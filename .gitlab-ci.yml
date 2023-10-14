@@ -1,0 +1,75 @@
+# The image used for this CI/CD Action should contain a JDK 17 (used by brew-day) and maven as well
+# We chose a Debian Bookwork containing the AmazonCorretto redistribution of JDK 17
+# Having to rely on Debian instead of Ubuntu enable us to have update yet stable toolkits.
+#
+# It's really important to notice how we don't need to impose dependency on NodeJS but only against Maven.
+# This because our setup allow the `frontend/pom.xml` to download a distribution of node by it self.
+image: maven:3.9.4-amazoncorretto-17-debian-bookworm
+
+# Configure CI/CD to run on Branch updates, but only when a PR is not acting on them
+workflow:
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH && $CI_OPEN_MERGE_REQUESTS
+      when: never
+    - if: $CI_COMMIT_BRANCH
+
+# Global environment variables that are available within each job container environment
+variables:
+  # Probably used during dockerization
+  DOCKER_HOST: tcp://docker:2375
+  DOCKER_DRIVER: overlay2
+  #
+  # Used in release phase
+  CONTAINER_IMAGE: $CI_REGISTRY_IMAGE
+  #
+  # Since this Action is run inside a cloud Gitlab instance, we need to set
+  # constaints on resources and stategies of Maven.
+  MAVEN_CLI_OPTS: "--strict-checksums --threads 1C --batch-mode"
+  #
+  # Maven option to use a local Maven repository for cache purposes
+  MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository"
+
+# We define one cache that is used by all jobs
+# We are allowed to define root-relative paths for targets and so on,
+# because `mvn` cli accepts a parameter `-pl` which takes as input the project name.
+#
+# As you can notice, in the root pom.xml two subprojects are defined
+# - 1) frontend
+# - 2) backend
+#
+# Running `mvn compile -pl backend` will trigger the compilation of only backend, which is great
+# as it applies to the specified lifecycle (es: test, verify, package ...).
+cache:
+  - key: "$CI_COMMIT_REF_SLUG"
+    paths:
+      - frontend/node/         # Local NodeJS installation
+      - frontend/node_modules/ # Local NPM repository
+      - .m2/repository/        # Local Maven repository
+      - backend/target/        # Maven output directory for Backend
+      - frontend/build/        # NPM output directory for Frontend
+
+# Stages definition
+stages:
+  - build
+  - verify
+  - unit-test
+  - integration-test
+  - package
+  - release
+  - docs
+
+# BUILD
+
+# VERIFY
+
+# UNIT-TEST
+
+# INTEGRATION-TEST
+
+# PACKAGE
+
+# RELEASE
+
+# DOCS
+
