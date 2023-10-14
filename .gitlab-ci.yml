@@ -59,6 +59,11 @@ stages:
   - release
   - docs
 
+# DEMO
+demo:
+  script:
+    - echo "This is a demo pipeline"
+
 # BUILD
 
 # VERIFY
