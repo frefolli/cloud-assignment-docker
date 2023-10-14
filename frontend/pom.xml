@@ -22,6 +22,31 @@
     <sonar.javascript.lcov.reportPaths>./coverage/lcov.info</sonar.javascript.lcov.reportPaths>
   </properties>
 
+<profiles>
+    <profile>
+        <id>builder</id>
+        <activation>
+            <file>
+                <missing>build</missing>
+            </file>
+        </activation>
+        <properties>
+            <frontend.skipbuild>false</frontend.skipbuild>
+        </properties>
+    </profile>
+    <profile>
+        <id>observer</id>
+        <activation>
+            <file>
+                <exists>build</exists>
+            </file>
+        </activation>
+        <properties>
+            <frontend.skipbuild>true</frontend.skipbuild>
+        </properties>
+    </profile>
+</profiles>
+
   <build>
     <plugins>
       <!-- clean the dist directory used by Angular -->
@@ -60,6 +85,9 @@
             <goals>
               <goal>npm</goal>
             </goals>
+            <configuration>
+              <skip>${frontend.skipbuild}</skip>
+            </configuration>
           </execution>
 
           <!-- code validation -->
@@ -82,6 +110,7 @@
             </goals>
             <configuration>
               <arguments>run build</arguments>
+              <skip>${frontend.skipbuild}</skip>
             </configuration>
           </execution>
 

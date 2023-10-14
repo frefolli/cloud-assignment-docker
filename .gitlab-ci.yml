@@ -46,8 +46,10 @@ cache:
       - backend/target/        # Maven output directory for Backend
       - frontend/build/        # NPM output directory for Frontend
 
-# Stages definition
+# Stages definition:
+#
 stages:
+  - clean
   - build
   - verify
   - unit-test
@@ -55,6 +57,15 @@ stages:
   - package
   - release
   - docs
+
+# CLEAN
+# 
+# We added a CLEAN stage to ensure that cache is ready for the workflow.
+# For example, we set up a check in frontend/pom.xml to ensure that `npm run build` is run only once.
+clean-cache:
+  stage: clean
+  script:
+    - mvn $MAVEN_OPTS clean
 
 # BUILD
 frontend-build:
