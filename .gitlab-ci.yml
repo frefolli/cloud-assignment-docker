@@ -6,13 +6,13 @@
 # This because our setup allow the `frontend/pom.xml` to download a distribution of node by it self.
 image: maven:3.9.4-amazoncorretto-17-debian-bookworm
 
-# Configure CI/CD to run on Branch updates, but only when a PR is not acting on them
+# Configure CI/CD to run on master Branch updates, but only when a PR is not acting on it, and for PR in general.
 workflow:
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
     - if: $CI_COMMIT_BRANCH && $CI_OPEN_MERGE_REQUESTS
       when: never
-    - if: $CI_COMMIT_BRANCH
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
 
 # Global environment variables that are available within each job container environment
 variables:
@@ -23,12 +23,9 @@ variables:
   # Used in release phase
   CONTAINER_IMAGE: $CI_REGISTRY_IMAGE
   #
-  # Since this Action is run inside a cloud Gitlab instance, we need to set
-  # constaints on resources and stategies of Maven.
-  MAVEN_CLI_OPTS: "--strict-checksums --threads 1C --batch-mode"
-  #
-  # Maven option to use a local Maven repository for cache purposes
-  MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository"
+  # Since this Action is run inside a cloud Gitlab instance, we need to set constaints on resources and stategies of Maven.
+  # We also set a customized location for Maven repository in order to be able to cache it.
+  MAVEN_CLI_OPTS: "--strict-checksums --threads 1C --batch-mode -Dmaven.repo.local=.m2/repository"
 
 # We define one cache that is used by all jobs
 # We are allowed to define root-relative paths for targets and so on,
@@ -59,13 +56,17 @@ stages:
   - release
   - docs
 
-# DEMO
-demo:
+# BUILD
+frontend-build:
   stage: build
   script:
-    - echo "This is a demo pipeline"
+    - mvn $MAVEN_OPTS compile -pl frontend
 
 # BUILD
+backend-build:
+  stage: build
+  script:
+    - mvn $MAVEN_OPTS compile -pl backend
 
 # VERIFY
 
