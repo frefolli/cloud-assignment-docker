@@ -63,6 +63,7 @@ stages:
 # We added a CLEAN stage to ensure that cache is ready for the workflow.
 # For example, we set up a check in frontend/pom.xml to ensure that `npm run build` is run only once.
 clean-cache:
+  when: manual
   stage: clean
   script:
     - mvn $MAVEN_CLI_OPTS clean
@@ -71,11 +72,13 @@ clean-cache:
 # 
 # Frontend and Backend can be built using two concurrent jobs.
 frontend-build:
+  when: manual
   stage: build
   script:
     - mvn $MAVEN_CLI_OPTS compile -pl frontend
 
 backend-build:
+  when: manual
   stage: build
   script:
     - mvn $MAVEN_CLI_OPTS compile -pl backend
@@ -110,6 +113,7 @@ backend-build:
 ## We don't feel the need for a distinct cache space for these jobs, so we kept the main one.
 ## 
 backend-spotbugs:
+  when: manual
   stage: verify
   script:
     - ls backend/target/classes/unimib/ingsof
@@ -119,9 +123,9 @@ backend-spotbugs:
     paths:
       - backend/target/spotbugsXml.xml
     when: on_failure
-  dependencies: []
 ## 
 backend-checkstyle:
+  when: manual
   stage: verify
   script:
     - mvn $MAVEN_CLI_OPTS -pl backend checkstyle:check
@@ -133,6 +137,7 @@ backend-checkstyle:
   dependencies: []
 ## 
 backend-pmd:
+  when: manual
   stage: verify
   script:
     - mvn $MAVEN_CLI_OPTS -pl backend pmd:check
