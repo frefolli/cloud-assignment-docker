@@ -119,7 +119,7 @@ backend-spotbugs:
     paths:
       - backend/target/spotbugsXml.xml
     when: on_failure
-    dependencies: []
+  dependencies: []
 ## 
 backend-checkstyle:
   stage: verify
@@ -130,7 +130,7 @@ backend-checkstyle:
     paths:
       - backend/target/checkstyle-result.xml
     when: on_failure
-    dependencies: []
+  dependencies: []
 ## 
 backend-pmd:
   stage: verify
@@ -141,7 +141,7 @@ backend-pmd:
     paths:
       - backend/target/pmd.xml
     when: on_failure
-    dependencies: []
+  dependencies: []
 ## 
 ## FRONTEND
 ## 
