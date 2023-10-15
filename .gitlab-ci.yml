@@ -25,7 +25,7 @@ variables:
   #
   # Since this Action is run inside a cloud Gitlab instance, we need to set constaints on resources and stategies of Maven.
   # We also set a customized location for Maven repository in order to be able to cache it.
-  MAVEN_CLI_OPTS: "--strict-checksums --threads 1C --batch-mode -Dmaven.repo.local=.m2/repository"
+  MAVEN_OPTS: "--strict-checksums --threads 1C --batch-mode -Dmaven.repo.local=.m2/repository"
 
 # We define one cache that is used by all jobs
 # We are allowed to define root-relative paths for targets and so on,
@@ -112,12 +112,14 @@ backend-build:
 backend-spotbugs:
   stage: verify
   script:
+    - ls backend/target/classes/unimib/ingsof
     - mvn $MAVEN_OPTS -pl backend spotbugs:check
   allow_failure: true
   artifacts:
     paths:
       - backend/target/spotbugsXml.xml
     when: on_failure
+    dependencies: []
 ## 
 backend-checkstyle:
   stage: verify
@@ -128,6 +130,7 @@ backend-checkstyle:
     paths:
       - backend/target/checkstyle-result.xml
     when: on_failure
+    dependencies: []
 ## 
 backend-pmd:
   stage: verify
@@ -138,6 +141,7 @@ backend-pmd:
     paths:
       - backend/target/pmd.xml
     when: on_failure
+    dependencies: []
 ## 
 ## FRONTEND
 ## 
