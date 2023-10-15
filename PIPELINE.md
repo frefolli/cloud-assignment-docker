@@ -6,7 +6,7 @@ root progetto + mvn compile
 
 - spotbugs
 - checkstyle
-- valgrind
+- pmd
 - *sonarqube
 
 # Unit Test
