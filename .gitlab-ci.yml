@@ -73,13 +73,26 @@ frontend-build:
   script:
     - mvn $MAVEN_OPTS compile -pl frontend
 
-# BUILD
 backend-build:
   stage: build
   script:
     - mvn $MAVEN_OPTS compile -pl backend
 
 # VERIFY
+backend-spotbugs:
+  stage: build
+  script:
+    - mvn $MAVEN_OPTS -pl backend spotbugs:check
+
+backend-checkstyle:
+  stage: build
+  script:
+    - mvn $MAVEN_OPTS -pl backend checkstyle:check
+
+backend-pmd:
+  stage: build
+  script:
+    - mvn $MAVEN_OPTS -pl backend pmd:check
 
 # UNIT-TEST
 
