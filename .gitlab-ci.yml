@@ -25,7 +25,7 @@ variables:
   #
   # Since this Action is run inside a cloud Gitlab instance, we need to set constaints on resources and stategies of Maven.
   # We also set a customized location for Maven repository in order to be able to cache it.
-  MAVEN_OPTS: "-C --threads 1C --batch-mode -Dmaven.repo.local=.m2/repository"
+  MAVEN_CLI_OPTS: "-C --threads 1C --batch-mode -Dmaven.repo.local=.m2/repository"
 
 # We define one cache that is used by all jobs
 # We are allowed to define root-relative paths for targets and so on,
@@ -65,7 +65,7 @@ stages:
 clean-cache:
   stage: clean
   script:
-    - mvn $MAVEN_OPTS clean
+    - mvn $MAVEN_CLI_OPTS clean
 
 # BUILD
 # 
@@ -73,12 +73,12 @@ clean-cache:
 frontend-build:
   stage: build
   script:
-    - mvn $MAVEN_OPTS compile -pl frontend
+    - mvn $MAVEN_CLI_OPTS compile -pl frontend
 
 backend-build:
   stage: build
   script:
-    - mvn $MAVEN_OPTS compile -pl backend
+    - mvn $MAVEN_CLI_OPTS compile -pl backend
 
 # VERIFY
 #
@@ -113,7 +113,7 @@ backend-spotbugs:
   stage: verify
   script:
     - ls backend/target/classes/unimib/ingsof
-    - mvn $MAVEN_OPTS -pl backend spotbugs:check
+    - mvn $MAVEN_CLI_OPTS -pl backend spotbugs:check
   allow_failure: true
   artifacts:
     paths:
@@ -124,7 +124,7 @@ backend-spotbugs:
 backend-checkstyle:
   stage: verify
   script:
-    - mvn $MAVEN_OPTS -pl backend checkstyle:check
+    - mvn $MAVEN_CLI_OPTS -pl backend checkstyle:check
   allow_failure: true
   artifacts:
     paths:
@@ -135,7 +135,7 @@ backend-checkstyle:
 backend-pmd:
   stage: verify
   script:
-    - mvn $MAVEN_OPTS -pl backend pmd:check
+    - mvn $MAVEN_CLI_OPTS -pl backend pmd:check
   allow_failure: true
   artifacts:
     paths:
