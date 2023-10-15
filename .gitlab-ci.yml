@@ -68,6 +68,8 @@ clean-cache:
     - mvn $MAVEN_OPTS clean
 
 # BUILD
+# 
+# Frontend and Backend can be built using two concurrent jobs.
 frontend-build:
   stage: build
   script:
@@ -79,20 +81,67 @@ backend-build:
     - mvn $MAVEN_OPTS compile -pl backend
 
 # VERIFY
+#
+## BACKEND
+## 
+## As backend linters we run
+## 
+## - 1) SpotBugs     https://spotbugs.github.io/
+## - 2) CheckStyle   https://checkstyle.sourceforge.io/
+## - 3) PMD          https://pmd.github.io/
+##
+## Since JDK 17 is only officially supported starting with FindSec-Plugin 1.12.0,
+##   and that this specific version lacks of fixes to generic type parsing introduced
+##   with issue #680, we decided to run SpotBugs without it.
+## 
+## We also decided to run CheckStyle on the backend part using the default Sun stylechecks
+##   provided by the framework for simplicity.
+## 
+## Finally instead of running Valgrind, which could be useful if running native application,
+##   although it was suggested in the Assignment 1 paper, we run additional checks with PMD,
+##   another source code analyzer, which "finds common programming flaws like unused variables,
+##   empty catch blocks, unnecessary object creation, and so forth".
+## 
+## The original project ran SonarQube against both Frontend and Backend thanks to the SonarCloud
+##   account provided by Ingegneria del Software course. In order to avoid abouse of this priviledge
+##   and useless bloats on that account, we decided to skip the usage of this tool.
+## 
+## Every verification job allows mvn to fail as a trigger for upload of checking frameworks reports.
+## We don't feel the need for a distinct cache space for these jobs, so we kept the main one.
+## 
 backend-spotbugs:
-  stage: build
+  stage: verify
   script:
     - mvn $MAVEN_OPTS -pl backend spotbugs:check
-
+  allow_failure: true
+  artifacts:
+    paths:
+      - backend/target/spotbugsXml.xml
+    when: on_failure
+## 
 backend-checkstyle:
-  stage: build
+  stage: verify
   script:
     - mvn $MAVEN_OPTS -pl backend checkstyle:check
-
+  allow_failure: true
+  artifacts:
+    paths:
+      - backend/target/checkstyle-result.xml
+    when: on_failure
+## 
 backend-pmd:
-  stage: build
+  stage: verify
   script:
     - mvn $MAVEN_OPTS -pl backend pmd:check
+  allow_failure: true
+  artifacts:
+    paths:
+      - backend/target/pmd.xml
+    when: on_failure
+## 
+## FRONTEND
+## 
+## 
 
 # UNIT-TEST
 
