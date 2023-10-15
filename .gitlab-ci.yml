@@ -48,6 +48,10 @@ cache:
 
 # Stages definition:
 #
+# Every job FOR NOW has a `when: manual` trigger, this because there's no real need of executing
+#   the whole pipeline when testing a single aspect of the pipeline. Only the few jobs that matter
+#   get executed by manually running them.
+#
 stages:
   - clean
   - build
