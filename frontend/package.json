@@ -25,7 +25,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "eslint src/**/*.js src/**/*.jsx",
+    "eslint": "eslint src/**/*.js src/**/*.jsx",
     "babel": "babel src/ -d lib/",
     "flow": "flow",
     "sonarqube": "sonar-scanner -Dsonar.login=squ_f91b9a7394d69d0f9ac15370ad6d8fffa9001a62 -Dsonar.host.url=http://localhost:9000",

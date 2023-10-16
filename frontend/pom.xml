@@ -70,6 +70,7 @@
         <executions>
           <!-- Install node and npm -->
           <execution>
+            <phase>validate</phase>
             <id>Install Node and NPM</id>
             <goals>
               <goal>install-node-and-npm</goal>
@@ -81,29 +82,16 @@
 
           <!-- clean install -->
           <execution>
+            <phase>validate</phase>
             <id>npm install</id>
             <goals>
               <goal>npm</goal>
             </goals>
-            <configuration>
-              <skip>${skip.build}</skip>
-            </configuration>
-          </execution>
-
-          <!-- code testing -->
-          <execution>
-            <id>npm run test</id>
-            <goals>
-              <goal>npm</goal>
-            </goals>
-            <phase>test</phase>
-            <configuration>
-              <arguments>run lint</arguments>
-            </configuration>
           </execution>
 
           <!-- build app -->
           <execution>
+            <phase>compile</phase>
             <id>npm run build</id>
             <goals>
               <goal>npm</goal>
@@ -114,16 +102,53 @@
             </configuration>
           </execution>
 
-          <!-- code validation -->
+          <!-- code validation with ESLint -->
           <execution>
+            <phase>process-classes</phase>
             <id>eslint</id>
             <goals>
-              <goal>npx</goal>
+              <goal>npm</goal>
             </goals>
-            <phase>validate</phase>
             <configuration>
-              <arguments>eslint</arguments>
+              <arguments>run eslint</arguments>
               <skip>${skip.eslint}</skip>
+            </configuration>
+          </execution>
+
+          <!-- code validation with FlowJS -->
+          <execution>
+            <phase>process-classes</phase>
+            <id>babel</id>
+            <goals>
+              <goal>npm</goal>
+            </goals>
+            <configuration>
+              <arguments>run babel</arguments>
+              <skip>${skip.flow}</skip>
+            </configuration>
+          </execution>
+
+          <execution>
+            <phase>process-classes</phase>
+            <id>flow</id>
+            <goals>
+              <goal>npm</goal>
+            </goals>
+            <configuration>
+              <arguments>run flow</arguments>
+              <skip>${skip.flow}</skip>
+            </configuration>
+          </execution>
+
+          <!-- code testing -->
+          <execution>
+            <phase>test</phase>
+            <id>npm run test</id>
+            <goals>
+              <goal>npm</goal>
+            </goals>
+            <configuration>
+              <arguments>run lint</arguments>
             </configuration>
           </execution>
         </executions>
