@@ -31,7 +31,7 @@
             </file>
         </activation>
         <properties>
-            <frontend.skipbuild>false</frontend.skipbuild>
+            <skip.build>false</skip.build>
         </properties>
     </profile>
     <profile>
@@ -42,7 +42,7 @@
             </file>
         </activation>
         <properties>
-            <frontend.skipbuild>true</frontend.skipbuild>
+            <skip.build>true</skip.build>
         </properties>
     </profile>
 </profiles>
@@ -86,13 +86,13 @@
               <goal>npm</goal>
             </goals>
             <configuration>
-              <skip>${frontend.skipbuild}</skip>
+              <skip>${skip.build}</skip>
             </configuration>
           </execution>
 
-          <!-- code validation -->
+          <!-- code testing -->
           <execution>
-            <id>npm run lint</id>
+            <id>npm run test</id>
             <goals>
               <goal>npm</goal>
             </goals>
@@ -110,18 +110,24 @@
             </goals>
             <configuration>
               <arguments>run build</arguments>
-              <skip>${frontend.skipbuild}</skip>
+              <skip>${skip.build}</skip>
             </configuration>
           </execution>
 
+          <!-- code validation -->
+          <execution>
+            <id>eslint</id>
+            <goals>
+              <goal>npx</goal>
+            </goals>
+            <phase>validate</phase>
+            <configuration>
+              <arguments>eslint</arguments>
+              <skip>${skip.eslint}</skip>
+            </configuration>
+          </execution>
         </executions>
       </plugin>
     </plugins>
-    <!--
-    <resources>
-      <resource>
-        <directory>build</directory>
-      </resource>
-    </resources>-->
   </build>
 </project>
