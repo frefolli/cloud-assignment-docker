@@ -10,4 +10,6 @@ This file lists the command lines for executing correctly the stages of the pipe
 | verify | `mvn -pl backend spotbugs:check` | Run SpotBugs against backend (requires a previous `compile`) |
 | verify | `mvn -pl backend checkstyle:check` | Run CheckStyke against backend |
 | verify | `mvn -pl backend pmd:check` | Run PMD against backend |
+| verify | `mvn -pl frontend validate -Dskip.flow` | Run ESLint |
+| verify | `mvn -pl frontend validate -Dskip.eslint` | Run Flow |
 <!-- |  |  |  | -->
