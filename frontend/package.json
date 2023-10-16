@@ -25,7 +25,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "eslint src/**/*.js src/**/*.jsx",
+    "eslint": "eslint src/**/*.js src/**/*.jsx",
+    "babel": "babel src/ -d lib/",
+    "flow": "flow",
     "sonarqube": "sonar-scanner -Dsonar.login=squ_f91b9a7394d69d0f9ac15370ad6d8fffa9001a62 -Dsonar.host.url=http://localhost:9000",
     "stalin": "jest --coverage -u --verbose --maxWorkers=50%",
     "coverage": "jest --coverage -u --silent --maxWorkers=50%"
@@ -64,14 +66,18 @@
     ]
   },
   "devDependencies": {
+    "@babel/cli": "^7.23.0",
+    "@babel/core": "^7.23.2",
     "@babel/plugin-syntax-jsx": "^7.18.6",
     "@babel/preset-env": "^7.20.2",
+    "@babel/preset-flow": "^7.22.15",
     "@babel/preset-react": "^7.18.6",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "eslint": "^8.51.0",
     "eslint-config-google": "^0.14.0",
-    "eslint-plugin-react": "^7.33.2"
+    "eslint-plugin-react": "^7.33.2",
+    "flow-bin": "^0.218.1"
   },
   "proxy": "http://localhost:8080"
 }
