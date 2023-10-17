@@ -7,6 +7,31 @@ import Paper from '@mui/material/Paper';
 import Draggable from 'react-draggable';
 import MButton from './MButton';
 
+/**
+ * This component represents a modal dialog for displaying content.
+ * 
+ * @class Modal
+ * 
+ * @param {Object} props - The component's properties.
+ * @param {boolean} props.showModal - If `true`, the modal is displayed; otherwise, it's hidden.
+ * @param {function} props.setShowModal - A function to control the visibility of the modal.
+ * @param {JSX.Element} props.children - The content to be displayed within the modal.
+ * 
+ * @return {JSX.Element} A modal dialog for displaying content.
+ * 
+ * @example
+ * // Example usage of the Modal component
+ * <Modal
+ *   showModal={isModalVisible}
+ *   setShowModal={setModalVisibility}
+ * >
+ *   <div>
+ *     <h2>Modal Content</h2>
+ *     <p>This is the content of the modal dialog.</p>
+ *   </div>
+ * </Modal>
+ */
+
 function PaperComponent(props) {
   return (
     <Draggable
