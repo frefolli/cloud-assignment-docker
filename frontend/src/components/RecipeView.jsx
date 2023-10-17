@@ -2,6 +2,22 @@ import React from "react";
 import { FAKE_NOTIFIER, RECIPE_ENDPOINT } from '../utils/Protocol';
 import RecipeIngredientTableReadOnly from "./RecipeIngredientTableReadOnly";
 
+/**
+ * The RecipeView component displays detailed information about a specific recipe, including its name, description, and ingredients in read-only mode.
+ *
+ * @class RecipeView
+ *
+ * @param {Object} props - The component's properties.
+ * @param {string} props.recipeID - The unique identifier of the recipe to display.
+ * @param {Object} [props.notifier=FAKE_NOTIFIER] - The notifier object used for displaying notifications. Defaults to FAKE_NOTIFIER if not provided.
+ *
+ * @returns {JSX.Element} The RecipeView component.
+ *
+ * @example
+ * // Example usage of the RecipeView component
+ * <RecipeView recipeID={selectedRecipeID} notifier={notifierInstance} />
+ */
+
 export default class RecipeView extends React.Component {
   constructor(props) {
     super(props);
