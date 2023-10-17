@@ -2,6 +2,23 @@ import React, { Component }  from "react";
 import MButton from '../components/MButton';
 import {FAKE_NOTIFIER, RECIPE_ENDPOINT} from '../utils/Protocol';
 
+/**
+ * This component allows the user to confirm the deletion of a recipe. It displays the name, description, and asks for confirmation.
+ *
+ * @class RecipeDelete
+ *
+ * @param {Object} props - The component's properties.
+ * @param {string} props.recipeID - The unique identifier of the recipe to be deleted.
+ * @param {function} props.onConfirm - A callback function to be called when the deletion is confirmed.
+ * @param {object} [props.notifier] - An optional notifier object to handle notifications.
+ *
+ * @returns {JSX.Element} The RecipeDelete component for confirming the deletion of a recipe.
+ *
+ * @example
+ * // Example usage of the RecipeDelete component
+ * <RecipeDelete recipeID={recipe.id} onConfirm={handleRecipeDeletion} notifier={notifier} />
+ */
+
 class RecipeDelete extends Component{
   constructor(props) {
     super(props);

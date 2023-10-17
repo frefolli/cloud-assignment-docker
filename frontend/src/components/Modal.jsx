@@ -7,6 +7,17 @@ import Paper from '@mui/material/Paper';
 import Draggable from 'react-draggable';
 import MButton from './MButton';
 
+function PaperComponent(props) {
+  return (
+    <Draggable
+      handle="#draggable-dialog-title"
+      cancel={'[class*="MuiDialogContent-root"]'}
+    >
+      <Paper {...props} />
+    </Draggable>
+  );
+}
+
 /**
  * This component represents a modal dialog for displaying content.
  * 
@@ -31,17 +42,6 @@ import MButton from './MButton';
  *   </div>
  * </Modal>
  */
-
-function PaperComponent(props) {
-  return (
-    <Draggable
-      handle="#draggable-dialog-title"
-      cancel={'[class*="MuiDialogContent-root"]'}
-    >
-      <Paper {...props} />
-    </Draggable>
-  );
-}
 
 export default class Modal extends React.Component {
   render() {
