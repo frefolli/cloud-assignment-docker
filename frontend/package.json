@@ -11,6 +11,7 @@
     "css-mediaquery": "^0.1.2",
     "eslint": "^8.34.0",
     "history": "^5.3.0",
+    "jsdoc": "^4.0.2",
     "notistack": "^2.0.8",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -51,7 +52,12 @@
   },
   "jest": {
     "testEnvironment": "jsdom",
-    "coverageReporters": ["clover", "json", "lcov", "text"],
+    "coverageReporters": [
+      "clover",
+      "json",
+      "lcov",
+      "text"
+    ],
     "collectCoverageFrom": [
       "src/*.{js,jsx}",
       "src/**/*.{js,jsx}",
