@@ -4,16 +4,14 @@ import RecipeView from './RecipeView';
 import RecipeExecute from './RecipeExecute';
 
 /**
- * AdviceView Component
- *
  * This component is responsible for displaying advice on what beer to brew next based on your ingredients.
- *
+ * 
+ * @class AdviceView
+ * 
  * @param {Object} props - The component's properties.
  * @param {Notifier} props.notifier - An optional notifier for displaying notifications (default: FAKE_NOTIFIER).
  * @param {boolean} props.testAdviceCookie - Set to true to test the advice cookie.
  * @param {function} props.masterCall - A function to be called after triggering the next recipe view.
- *
- * @result {void}
  *
  * @example
  * // Example usage of the AdviceView component
