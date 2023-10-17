@@ -31,7 +31,7 @@
             </file>
         </activation>
         <properties>
-            <frontend.skipbuild>false</frontend.skipbuild>
+            <skip.build>false</skip.build>
         </properties>
     </profile>
     <profile>
@@ -42,7 +42,7 @@
             </file>
         </activation>
         <properties>
-            <frontend.skipbuild>true</frontend.skipbuild>
+            <skip.build>true</skip.build>
         </properties>
     </profile>
 </profiles>
@@ -70,6 +70,7 @@
         <executions>
           <!-- Install node and npm -->
           <execution>
+            <phase>validate</phase>
             <id>Install Node and NPM</id>
             <goals>
               <goal>install-node-and-npm</goal>
@@ -81,47 +82,77 @@
 
           <!-- clean install -->
           <execution>
+            <phase>validate</phase>
             <id>npm install</id>
             <goals>
               <goal>npm</goal>
             </goals>
-            <configuration>
-              <skip>${frontend.skipbuild}</skip>
-            </configuration>
-          </execution>
-
-          <!-- code validation -->
-          <execution>
-            <id>npm run lint</id>
-            <goals>
-              <goal>npm</goal>
-            </goals>
-            <phase>test</phase>
-            <configuration>
-              <arguments>run lint</arguments>
-            </configuration>
           </execution>
 
           <!-- build app -->
           <execution>
+            <phase>compile</phase>
             <id>npm run build</id>
             <goals>
               <goal>npm</goal>
             </goals>
             <configuration>
               <arguments>run build</arguments>
-              <skip>${frontend.skipbuild}</skip>
+              <skip>${skip.build}</skip>
             </configuration>
           </execution>
 
+          <!-- code validation with ESLint -->
+          <execution>
+            <phase>process-classes</phase>
+            <id>eslint</id>
+            <goals>
+              <goal>npm</goal>
+            </goals>
+            <configuration>
+              <arguments>run eslint</arguments>
+              <skip>${skip.eslint}</skip>
+            </configuration>
+          </execution>
+
+          <!-- code validation with FlowJS -->
+          <execution>
+            <phase>process-classes</phase>
+            <id>babel</id>
+            <goals>
+              <goal>npm</goal>
+            </goals>
+            <configuration>
+              <arguments>run babel</arguments>
+              <skip>${skip.flow}</skip>
+            </configuration>
+          </execution>
+
+          <execution>
+            <phase>process-classes</phase>
+            <id>flow</id>
+            <goals>
+              <goal>npm</goal>
+            </goals>
+            <configuration>
+              <arguments>run flow</arguments>
+              <skip>${skip.flow}</skip>
+            </configuration>
+          </execution>
+
+          <!-- code testing -->
+          <execution>
+            <phase>test</phase>
+            <id>npm run test</id>
+            <goals>
+              <goal>npm</goal>
+            </goals>
+            <configuration>
+              <arguments>run lint</arguments>
+            </configuration>
+          </execution>
         </executions>
       </plugin>
     </plugins>
-    <!--
-    <resources>
-      <resource>
-        <directory>build</directory>
-      </resource>
-    </resources>-->
   </build>
 </project>

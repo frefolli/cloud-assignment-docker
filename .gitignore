@@ -2,3 +2,5 @@ uml/uml.vpp.bak_*
 database.db
 .settings
 .vscode
+frontend/lib
+frontend/reports
