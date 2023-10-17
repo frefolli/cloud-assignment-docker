@@ -10,6 +10,27 @@ import { visuallyHidden } from '@mui/utils';
 import { Box } from '@mui/system';
 import JimTable from './JimTable';
 
+/**
+ * This component provides a dedicated table for displaying tabular data with various features such as sorting and pagination.
+ * 
+ * @class DedicatedTable
+ * 
+ * @param {Object} props - The component's properties.
+ * @param {Array} props.columns - An array of column definitions with keys, titles, and other options.
+ * @param {Array} props.rows - An array of row data to display in the table.
+ * @param {ReactNode} props.pivotRow - An optional pivot row to be displayed at the end of the table.
+ * 
+ * @return {JSX.Element} A table component for displaying tabular data with sorting and pagination features.
+ * 
+ * @example
+ * // Example usage of the DedicatedTable component
+ * <DedicatedTable
+ *   columns={tableColumns}
+ *   rows={tableData}
+ *   pivotRow={pivotRowData}
+ * />
+ */
+
 export default class DedicatedTable extends React.Component {
     constructor(props) {
         super(props);
