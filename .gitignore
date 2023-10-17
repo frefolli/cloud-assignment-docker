@@ -3,3 +3,4 @@ database.db
 .settings
 .vscode
 frontend/lib
+frontend/reports
