@@ -20,6 +20,8 @@ import RecipeExecute from './RecipeExecute';
  *   testAdviceCookie={true}
  *   masterCall={handleMasterCall}
  * />
+ *
+ * @return {JSX.Element} The AdviceView component for displaying brewing advice.
  */
 
 export default class AdviceView extends React.Component {

@@ -3,6 +3,20 @@ import {BEERS_ENDPOINT, DEFAULT_NOTE_TYPE, FAKE_NOTIFIER} from '../utils/Protoco
 import BeerNoteTable from "./BeerNoteTable";
 import InputFieldSetting from "./InputFieldSetting";
 
+/**
+ * This class represents a component for editing beer details, including name and notes.
+ * @class BeerEdit
+ * 
+ * @param {Object} props - The component's properties.
+ * @param {number} props.beerID - The unique identifier for the beer.
+ * @param {Notifier} [props.notifier] - An optional notifier for displaying notifications (default: FAKE_NOTIFIER).
+ *
+ * @returns {JSX.Element} The rendered BeerEdit component.
+ *
+ * @example
+ * // Example usage of the BeerEdit component:
+ * <BeerEdit beerID={123} notifier={customNotifier} />
+ */
 
 class BeerEdit extends Component {
   constructor(props) {
