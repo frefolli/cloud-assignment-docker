@@ -45,6 +45,7 @@ cache:
       - .m2/repository/        # Local Maven repository
       - backend/target/        # Maven output directory for Backend
       - frontend/build/        # NPM output directory for Frontend
+      - frontend/reports/      # ESLint and Flow output directory
 
 # Stages definition:
 #
@@ -154,7 +155,45 @@ backend-pmd:
 ## 
 ## FRONTEND
 ## 
+## As frontend linters we run
 ## 
+## - 1) ESLint
+## - 2) Flow
+##
+## As previous said, we skip the SonarQube analysis that was configured by us in the original trunk.
+## Every verification job allows mvn to fail as a trigger for upload of checking frameworks reports.
+## We don't feel the need for a distinct cache space for these jobs, so we kept the main one.
+##
+## In this part we call the `process-classes` lifecycle of Maven because is after compilation and before actual tests.
+## This way we can have Maven to install needed dependencies and let it run after that phase the linter configured.
+##
+## Talking about linters, we configured ESLint and Flow as suggested by the Assignment 1 paper. We set up what i'll call
+##   a weird trigger for these two frameworks: instead of enabling them with a flag, the Maven plugin we use to interact with
+##   NPM allow us only to disable some executions. So we established a flag semathics where `-Dskip.{goal}` skips the goal `goal`.
+##   For consistency, the rule enforced by Maven profiles that caches the previous NPM build during the stages is called `-Dskip.build`,
+##   but it's activation trigger is the presence of the `frontend/build` directory in the master cache. That's why we set up a clean job
+##   at the start of the Pipeline.
+## 
+frontend-eslint:
+  when: manual
+  stage: verify
+  script:
+    - mvn $MAVEN_CLI_OPTS -pl backend process-classes -Dskip.flow
+  allow_failure: true
+  artifacts:
+    paths:
+      - frontend/reports/eslint.html
+    when: on_failure
+  dependencies: []
+## 
+frontend-flow:
+  when: manual
+  stage: verify
+  script:
+    - mvn $MAVEN_CLI_OPTS -pl backend process-classes -Dskip.eslint
+  allow_failure: true
+  # FlowJS doesn't provide deliverables
+  dependencies: []
 
 # UNIT-TEST
 
