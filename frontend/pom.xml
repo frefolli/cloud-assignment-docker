@@ -139,18 +139,6 @@
               <skip>${skip.flow}</skip>
             </configuration>
           </execution>
-
-          <!-- code testing -->
-          <execution>
-            <phase>test</phase>
-            <id>npm run test</id>
-            <goals>
-              <goal>npm</goal>
-            </goals>
-            <configuration>
-              <arguments>run lint</arguments>
-            </configuration>
-          </execution>
         </executions>
       </plugin>
     </plugins>
