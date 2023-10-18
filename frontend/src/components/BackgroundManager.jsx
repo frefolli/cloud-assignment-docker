@@ -2,6 +2,23 @@ import React from 'react';
 import backgrounds from '../theme/backgrounds';
 import { BACKGROUND_MANAGER_ESCAPE, BACKGROUND_MANAGER_TRIGGER, DEFAULT_BACKGROUND, LAST_USED_BACKGROUND_LOCALSTORAGE_KEY, SETTINGS_ENDPOINT } from '../utils/Protocol';
 
+/**
+ * Manages and displays background images for the application.
+ * 
+ * @class BackgroundManager
+ * 
+ * @param {Object} props - The component's properties.
+ * @param {boolean} props.testBackgroundCookie - Set to true to test the background cookie.
+ * 
+ * @returns {JSX.Element} The rendered BackgroundManager component.
+ * 
+ * @example
+ * // Example usage of the BackgroundManager component:
+ * <BackgroundManager testBackgroundCookie={true}>
+ *   {/* Application content *\/}
+ * </BackgroundManager>
+ */
+
 export default class BackgroundManager extends React.Component {
     constructor(props) {
         super(props);

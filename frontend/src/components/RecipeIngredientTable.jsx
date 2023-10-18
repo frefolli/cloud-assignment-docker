@@ -14,6 +14,39 @@ const COLUMNS = [
     {title: "Azioni", key: "toolbox", sortable: false}
 ]
 
+/**
+ * The RecipeIngredientTable component displays a table of ingredients for a recipe. It allows users to view, edit, and delete existing ingredients and add new ones.
+ *
+ * @class RecipeIngredientTable
+ *
+ * @param {Object} props - The component's properties.
+ * @param {Array} props.ingredients - An array of existing ingredients for the recipe.
+ * @param {string} props.newIngredientName - The name of the new ingredient to be added.
+ * @param {string} props.newIngredientQuantity - The quantity of the new ingredient to be added.
+ * @param {function} props.editQuantity - A callback function to edit the quantity of an existing ingredient.
+ * @param {function} props.setQuantity - A callback function to set the quantity of an existing ingredient.
+ * @param {function} props.deleteIngredient - A callback function to delete an existing ingredient.
+ * @param {function} props.setNewIngredientName - A callback function to set the name of the new ingredient.
+ * @param {function} props.setNewIngredientQuantity - A callback function to set the quantity of the new ingredient.
+ * @param {function} props.addIngredient - A callback function to add a new ingredient.
+ *
+ * @returns {JSX.Element} The RecipeIngredientTable component.
+ *
+ * @example
+ * // Example usage of the RecipeIngredientTable component
+ * <RecipeIngredientTable
+ *   ingredients={recipe.ingredients}
+ *   newIngredientName={newIngredientName}
+ *   newIngredientQuantity={newIngredientQuantity}
+ *   editQuantity={handleEditQuantity}
+ *   setQuantity={handleSetQuantity}
+ *   deleteIngredient={handleDeleteIngredient}
+ *   setNewIngredientName={handleSetNewIngredientName}
+ *   setNewIngredientQuantity={handleSetNewIngredientQuantity}
+ *   addIngredient={handleAddIngredient}
+ * />
+ */
+
 export default class RecipeIngredientTable extends React.Component {
     render() {
         const rows = this.props.ingredients.map((ingredient) => {

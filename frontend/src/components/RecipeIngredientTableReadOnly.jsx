@@ -7,6 +7,21 @@ const COLUMNS = [
     {title: "Quantita'", key: "quantity"},
 ]
 
+/**
+ * The RecipeIngredientTableReadOnly component displays a read-only table of ingredients for a recipe. It allows users to view ingredients with icons, names, and quantities.
+ *
+ * @class RecipeIngredientTableReadOnly
+ *
+ * @param {Object} props - The component's properties.
+ * @param {Array} props.ingredients - An array of ingredients for the recipe.
+ *
+ * @returns {JSX.Element} The RecipeIngredientTableReadOnly component.
+ *
+ * @example
+ * // Example usage of the RecipeIngredientTableReadOnly component
+ * <RecipeIngredientTableReadOnly ingredients={recipe.ingredients} />
+ */
+
 export default class RecipeIngredientTableReadOnly extends React.Component {
     render() {
         const rows = this.props.ingredients.map((ingredient) => {

@@ -13,6 +13,40 @@ const COLUMNS = [
     {title: "Azioni", key: "toolbox", sortable: false}
 ]
 
+/**
+ * This class represents a component for displaying and managing beer notes in a table.
+ * @class BeerNoteTable
+ * 
+ * @param {Object} props - The component's properties.
+ * @param {Array<Object>} props.notes - An array of beer notes to display in the table.
+ * @param {string} props.newNoteType - The new note type for adding notes.
+ * @param {string} props.newDescription - The new description for adding notes.
+ * @param {function} props.setNewNoteType - A callback function to set the new note type.
+ * @param {function} props.setNewDescription - A callback function to set the new description.
+ * @param {function} props.editNote - A callback function to edit an existing note.
+ * @param {function} props.deleteNote - A callback function to delete an existing note.
+ * @param {function} props.handleNoteTypeChange - A callback function to handle changes to note types.
+ * @param {function} props.handleDescriptionChange - A callback function to handle changes to note descriptions.
+ * @param {function} props.addNote - A callback function to add a new note.
+ *
+ * @returns {JSX.Element} The rendered BeerNoteTable component.
+ *
+ * @example
+ * // Example usage of the BeerNoteTable component:
+ * <BeerNoteTable
+ *   notes={noteList}
+ *   newNoteType="New Type"
+ *   newDescription="New Description"
+ *   setNewNoteType={handleNewNoteType}
+ *   setNewDescription={handleNewDescription}
+ *   editNote={handleEditNote}
+ *   deleteNote={handleDeleteNote}
+ *   handleNoteTypeChange={handleTypeChange}
+ *   handleDescriptionChange={handleDescriptionChange}
+ *   addNote={handleAddNote}
+ * />
+ */
+
 export default class BeerNoteTable extends React.Component {
     render() {
         const rows = this.props.notes.map((note) => {

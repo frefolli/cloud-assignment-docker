@@ -7,6 +7,22 @@ import { TextField } from "@mui/material";
 import SettingsManager from '../utils/SettingsManager';
 import BirreIcon from "../svgicons/BirreIcon";
 
+/**
+ * This component is responsible for displaying the next recipe and managing actions related to it.
+ *
+ * @class NextRecipeView
+ *
+ * @param {Object} props - The component's properties.
+ * @param {Notifier} props.notifier - An optional notifier for displaying notifications (default: FAKE_NOTIFIER).
+ * @param {boolean} props.testNextRecipeCookie - A flag to simulate testing the "Next Recipe" cookie (default: false).
+ *
+ * @returns {JSX.Element} The NextRecipeView component for managing the next recipe.
+ *
+ * @example
+ * // Example usage of the NextRecipeView component
+ * <NextRecipeView notifier={customNotifier} testNextRecipeCookie={true} />
+ */
+
 export default class NextRecipeView extends Component {
   constructor(props) {
     super(props);

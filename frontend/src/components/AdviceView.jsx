@@ -3,6 +3,27 @@ import { FAKE_NOTIFIER, ADVICE_ENDPOINT, ADVICE_VIEW_TRIGGER, ADVICE_VIEW_ESCAPE
 import RecipeView from './RecipeView';
 import RecipeExecute from './RecipeExecute';
 
+/**
+ * This component is responsible for displaying advice on what beer to brew next based on your ingredients.
+ * 
+ * @class AdviceView
+ * 
+ * @param {Object} props - The component's properties.
+ * @param {Notifier} props.notifier - An optional notifier for displaying notifications (default: FAKE_NOTIFIER).
+ * @param {boolean} props.testAdviceCookie - Set to true to test the advice cookie.
+ * @param {function} props.masterCall - A function to be called after triggering the next recipe view.
+ *
+ * @example
+ * // Example usage of the AdviceView component
+ * <AdviceView
+ *   notifier={customNotifier}
+ *   testAdviceCookie={true}
+ *   masterCall={handleMasterCall}
+ * />
+ *
+ * @return {JSX.Element} The AdviceView component for displaying brewing advice.
+ */
+
 export default class AdviceView extends React.Component {
   constructor(props) {
     super(props);

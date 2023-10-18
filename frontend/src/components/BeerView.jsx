@@ -4,6 +4,21 @@ import MButton from '../components/MButton';
 import {BEERS_ENDPOINT, FAKE_NOTIFIER} from '../utils/Protocol';
 import BeerNoteTableReadOnly from "./BeerNoteTableReadOnly";
 
+/**
+ * This class represents a component for viewing beer details, including name, recipe, and notes.
+ * @class BeerView
+ * 
+ * @param {Object} props - The component's properties.
+ * @param {number} props.beerID - The unique identifier for the beer.
+ * @param {Notifier} [props.notifier] - An optional notifier for displaying notifications (default: FAKE_NOTIFIER).
+ *
+ * @returns {JSX.Element} The rendered BeerView component.
+ *
+ * @example
+ * // Example usage of the BeerView component:
+ * <BeerView beerID={123} notifier={customNotifier} />
+ */
+
 class BeerView extends Component {
   constructor(props) {
     super(props);

@@ -2,6 +2,22 @@ import React, { Component } from "react";
 import {SHOPPING_ENDPOINT} from '../utils/Protocol';
 import RecipeIngredientTableReadOnly from "./RecipeIngredientTableReadOnly";
 
+/**
+ * The ShoppingList component retrieves a list of missing ingredients for a recipe and displays them.
+ *
+ * @class ShoppingList
+ *
+ * @param {Object} props - The component's properties.
+ * @param {string} props.recipeID - The ID of the recipe for which to retrieve the missing ingredients.
+ * @param {number} props.quantity - The quantity of the recipe to consider when finding missing ingredients.
+ *
+ * @returns {JSX.Element} The ShoppingList component.
+ *
+ * @example
+ * // Example usage of the ShoppingList component
+ * <ShoppingList recipeID="123" quantity={5} />
+ */
+
 class ShoppingList extends Component {
   constructor(props) {
     super(props);
