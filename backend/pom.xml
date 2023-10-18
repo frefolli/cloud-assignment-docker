@@ -30,6 +30,11 @@
 
     <!-- hibernate need this community dialect in order to interact with SQLite -->
     <hibernate.dialect>org.hibernate.community.dialect.SQLiteDialect</hibernate.dialect>
+
+    <!-- Tests -->
+    <skip.test>false</skip.test>
+    <skip.ITs>${skip.test}</skip.ITs>
+    <skip.UTs>${skip.test}</skip.UTs>
   </properties>
 
   <dependencyManagement>
@@ -235,6 +240,21 @@
               </goals>
             </execution>
           </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-failsafe-plugin</artifactId>
+        <configuration>
+          <skip.tests>${skip.test}</skip.tests>
+          <skip.ITs>${skip.ITs}</skip.ITs>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <configuration>
+          <skip.tests>${skip.UTs}</skip.tests>
+        </configuration>
       </plugin>
     </plugins>
   </build>
