@@ -20,7 +20,7 @@ import unimib.ingsof.persistence.service.Protocol;
 
 
 @SpringBootTest
-class InventoryEndpointTest {
+class InventoryEndpointIT {
 	@Autowired
 	private InventoryEndpoint inventoryEndpoint;
 	@Autowired
