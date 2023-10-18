@@ -178,7 +178,7 @@ frontend-eslint:
   when: manual
   stage: verify
   script:
-    - mvn $MAVEN_CLI_OPTS -pl backend process-classes -Dskip.flow
+    - mvn $MAVEN_CLI_OPTS -pl frontend process-classes -Dskip.flow
   allow_failure: true
   artifacts:
     paths:
@@ -190,7 +190,7 @@ frontend-flow:
   when: manual
   stage: verify
   script:
-    - mvn $MAVEN_CLI_OPTS -pl backend process-classes -Dskip.eslint
+    - mvn $MAVEN_CLI_OPTS -pl frontend process-classes -Dskip.eslint
   allow_failure: true
   # FlowJS doesn't provide deliverables
   dependencies: []

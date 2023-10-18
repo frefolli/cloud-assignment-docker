@@ -4,3 +4,4 @@ database.db
 .vscode
 frontend/lib
 frontend/reports
+__pycache__

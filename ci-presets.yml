@@ -1,0 +1,20 @@
+pipeline:
+  - clean-cache
+  - frontend-build
+  - backend-build
+  - frontend-eslint
+  - frontend-flow
+  - backend-spotbugs
+  - backend-checkstyle
+  - backend-pmd
+frontend:
+  - clean-cache
+  - frontend-build
+  - frontend-eslint
+  - frontend-flow
+backend:
+  - clean-cache
+  - backend-build
+  - backend-spotbugs
+  - backend-checkstyle
+  - backend-pmd
