@@ -245,15 +245,15 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-failsafe-plugin</artifactId>
         <configuration>
-          <skip.tests>${skip.test}</skip.tests>
-          <skip.ITs>${skip.ITs}</skip.ITs>
+          <skipTests>${skip.test}</skipTests>
+          <skipITs>${skip.ITs}</skipITs>
         </configuration>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
         <configuration>
-          <skip.tests>${skip.UTs}</skip.tests>
+          <skipTests>${skip.UTs}</skipTests>
         </configuration>
       </plugin>
     </plugins>
