@@ -196,6 +196,13 @@ frontend-flow:
   dependencies: []
 
 # UNIT-TEST
+# 
+# Run Backend tests with Maven
+backend-unit-test:
+  when: manual
+  stage: unit-test
+  script:
+    - mvn $MAVEN_CLI_OPTS -pl backend test -Dskip.ITs
 
 # INTEGRATION-TEST
 
