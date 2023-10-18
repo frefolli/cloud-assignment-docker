@@ -31,6 +31,12 @@
     <!-- hibernate need this community dialect in order to interact with SQLite -->
     <hibernate.dialect>org.hibernate.community.dialect.SQLiteDialect</hibernate.dialect>
 
+    <!-- Lints -->
+    <skip.lint>false</skip.lint>
+    <skip.spotbugs>${skip.lint}</skip.spotbugs>
+    <skip.checkstyle>${skip.lint}</skip.checkstyle>
+    <skip.pmd>${skip.lint}</skip.pmd>
+
     <!-- Tests -->
     <skip.test>false</skip.test>
     <skip.ITs>${skip.test}</skip.ITs>
@@ -207,6 +213,9 @@
         <groupId>com.github.spotbugs</groupId>
         <artifactId>spotbugs-maven-plugin</artifactId>
         <version>4.7.3.6</version>
+        <configuration>
+            <skip>${skip.spotbugs}</skip>
+        </configuration>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -217,6 +226,7 @@
           <consoleOutput>true</consoleOutput>
           <failsOnError>true</failsOnError>
           <linkXRef>false</linkXRef>
+          <skip>${skip.checkstyle}</skip>
         </configuration>
         <executions>
           <execution>
@@ -229,9 +239,12 @@
         </executions>
       </plugin>
       <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-pmd-plugin</artifactId>
-          <version>3.21.0</version>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-pmd-plugin</artifactId>
+        <version>3.21.0</version>
+        <configuration>
+          <skip>${skip.spotbugs}</skip>
+        </configuration>
           <executions>
             <execution>
               <id>validate</id>
