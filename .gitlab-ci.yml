@@ -196,6 +196,16 @@ frontend-flow:
   dependencies: []
 
 # UNIT-TEST
+# 
+# Run Frontend tests with Maven
+# Because our solution for running lints on Frontend binds the previous stage to "process-classes", which is a "dependency" lifecycle of `test`,
+#   we need to manually disable such lifecycle.
+frontend-unit-test:
+  when: manual
+  stage: unit-test
+  script:
+    - mvn $MAVEN_CLI_OPTS -pl frontend test -Dskip.lint -Dskip.ITs
+
 
 # INTEGRATION-TEST
 
