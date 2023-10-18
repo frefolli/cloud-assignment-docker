@@ -7,6 +7,7 @@ pipeline:
   - backend-spotbugs
   - backend-checkstyle
   - backend-pmd
+  - backend-unit-test
 frontend:
   - clean-cache
   - frontend-build
@@ -18,3 +19,4 @@ backend:
   - backend-spotbugs
   - backend-checkstyle
   - backend-pmd
+  - backend-unit-test

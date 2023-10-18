@@ -38,7 +38,7 @@ class Execution:
             self._launch_job(job)
 
     def _launch_job(self, job: str):
-        self._cmd("sudo gitlab-runner exec docker %s --docker-pull-policy if-not-present" % job)
+        self._cmd("gitlab-runner exec docker %s --docker-pull-policy if-not-present" % job)
 
     def _cmd(self, line: str):
         print(line)
