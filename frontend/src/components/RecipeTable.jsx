@@ -14,6 +14,41 @@ const COLUMNS = [
     {title: "Azioni", key: "toolbox", sortable: false}
 ]
 
+/**
+ * The RecipeTable component displays a table of recipes, allowing users to view, execute, edit, and delete recipes. It also provides the option to add new recipes.
+ *
+ * @class RecipeTable
+ *
+ * @param {Object} props - The component's properties.
+ * @param {Array} props.recipes - An array of recipe objects to display.
+ * @param {string} props.newRecipeName - The name of a new recipe to add.
+ * @param {string} props.newRecipeDescription - The description of a new recipe to add.
+ * @param {Function} props.handleView - A callback function to handle viewing a recipe.
+ * @param {Function} props.handleExecute - A callback function to handle executing a recipe.
+ * @param {Function} props.handleEdit - A callback function to handle editing a recipe.
+ * @param {Function} props.handleDelete - A callback function to handle deleting a recipe.
+ * @param {Function} props.setNewRecipeName - A function to set the name of the new recipe.
+ * @param {Function} props.setNewRecipeDescription - A function to set the description of the new recipe.
+ * @param {Function} props.addRecipe - A function to add a new recipe.
+ *
+ * @returns {JSX.Element} The RecipeTable component.
+ *
+ * @example
+ * // Example usage of the RecipeTable component
+ * <RecipeTable
+ *   recipes={recipeData}
+ *   newRecipeName={newRecipeName}
+ *   newRecipeDescription={newRecipeDescription}
+ *   handleView={handleViewRecipe}
+ *   handleExecute={handleExecuteRecipe}
+ *   handleEdit={handleEditRecipe}
+ *   handleDelete={handleDeleteRecipe}
+ *   setNewRecipeName={setNewRecipeName}
+ *   setNewRecipeDescription={setNewRecipeDescription}
+ *   addRecipe={addNewRecipe}
+ * />
+ */
+
 export default class RecipeTable extends React.Component {
     render() {
         const rows = this.props.recipes.map((recipe) => {

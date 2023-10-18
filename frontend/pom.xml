@@ -20,6 +20,16 @@
     <sonar.sources>./src</sonar.sources>
     <sonar.coverage.exclusions>./src/index.js</sonar.coverage.exclusions>
     <sonar.javascript.lcov.reportPaths>./coverage/lcov.info</sonar.javascript.lcov.reportPaths>
+
+    <!-- Lints -->
+    <skip.lint>false</skip.lint>
+    <skip.eslint>${skip.lint}</skip.eslint>
+    <skip.flow>${skip.lint}</skip.flow>
+
+    <!-- Tests -->
+    <skip.test>false</skip.test>
+    <skip.ITs>${skip.test}</skip.ITs>
+    <skip.UTs>${skip.test}</skip.UTs>
   </properties>
 
 <profiles>
@@ -140,15 +150,27 @@
             </configuration>
           </execution>
 
-          <!-- code testing -->
           <execution>
             <phase>test</phase>
-            <id>npm run test</id>
+            <id>unit-tests</id>
             <goals>
               <goal>npm</goal>
             </goals>
             <configuration>
-              <arguments>run lint</arguments>
+              <arguments>run unit-tests</arguments>
+              <skip>${skip.UTs}</skip>
+            </configuration>
+          </execution>
+
+          <execution>
+            <phase>test</phase>
+            <id>integration-tests</id>
+            <goals>
+              <goal>npm</goal>
+            </goals>
+            <configuration>
+              <arguments>run integration-tests</arguments>
+              <skip>${skip.ITs}</skip>
             </configuration>
           </execution>
         </executions>

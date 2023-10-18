@@ -13,6 +13,24 @@ const isValidInput = (newValue) => {
 
 }
 
+/**
+ * This component provides an input field for specifying a quantity, with validation to ensure non-negative numbers.
+ *
+ * @class QuantityInput
+ *
+ * @param {Object} props - The component's properties.
+ * @param {string} props.value - The current value of the input field.
+ * @param {function} props.onChange - A callback function to handle changes in the input value.
+ * @param {string} props.label - The label for the input field.
+ * @param {Object} [props.style] - Optional CSS style to be applied to the input field.
+ *
+ * @returns {JSX.Element} The QuantityInput component for specifying a quantity.
+ *
+ * @example
+ * // Example usage of the QuantityInput component
+ * <QuantityInput value={quantity} onChange={handleQuantityChange} label="Quantity" style={{ width: "100%" }} />
+ */
+
 class QuantityInput extends React.Component {
   handleValue = (event) => {
     const newValue = event.target.value;

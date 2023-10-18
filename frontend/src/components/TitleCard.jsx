@@ -3,6 +3,24 @@ import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 
+/**
+ * The TitleCard component represents a card with a title and content.
+ *
+ * @class TitleCard
+ *
+ * @param {Object} props - The component's properties.
+ * @param {ReactNode} props.children - The content to be displayed within the card.
+ *
+ * @returns {JSX.Element} The `TitleCard` component.
+ *
+ * @example
+ * // Example usage of the TitleCard component
+ * <TitleCard>
+ *   <h2>Card Title</h2>
+ *   <p>This is the card content.</p>
+ * </TitleCard>
+ */
+
 export default class TitleCard extends React.Component {
     render() {
         return (

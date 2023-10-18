@@ -3,6 +3,21 @@ import Typography from '@mui/material/Typography';
 import TitleCard from './TitleCard';
 import SettingsManager from '../utils/SettingsManager';
 
+/**
+ * This component serves as a greeting message to welcome the user, personalized with their name.
+ * 
+ * @class Greeter
+ * 
+ * @param {Object} props - The component's properties.
+ * @param {string} props.name - The user's name to be displayed in the greeting message.
+ * 
+ * @return {JSX.Element} A greeting message component with a personalized welcome message.
+ * 
+ * @example
+ * // Example usage of the Greeter component
+ * <Greeter name="John" />
+ */
+
 export default class Greeter extends React.Component {
   constructor(props) {
     super(props);

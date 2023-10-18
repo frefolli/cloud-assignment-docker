@@ -7,6 +7,24 @@ import { TextField } from "@mui/material";
 import SettingsManager from '../utils/SettingsManager';
 import BirreIcon from "../svgicons/BirreIcon";
 
+/**
+ * The RecipeExecute component allows users to execute a recipe. It displays the recipe details, including name, description, ingredients, equipment, and provides options to create a new beer.
+ *
+ * @class RecipeExecute
+ *
+ * @param {Object} props - The component's properties.
+ * @param {string} props.recipeID - The unique identifier of the recipe to be executed.
+ * @param {number} [props.beerQuantity=0] - The default beer quantity to create.
+ * @param {function} props.onConfirm - A callback function to be called when the execution is confirmed.
+ * @param {object} [props.notifier] - An optional notifier object to handle notifications.
+ *
+ * @returns {JSX.Element} The RecipeExecute component for executing a recipe.
+ *
+ * @example
+ * // Example usage of the RecipeExecute component
+ * <RecipeExecute recipeID={recipe.id} onConfirm={handleRecipeExecution} notifier={notifier} />
+ */
+
 class RecipeExecute extends Component {
   constructor(props) {
     super(props);

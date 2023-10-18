@@ -15,6 +15,19 @@ import SportsBarIcon from '@mui/icons-material/SportsBar';
 
 const pages = ['Ricette', 'Birre', 'Inventario', 'Spesa', 'Impostazioni'];
 
+/**
+ * This component represents the navigation bar of the application.
+ *
+ * @function NavBar
+ *
+ * @returns {JSX.Element} The navigation bar component.
+ *
+ * @example
+ * // Example usage of the NavBar component
+ * <NavBar />
+ */
+
+
 function NavBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
 

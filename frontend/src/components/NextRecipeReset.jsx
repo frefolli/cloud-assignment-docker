@@ -3,6 +3,22 @@ import MButton from '../components/MButton';
 import { FAKE_NOTIFIER } from '../utils/Protocol';
 import SettingsManager from '../utils/SettingsManager'
 
+/**
+ * This component is responsible for resetting the next recipe settings.
+ *
+ * @class NextRecipeReset
+ *
+ * @param {Object} props - The component's properties.
+ * @param {Notifier} props.notifier - An optional notifier for displaying notifications (default: FAKE_NOTIFIER).
+ * @param {function} props.onConfirm - A function to be called after resetting the next recipe settings.
+ *
+ * @returns {JSX.Element} The NextRecipeReset component for resetting the next recipe settings.
+ *
+ * @example
+ * // Example usage of the NextRecipeReset component
+ * <NextRecipeReset notifier={customNotifier} onConfirm={handleConfirm} />
+ */
+
 class NextRecipeReset extends Component{
   constructor(props) {
     super(props);

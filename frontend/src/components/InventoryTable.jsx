@@ -11,6 +11,25 @@ const COLUMNS = [
     {title: "Azioni", key: "toolbox", sortable: false}
 ]
 
+/**
+ * This component is responsible for rendering an inventory table that displays a list of items with their name, quantity, and an option to delete each item.
+ * 
+ * @class InventoryTable
+ * 
+ * @param {Object} props - The component's properties.
+ * @param {Array} props.items - An array of items to display in the inventory table.
+ * @param {function} props.handleDelete - A callback function to handle item deletion.
+ * 
+ * @return {JSX.Element} A component representing an inventory table with item details and delete buttons.
+ * 
+ * @example
+ * // Example usage of the InventoryTable component
+ * <InventoryTable
+ *   items={inventoryItems}
+ *   handleDelete={handleItemDeletion}
+ * />
+ */
+
 export default class InventoryTable extends React.Component {
     render() {
         const rows = this.props.items.map((item) => {

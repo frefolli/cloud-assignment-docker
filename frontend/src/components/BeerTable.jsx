@@ -11,6 +11,29 @@ const COLUMNS = [
     {title: "Azioni", key: "toolbox", sortable: false}
 ]
 
+/**
+ * This class represents a component for displaying a table of beer data and associated actions.
+ * @class BeerTable
+ * 
+ * @param {Object} props - The component's properties.
+ * @param {Array<Object>} props.beers - An array of beer objects to display in the table.
+ * @param {function} props.handleView - A callback function to handle viewing details for a beer.
+ * @param {function} props.handleEdit - A callback function to handle editing a beer.
+ * @param {function} props.handleDelete - A callback function to handle deleting a beer.
+ *
+ * @returns {JSX.Element} The rendered BeerTable component.
+ *
+ * @example
+ * // Example usage of the BeerTable component:
+ * <BeerTable
+ *   beers={beerList}
+ *   handleView={handleViewBeer}
+ *   handleEdit={handleEditBeer}
+ *   handleDelete={handleDeleteBeer}
+ * />
+ */
+
+
 export default class BeerTable extends React.Component {
     render() {
         const rows = this.props.beers.map((beer) => {

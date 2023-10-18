@@ -12,4 +12,11 @@ This file lists the command lines for executing correctly the stages of the pipe
 | verify | `mvn -pl backend pmd:check` | Run PMD against backend |
 | verify | `mvn -pl frontend process-classes -Dskip.flow` | Run ESLint |
 | verify | `mvn -pl frontend process-classes -Dskip.eslint` | Run Flow |
+| test | `mvn test -Dskip.UTs` | Runs only Integration Tests |
+| test | `mvn test -Dskip.ITs` | Runs only Unit Tests  |
 <!-- |  |  |  | -->
+<!-- |  |  |  | -->
+
+## Variables
+
+Generally we implemented something like `skip.{some}`, where `some` can be either a phase or an action. For example, while `skip.lint` skips all linters, `skip.eslint` skips only ESLint.

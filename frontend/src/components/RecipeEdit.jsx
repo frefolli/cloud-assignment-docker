@@ -5,6 +5,23 @@ import InputTextAreaSetting from "./InputTextAreaSetting";
 import JimFlex from "./JimFlex";
 import RecipeIngredientTable from "./RecipeIngredientTable";
 
+/**
+ * This component allows editing a recipe. It displays the recipe name, description, ingredients, and provides options to edit or add ingredients.
+ *
+ * @class RecipeEdit
+ *
+ * @param {Object} props - The component's properties.
+ * @param {string} props.recipeID - The unique identifier of the recipe to be edited.
+ * @param {function} props.onConfirm - A callback function to be called when the editing is confirmed.
+ * @param {object} [props.notifier] - An optional notifier object to handle notifications.
+ *
+ * @returns {JSX.Element} The RecipeEdit component for editing a recipe.
+ *
+ * @example
+ * // Example usage of the RecipeEdit component
+ * <RecipeEdit recipeID={recipe.id} onConfirm={handleRecipeEditing} notifier={notifier} />
+ */
+
 class RecipeEdit extends Component{
   constructor(props) {
     super(props);
