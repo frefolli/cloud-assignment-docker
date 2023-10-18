@@ -214,6 +214,13 @@ frontend-unit-test:
     - mvn $MAVEN_CLI_OPTS -pl frontend test -Dskip.lint -Dskip.ITs
 
 # INTEGRATION-TEST
+# 
+# Run Backend tests with Maven
+backend-integration-test:
+  when: manual
+  stage: integration-test
+  script:
+    - mvn $MAVEN_CLI_OPTS -pl backend verify -Dskip.UTs -Dskip.lint
 
 # PACKAGE
 
