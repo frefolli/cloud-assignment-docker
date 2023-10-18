@@ -21,7 +21,7 @@ import unimib.ingsof.logic.RepositoryResetController;
 import unimib.ingsof.persistence.service.Protocol;
 
 @SpringBootTest
-class BeerListEndpointTest {
+class BeerListEndpointIT {
 	@Autowired
 	private BeerListEndpoint beerListEndpoint;
 	@Autowired

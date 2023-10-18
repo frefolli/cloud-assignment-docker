@@ -18,7 +18,7 @@ import unimib.ingsof.logic.RepositoryResetController;
 import unimib.ingsof.persistence.service.Protocol;
 
 @SpringBootTest
-class RecipeIngredientEndpointTest {
+class RecipeIngredientEndpointIT {
 	@Autowired
 	private RecipeListEndpoint recipeListEndpoint;
 	@Autowired

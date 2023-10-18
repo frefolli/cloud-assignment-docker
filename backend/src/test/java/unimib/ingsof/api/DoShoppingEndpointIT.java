@@ -20,7 +20,7 @@ import unimib.ingsof.logic.RepositoryResetController;
 import unimib.ingsof.persistence.service.Protocol;
 
 @SpringBootTest
-class DoShoppingEndpointTest {
+class DoShoppingEndpointIT {
 	@Autowired
 	private DoShoppingEndpoint shoppingEndpoint;
 	@Autowired
