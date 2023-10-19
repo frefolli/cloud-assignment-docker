@@ -35,16 +35,19 @@ export default class ThemeManager extends React.Component {
     triggerReload() {
         return new Promise((acc, rej) => {
             this.settingsManager.getSetting("color")
-            .catch(() => {value: DEFAULT_THEME})
             .then(data => {
-                let value = data.value;
-                if (themes[value] === undefined)
-                    value = DEFAULT_THEME;
-                localStorage.setItem(LAST_USED_THEME_LOCALSTORAGE_KEY, value);
-                this.setState({currentTheme: value});
+                this.setTheme(data.value);
                 acc();
             })
+            .catch(() => {this.setTheme()})
         })
+    }
+
+    setTheme(theme) {
+        if (theme === undefined || themes[theme] === undefined)
+            theme = DEFAULT_THEME;
+        localStorage.setItem(LAST_USED_THEME_LOCALSTORAGE_KEY, theme);
+        this.setState({currentTheme: theme});
     }
     
     componentDidMount() {

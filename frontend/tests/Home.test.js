@@ -2,7 +2,7 @@ import "@testing-library/jest-dom/extend-expect";
 import React from "react";
 import { render, screen, act, fireEvent } from "@testing-library/react";
 import Home from "../src/pages/Home";
-import { RECIPE_ENDPOINT, RECIPE_LIST_ENDPOINT, SETTINGS_ENDPOINT } from "../src/utils/Protocol";
+import { RECIPES_ENDPOINT, SETTINGS_ENDPOINT } from "../src/utils/Protocol";
 import AdviceView from "../src/components/AdviceView";
 
 var contentFlick = true;
@@ -11,11 +11,11 @@ var adviceQuantity = 30.0;
 global.fetch = jest.fn().mockImplementation((url) =>
   (contentFlick ? Promise.resolve({
     json: () => {
-      if (url.startsWith(SETTINGS_ENDPOINT + "equipment"))
+      if (url.startsWith(SETTINGS_ENDPOINT + "/" + "equipment"))
           return Promise.resolve({value:"30"})
       if (url === "/api/settings/nextRecipeID")
         return Promise.resolve({ value: "recipe1" });
-      if (url.startsWith(SETTINGS_ENDPOINT))
+      if (url.startsWith(SETTINGS_ENDPOINT + "/"))
         return Promise.resolve({value:"default"})
       if (url === "/api/advice") {
         return Promise.resolve({

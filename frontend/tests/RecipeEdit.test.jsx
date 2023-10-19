@@ -3,7 +3,7 @@ import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import Ricette from "../src/pages/Ricette";
 import { act } from "react-test-renderer";
-import { RECIPE_ENDPOINT, RECIPE_LIST_ENDPOINT, SETTINGS_ENDPOINT } from "../src/utils/Protocol";
+import { RECIPES_ENDPOINT, SETTINGS_ENDPOINT } from "../src/utils/Protocol";
 import RecipeEdit from "../src/components/RecipeEdit";
 
 var recipes = {
@@ -21,13 +21,13 @@ const theIngredient = {
 global.fetch = jest.fn().mockImplementation((url) =>
 Promise.resolve({
   json: () => {
-    if (url.startsWith(SETTINGS_ENDPOINT))
+    if (url.startsWith(SETTINGS_ENDPOINT + "/"))
       return Promise.resolve({value:"default"})
-    if (url === RECIPE_LIST_ENDPOINT)
+    if (url === RECIPES_ENDPOINT)
       return Promise.resolve(Object.keys(recipes));
     else {
-      if (url.startsWith(RECIPE_ENDPOINT)) {
-        let recipeID = url.replace(RECIPE_ENDPOINT, "");
+      if (url.startsWith(RECIPES_ENDPOINT + "/")) {
+        let recipeID = url.replace(RECIPES_ENDPOINT + "/", "");
         return Promise.resolve(recipes[recipeID]);
       } else {
         return Promise.resolve(null);

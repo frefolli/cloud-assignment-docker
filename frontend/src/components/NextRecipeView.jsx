@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import RecipeView from "./RecipeView";
 import MButton from "./MButton";
-import { BEER_LIST_ENDPOINT, FAKE_NOTIFIER, ADVICE_VIEW_TRIGGER, NEXT_RECIPE_VIEW_TRIGGER, NEXT_RECIPE_VIEW_ESCAPE } from '../utils/Protocol';
+import { FAKE_NOTIFIER, ADVICE_VIEW_TRIGGER, NEXT_RECIPE_VIEW_TRIGGER, NEXT_RECIPE_VIEW_ESCAPE } from '../utils/Protocol';
 import ShoppingList from "./ShoppingList";
 import { TextField } from "@mui/material";
 import SettingsManager from '../utils/SettingsManager';
 import ShoppingManager from '../utils/ShoppingManager';
 import BirreIcon from "../svgicons/BirreIcon";
+import BeersManager from '../utils/BeersManager';
 
 /**
  * This component is responsible for displaying the next recipe and managing actions related to it.
@@ -38,6 +39,7 @@ export default class NextRecipeView extends Component {
     this.notifier = this.props.notifier || FAKE_NOTIFIER;
     this.settingsManager = new SettingsManager();
     this.shoppingManager = new ShoppingManager();
+    this.beersManager = new BeersManager();
   }
 
   getNextRecipeID = () => {
@@ -184,21 +186,10 @@ export default class NextRecipeView extends Component {
     if (this.state.newBeerName === "") {
       return this.notifier.warning("il nome della birra non deve essere vuoto");
     } else {
-      fetch(BEER_LIST_ENDPOINT, {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
+      this.beersManager.postBeer({
           name: this.state.newBeerName,
           recipeID: this.state.nextRecipeID,
-          quantity: this.state.nextRecipeQuantity,
-        }),
-      })
-      .then((response) => {
-        if (response.status >= 400)
-          throw new Error();
+          quantity: this.state.nextRecipeQuantity
       })
       .then(() => {
         this.resetNextRecipeSettings();

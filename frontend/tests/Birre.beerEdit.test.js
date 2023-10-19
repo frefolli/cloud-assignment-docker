@@ -28,7 +28,7 @@ var recipes = {
   global.fetch = jest.fn().mockImplementation((url) =>
     Promise.resolve({
       json: () => {
-        if (url.startsWith(SETTINGS_ENDPOINT))
+        if (url.startsWith(SETTINGS_ENDPOINT + "/"))
           return Promise.resolve({value:"default"})
            if (url.startsWith("/api/recipes")) {
               if (url === "/api/recipes")

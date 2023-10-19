@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import RecipeView from "./RecipeView";
 import MButton from '../components/MButton';
-import {BEERS_ENDPOINT, FAKE_NOTIFIER} from '../utils/Protocol';
+import {FAKE_NOTIFIER} from '../utils/Protocol';
 import BeerNoteTableReadOnly from "./BeerNoteTableReadOnly";
+import BeersManager from '../utils/BeersManager';
 
 /**
  * This class represents a component for viewing beer details, including name, recipe, and notes.
@@ -29,11 +30,11 @@ class BeerView extends Component {
       notes: []
     };
     this.notifier = this.props.notifier || FAKE_NOTIFIER;
+    this.beersManager = new BeersManager();
   }
 
   triggerReload = () => {
-    fetch(BEERS_ENDPOINT + `${this.props.beerID}`)
-    .then(response => response.json())
+    this.beersManager.getBeer(this.props.beerID)
     .then(data => this.setState({...data}))
     .catch(this.notifier.connectionError)
   }

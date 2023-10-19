@@ -5,7 +5,7 @@ import BeerDelete from "../components/BeerDelete";
 import Modal from "../components/Modal";
 import MButton from "../components/MButton";
 import BodyThemeManager from '../components/BodyThemeManager'
-import {BEER_LIST_ENDPOINT, BEERS_ENDPOINT, RECIPE_ENDPOINT, FAKE_NOTIFIER  } from '../utils/Protocol';
+import { FAKE_NOTIFIER  } from '../utils/Protocol';
 import Selector from "../components/Selector";
 import BeerTable from "../components/BeerTable";
 import JimTable from "../components/JimTable";
@@ -13,6 +13,8 @@ import { TextField } from "@mui/material";
 import JimFlex from "../components/JimFlex";
 import JimGrid from "../components/JimGrid";
 import LoadingScreen from "../components/LoadingScreen";
+import RecipesManager from '../utils/RecipesManager';
+import BeersManager from '../utils/BeersManager';
 
 
 class Birre extends Component {
@@ -31,39 +33,34 @@ class Birre extends Component {
       isLoading: true
     };
     this.notifier = this.props.notifier || FAKE_NOTIFIER;
+    this.recipesManager = new RecipesManager();
+    this.beersManager = new BeersManager();
   }
 
   triggerReload = () => {
-    fetch(BEER_LIST_ENDPOINT)
-      .then((response) => response.json())
-      .then((data) => {
+    this.beersManager.getBeerList()
+    .then((data) => {
         const beerIDs = data;
         const beerIDsFiltered = data;
-        const promises = beerIDs.map((id) => fetch(BEERS_ENDPOINT+`${id}`));
-        Promise.all(promises).then((results) => {
-          const beers = results.map((response) => response.json());
-          Promise.all(beers)
-            .then((updatedBeers) => {
-              this.setState({
-                beerIDs,
-                beers: updatedBeers,
-                beerIDsFiltered,
-              });
-              return updatedBeers
-                .map((beer) => beer.recipeID)
-                .filter((value, index, self) => (self.indexOf(value) === index) && value !== null);
-            })
-            .then((updatedRecipes) => {
-              Promise.all(
-                updatedBeers.map((recipeID) => fetch(RECIPE_ENDPOINT+`${recipeID}`))
-              )
-                .then((responses) =>
-                  Promise.all(responses.map((response) => response.json()))
-                )
-                .then((data) => {
-                  this.setState({ recipes: data, isLoading: false });
-                });
-            });
+        const beers = beerIDs.map((id) => this.beersManager.getBeer(id));
+        Promise.all(beers)
+        .then((updatedBeers) => {
+          this.setState({
+            beerIDs,
+            beers: updatedBeers,
+            beerIDsFiltered,
+          });
+          return updatedBeers
+            .map((beer) => beer.recipeID)
+            .filter((value, index, self) => (self.indexOf(value) === index) && value !== null);
+        })
+        .then((updatedRecipes) => {
+          Promise.all(
+            updatedRecipes.map((recipeID) => this.recipesManager.getRecipe(recipeID))
+          )
+          .then((data) => {
+             this.setState({ recipes: data, isLoading: false });
+          });
         });
       })
       .catch(this.notifier.connectionError);
@@ -105,15 +102,13 @@ class Birre extends Component {
 
   handleDeleteConfirm = () => {
     const beerToDeleteID = this.state.selectedBeer.beerID;
-     fetch(BEERS_ENDPOINT+`${beerToDeleteID}`, {
-      method: "DELETE",
-    })
-    .then(this.notifier.onRequestError("impossibile eliminare la birra"))
-    .then(this.notifier.onRequestSuccess("birra eliminata correttamente"))
+    this.beersManager.deleteBeer(beerToDeleteID)
+    .then(() => this.notifier.success("birra eliminata correttamente"))
     .then(() => {
       this.triggerReload();
       this.setShowModal(false);
     })
+    .catch(() => this.notifier.error("impossibile eliminare la birra"));
   };
 
   getCurrentComponent = () => {
@@ -229,18 +224,14 @@ class Birre extends Component {
   }
 
   filterBeer = () => {
-    let url = BEER_LIST_ENDPOINT+"?";
-    if (this.state.filterName !== "")
-      url += `&&name=${this.state.filterName}`;
-    if (this.state.filterRecipe !== "")
-      url += `&&recipeID=${this.state.filterRecipe}`;
-
-    fetch(url)
-    .then((response) => response.json())
-    .then((beerIDsFiltered) => {
-      this.setState({ beerIDsFiltered: beerIDsFiltered });
-    })
-    .catch(this.notifier.connectionError)
+      this.beersManager.getBeerList({
+          name: this.state.filterName,
+          recipe: this.state.filterRecipe
+      })
+      .then(data => this.setState({
+        beerIDsFiltered: data
+      }))
+      .catch(this.notifier.connectionError);
   }
 
   removeFilter = () => {

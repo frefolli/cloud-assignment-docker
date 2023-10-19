@@ -3,7 +3,7 @@ import React from "react";
 import { render, screen, fireEvent, within } from "@testing-library/react";
 import Birre from "../src/pages/Birre";
 import { act } from "react-test-renderer";
-import { BEERS_ENDPOINT, BEER_LIST_ENDPOINT, RECIPE_ENDPOINT, RECIPE_LIST_ENDPOINT, SETTINGS_ENDPOINT } from "../src/utils/Protocol";
+import { BEERS_ENDPOINT, RECIPES_ENDPOINT, SETTINGS_ENDPOINT } from "../src/utils/Protocol";
 
 var recipes = {
     "recipeID": {
@@ -26,22 +26,22 @@ var beers = {
 global.fetch = jest.fn().mockImplementation((url) =>
   Promise.resolve({
     json: () => {
-        if (url.startsWith(SETTINGS_ENDPOINT + "equipment"))
+        if (url.startsWith(SETTINGS_ENDPOINT + "/" + "equipment"))
           return Promise.resolve({value:"30"})
-          if (url.startsWith(SETTINGS_ENDPOINT))
+          if (url.startsWith(SETTINGS_ENDPOINT + "/"))
             return Promise.resolve({value:"default"})
-        if (url.startsWith(RECIPE_LIST_ENDPOINT)) {
-            if (url === RECIPE_LIST_ENDPOINT)
+        if (url.startsWith(RECIPES_ENDPOINT)) {
+            if (url === RECIPES_ENDPOINT)
               return Promise.resolve(Object.keys(recipes));
             else {
-                let recipeID = url.replace(RECIPE_ENDPOINT, "");
+                let recipeID = url.replace(RECIPES_ENDPOINT + "/", "");
                 return Promise.resolve(recipes[recipeID]);
             }
-        } else if (url.startsWith(BEER_LIST_ENDPOINT)) {
-            if (url === BEER_LIST_ENDPOINT || url.startsWith(BEER_LIST_ENDPOINT+"?"))
+        } else if (url.startsWith(BEERS_ENDPOINT)) {
+            if (url === BEERS_ENDPOINT || url.startsWith(BEERS_ENDPOINT+"?"))
               return Promise.resolve(Object.keys(beers));
             else {
-                let beerID = url.replace(BEERS_ENDPOINT, "");
+                let beerID = url.replace(BEERS_ENDPOINT + "/", "");
                 return Promise.resolve(beers[beerID]);
             }
         }

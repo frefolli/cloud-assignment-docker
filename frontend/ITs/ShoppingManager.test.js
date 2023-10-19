@@ -1,9 +1,9 @@
 import "@testing-library/jest-dom/extend-expect";
-import { SHOPPING_LIST_ENDPOINT } from "../src/utils/Protocol";
+import { SHOPPING_ENDPOINT } from "../src/utils/Protocol";
 import ShoppingManager from "../src/utils/ShoppingManager";
 
 global.fetch = jest.fn().mockImplementation((url) => {
-    if (url === SHOPPING_LIST_ENDPOINT)
+    if (url === SHOPPING_ENDPOINT)
         return Promise.resolve({json: () => {}})
     return Promise.resolve({status: 400});
 })

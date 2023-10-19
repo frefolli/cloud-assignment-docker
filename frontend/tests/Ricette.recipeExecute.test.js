@@ -3,7 +3,7 @@ import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import Ricette from "../src/pages/Ricette";
 import { act } from "react-test-renderer";
-import { FAKE_NOTIFIER, RECIPE_ENDPOINT, RECIPE_LIST_ENDPOINT, SETTINGS_ENDPOINT, SHOPPING_ENDPOINT } from "../src/utils/Protocol";
+import { FAKE_NOTIFIER, RECIPES_ENDPOINT, SETTINGS_ENDPOINT, SHOPPING_ENDPOINT } from "../src/utils/Protocol";
 import RecipeExecute from "../src/components/RecipeExecute";
 
 var recipes = {
@@ -41,19 +41,19 @@ global.fetch = jest.fn().mockImplementation((url) => {
     return Promise.resolve({
         status: getStatus(url),
         json: () => {
-            if (url.startsWith(SETTINGS_ENDPOINT + "equipment"))
+            if (url.startsWith(SETTINGS_ENDPOINT + "/" + "equipment"))
               return Promise.resolve({value:(equipmentFlick ? "30" : "")})
-              if (url.startsWith(SETTINGS_ENDPOINT + "nextRecipeID"))
+              if (url.startsWith(SETTINGS_ENDPOINT + "/" + "nextRecipeID"))
                 return Promise.resolve({value:""})
-              if (url.startsWith(SETTINGS_ENDPOINT))
+              if (url.startsWith(SETTINGS_ENDPOINT + "/"))
                 return Promise.resolve({value:"default"})
-            if (url === RECIPE_LIST_ENDPOINT)
+            if (url === RECIPES_ENDPOINT)
               return Promise.resolve(Object.keys(recipes));
-            else if (url.startsWith(RECIPE_ENDPOINT)) {
-                let recipeID = url.replace(RECIPE_ENDPOINT, "");
+            else if (url.startsWith(RECIPES_ENDPOINT + "/")) {
+                let recipeID = url.replace(RECIPES_ENDPOINT + "/", "");
                 return Promise.resolve(recipes[recipeID]);
-            } else if (url.startsWith(SHOPPING_ENDPOINT)) {
-                let recipeID = url.replace(SHOPPING_ENDPOINT, "");
+            } else if (url.startsWith(SHOPPING_ENDPOINT + "/")) {
+                let recipeID = url.replace(SHOPPING_ENDPOINT + "/", "");
                 return Promise.resolve(recipes[recipeID].ingredients);
             } else {
                 return Promise.resolve(null);
