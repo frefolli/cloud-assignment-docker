@@ -1,6 +1,7 @@
 import React from 'react';
 import backgrounds from '../theme/backgrounds';
-import { BACKGROUND_MANAGER_ESCAPE, BACKGROUND_MANAGER_TRIGGER, DEFAULT_BACKGROUND, LAST_USED_BACKGROUND_LOCALSTORAGE_KEY, SETTINGS_ENDPOINT } from '../utils/Protocol';
+import { BACKGROUND_MANAGER_ESCAPE, BACKGROUND_MANAGER_TRIGGER, DEFAULT_BACKGROUND, LAST_USED_BACKGROUND_LOCALSTORAGE_KEY } from '../utils/Protocol';
+import SettingsManager from '../utils/SettingsManager';
 
 /**
  * Manages and displays background images for the application.
@@ -23,11 +24,12 @@ export default class BackgroundManager extends React.Component {
     constructor(props) {
         super(props);
         this.state = {};
+        this.settingsManager = new SettingsManager();
     }
 
     triggerReload = () => {
         return new Promise((acc, rej) => {
-            fetch(SETTINGS_ENDPOINT + "background")
+            this.settingsManager.getSetting("background")
             .then((response) => {
                 if (response.status >= 400 && response.status <= 600) {
                     return {value: DEFAULT_BACKGROUND}

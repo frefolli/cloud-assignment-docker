@@ -4,8 +4,8 @@ import ResetManager from "../src/utils/ResetManager";
 
 global.fetch = jest.fn().mockImplementation((url) => {
     if (url === RESET_ENDPOINT)
-        return Promise.resolve({})
-    return Promise.resolve({status: 400, json: () => {}});
+        return Promise.resolve({json: () => {}})
+    return Promise.resolve({status: 400});
 })
 
 const resetManager = new ResetManager();
