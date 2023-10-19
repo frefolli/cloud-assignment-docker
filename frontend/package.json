@@ -30,7 +30,7 @@
     "flow": "flow",
     "sonarqube": "sonar-scanner -Dsonar.login=squ_f91b9a7394d69d0f9ac15370ad6d8fffa9001a62 -Dsonar.host.url=http://localhost:9000",
     "unit-tests": "jest --coverage -u --verbose --maxWorkers=50% UTs",
-    "integration-tests": "jest --coverage -u --silent --maxWorkers=50% ITs"
+    "integration-tests": "jest --coverage -u --verbose --maxWorkers=50% ITs --setupFilesAfterEnv \"<rootDir>/ITs/setup.js\""
   },
   "eslintConfig": {
     "extends": [
@@ -78,7 +78,8 @@
     "eslint": "^8.51.0",
     "eslint-config-google": "^0.14.0",
     "eslint-plugin-react": "^7.33.2",
-    "flow-bin": "^0.218.1"
+    "flow-bin": "^0.218.1",
+    "isomorphic-fetch": "^3.0.0"
   },
   "proxy": "http://localhost:8080"
 }
