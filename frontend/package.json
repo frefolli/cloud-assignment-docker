@@ -29,8 +29,8 @@
     "babel": "babel src/ -d lib/",
     "flow": "flow",
     "sonarqube": "sonar-scanner -Dsonar.login=squ_f91b9a7394d69d0f9ac15370ad6d8fffa9001a62 -Dsonar.host.url=http://localhost:9000",
-    "unit-tests": "jest --coverage -u --verbose --maxWorkers=50%",
-    "integration-tests": "jest --coverage -u --silent --maxWorkers=50%"
+    "unit-tests": "jest --coverage -u --verbose --maxWorkers=50% UTs",
+    "integration-tests": "jest --coverage -u --silent --maxWorkers=50% ITs"
   },
   "eslintConfig": {
     "extends": [
