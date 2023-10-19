@@ -53,9 +53,9 @@ class Birre extends Component {
                 .map((beer) => beer.recipeID)
                 .filter((value, index, self) => (self.indexOf(value) === index) && value !== null);
             })
-            .then((updatedBeers) => {
+            .then((updatedRecipes) => {
               Promise.all(
-                updatedBeers.map((beer) => fetch(RECIPE_ENDPOINT+`${beer}`))
+                updatedBeers.map((recipeID) => fetch(RECIPE_ENDPOINT+`${recipeID}`))
               )
                 .then((responses) =>
                   Promise.all(responses.map((response) => response.json()))
