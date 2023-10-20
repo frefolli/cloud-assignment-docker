@@ -6,15 +6,15 @@ import ResetManager from "../src/utils/ResetManager";
 const settingsManager = new SettingsManager();
 const resetManager = new ResetManager();
 describe("SettingsManager tests", () => {
-    test("SettingsManager should be able to putSetting", async () => {
+    test("master test", async () => {
         await resetManager.doReset();
         
         expect((await settingsManager.getSettings()).length).toBe(1);
         await settingsManager.postSetting("ID", "value");
         expect((await settingsManager.getSettings()).length).toBe(2);
-        expect((await settingsManager.getSetting("ID"))).toBe("value");
+        expect((await settingsManager.getSetting("ID")).value).toBe("value");
         await settingsManager.putSetting("ID", "value2");
-        expect((await settingsManager.getSetting("ID"))).toBe("value2");
+        expect((await settingsManager.getSetting("ID")).value).toBe("value2");
 
         await resetManager.doReset();
     })

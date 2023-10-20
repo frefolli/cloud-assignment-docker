@@ -6,7 +6,8 @@ import SettingsManager from '../src/utils/SettingsManager';
 const resetManager = new ResetManager();
 const settingsManager = new SettingsManager();
 describe("ResetManager tests", () => {
-    test("ResetManager should be able to doReset", async () => {
+    test("master test", async () => {
+        await resetManager.doReset();
         await settingsManager.postSetting("ID", "value");
         await resetManager.doReset();
         expect((await settingsManager.getSettings()).length).toBe(1);
