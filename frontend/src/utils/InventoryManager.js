@@ -12,7 +12,6 @@ export default class InventoryManager {
     deleteIngredient(ingredientID) {
         return new Promise((acc, rej) => {
             fetch(INVENTORY_ENDPOINT + `/${ingredientID}`, {method: "DELETE"})
-            .then(response => response.json())
             .then(acc).catch(rej);
         })
     }
