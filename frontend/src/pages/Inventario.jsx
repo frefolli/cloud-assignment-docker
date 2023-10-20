@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import IngredientDelete from "../components/IngredientDelete";
 import Modal from "../components/Modal";
-import {INVENTORY_LIST_ENDPOINT, INVENTORY_ENDPOINT, FAKE_NOTIFIER} from '../utils/Protocol';
+import {FAKE_NOTIFIER} from '../utils/Protocol';
 import BodyThemeManager from "../components/BodyThemeManager";
 import InventoryTable from "../components/InventoryTable";
 import LoadingScreen from "../components/LoadingScreen";
+import InventoryManager from '../utils/InventoryManager';
 
 class Inventario extends Component {
   constructor(props) {
@@ -16,11 +17,11 @@ class Inventario extends Component {
       ingredientID: null,
     };
     this.notifier = this.props.notifier || FAKE_NOTIFIER;
+    this.inventoryManager = new InventoryManager();
   }
 
   triggerReload = () => {
-    fetch(INVENTORY_LIST_ENDPOINT)
-    .then((response) => response.json())
+    this.inventoryManager.getIngredientList()
     .then((data) => {
       this.setState({ inventory: data, isLoading: false })
     })
@@ -44,14 +45,12 @@ class Inventario extends Component {
 
   handleDeleteConfirm = () => {
     const { ingredientID } = this.state;
-    fetch(INVENTORY_ENDPOINT+`${ingredientID}`, {
-      method: "DELETE",
-    })
-    .then(this.notifier.onRequestError("impossibile eliminare l'ingrediente"))
+    this.inventoryManager.deleteIngredient(ingredientID)
     .then(() => {
       this.setShowModal(false);
       this.triggerReload();
-    });
+    })
+    .catch(() => this.notifier.error("impossibile eliminare l'ingrediente"));
   };
 
   render() {

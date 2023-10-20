@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import MButton from "../components/MButton";
-import {DO_SHOPPING_ENDPOINT, FAKE_NOTIFIER, isNotValidPositiveQuantity} from '../utils/Protocol';
+import {FAKE_NOTIFIER, isNotValidPositiveQuantity} from '../utils/Protocol';
 import BodyThemeManager from '../components/BodyThemeManager';
 import ShoppingCartCheckoutIcon from '@mui/icons-material/ShoppingCartCheckout';
 import ShoppingIngredientTable from "../components/ShoppingIngredientTable";
 import RemoveShoppingCartIcon from '@mui/icons-material/RemoveShoppingCart';
+import ShoppingManager from '../utils/ShoppingManager';
 
 class Spesa extends Component {
   constructor(props) {
@@ -15,6 +16,7 @@ class Spesa extends Component {
       newIngredientQuantity: "0",
     };
     this.notifier = this.props.notifier || FAKE_NOTIFIER;
+    this.shoppingManager = new ShoppingManager();
   }
 
   handleClear = () => {
@@ -35,11 +37,7 @@ class Spesa extends Component {
         return this.notifier.warning("le quantita' dei singoli ingredienti devono essere strettamente positive");
     }
 
-    fetch(DO_SHOPPING_ENDPOINT, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(this.state.ingredients),
-    })
+    this.shoppingManager.doShopping(this.state.ingredients)
     .then(this.notifier.onRequestErrorResolvePromise(() => {throw new Error()}))
     .then(() => this.notifier.success("ingredienti inventariati con successo"))
     .then(() => {

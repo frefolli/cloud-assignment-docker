@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {SHOPPING_ENDPOINT} from '../utils/Protocol';
+import ShoppingManager from '../utils/ShoppingManager';
 import RecipeIngredientTableReadOnly from "./RecipeIngredientTableReadOnly";
 
 /**
@@ -26,20 +26,17 @@ class ShoppingList extends Component {
       newBeerQuantity: props.quantity,
       recipeID: props.recipeID,
     };
+    this.shoppingManager = new ShoppingManager();
   }
 
   componentDidMount() {
-    fetch(SHOPPING_ENDPOINT + `${this.state.recipeID}`, {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        quantity: this.state.newBeerQuantity,
-      }),
-      }).then((response) => response.json())
-      .then((data) => this.setState({ missingIngredients: data }));
+    this.shoppingManager.getShoppingList({
+        recipeID: this.state.recipeID,
+        quantity: this.state.newBeerQuantity
+    })
+    .then((response) => response.json())
+    .then((data) => this.setState({ missingIngredients: data }))
+    .catch(err => {}); // TODO: link notifier
   }
 
 

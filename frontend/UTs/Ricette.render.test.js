@@ -3,7 +3,7 @@ import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import Ricette from "../src/pages/Ricette";
 import { act } from "react-test-renderer";
-import { RECIPE_ENDPOINT, RECIPE_LIST_ENDPOINT, SETTINGS_ENDPOINT } from "../src/utils/Protocol";
+import { RECIPES_ENDPOINT, SETTINGS_ENDPOINT } from "../src/utils/Protocol";
 
 var settings = {
     nextRecipeID: "recipeID",
@@ -32,34 +32,34 @@ var statusFlicks = {
 };
 
 function getStatus(url) {
-  if (url.startsWith(SETTINGS_ENDPOINT + "nextRecipeID"))
+  if (url.startsWith(SETTINGS_ENDPOINT + "/" + "nextRecipeID"))
   return statusFlicks.nextRecipeID;
-  if (url.startsWith(SETTINGS_ENDPOINT + "nextRecipeQuantity"))
+  if (url.startsWith(SETTINGS_ENDPOINT + "/" + "nextRecipeQuantity"))
   return statusFlicks.nextRecipeQuantity;
   return 200;
 };
 
 global.fetch = jest.fn().mockImplementation((url) => {
-    if (url.startsWith(SETTINGS_ENDPOINT + "nextRecipeID") && !contentFlicks.nextRecipeID)
+    if (url.startsWith(SETTINGS_ENDPOINT + "/" + "nextRecipeID") && !contentFlicks.nextRecipeID)
         return Promise.resolve({});
-    if (url.startsWith(SETTINGS_ENDPOINT + "nextRecipeQuantity") && !contentFlicks.nextRecipeQuantity)
+    if (url.startsWith(SETTINGS_ENDPOINT + "/" + "nextRecipeQuantity") && !contentFlicks.nextRecipeQuantity)
         return Promise.resolve({});
     return Promise.resolve({
         status: getStatus(url),
         json: () => {
-            if (url.startsWith(SETTINGS_ENDPOINT + "nextRecipeID"))
+            if (url.startsWith(SETTINGS_ENDPOINT + "/" + "nextRecipeID"))
             return Promise.resolve({value:settings.nextRecipeID})
-            if (url.startsWith(SETTINGS_ENDPOINT + "nextRecipeQuantity"))
+            if (url.startsWith(SETTINGS_ENDPOINT + "/" + "nextRecipeQuantity"))
             return Promise.resolve({value:settings.nextRecipeQuantity})
-            if (url.startsWith(SETTINGS_ENDPOINT))
+            if (url.startsWith(SETTINGS_ENDPOINT + "/"))
             return Promise.resolve({value:"default"})
             if (url.startsWith("/api/recipes?name="))
             return Promise.resolve(Object.keys(recipes));
-            if (url === RECIPE_LIST_ENDPOINT)
+            if (url === RECIPES_ENDPOINT)
             return Promise.resolve(Object.keys(recipes));
             else {
-                if (url.startsWith(RECIPE_ENDPOINT)) {
-                    let recipeID = url.replace(RECIPE_ENDPOINT, "");
+                if (url.startsWith(RECIPES_ENDPOINT + "/")) {
+                    let recipeID = url.replace(RECIPES_ENDPOINT + "/", "");
                     return Promise.resolve(recipes[recipeID]);
                 } else {
                     return Promise.resolve(null);

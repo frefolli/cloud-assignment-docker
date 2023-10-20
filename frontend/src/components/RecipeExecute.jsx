@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import MButton from "../components/MButton";
-import { RECIPE_ENDPOINT, BEER_LIST_ENDPOINT, FAKE_NOTIFIER, isNotValidPositiveQuantity} from '../utils/Protocol';
+import { FAKE_NOTIFIER, isNotValidPositiveQuantity} from '../utils/Protocol';
+import RecipesManager from '../utils/RecipesManager';
 import ShoppingList from "./ShoppingList";
 import QuantityInput from "./QuantityInput";
 import { TextField } from "@mui/material";
 import SettingsManager from '../utils/SettingsManager';
+import BeersManager from '../utils/BeersManager';
 import BirreIcon from "../svgicons/BirreIcon";
 
 /**
@@ -40,13 +42,14 @@ class RecipeExecute extends Component {
     };
     this.notifier = this.props.notifier || FAKE_NOTIFIER;
     this.settingsManager = new SettingsManager();
+    this.recipesManager = new RecipesManager();
+    this.beersManager = new BeersManager();
   }
 
   triggerReload = () => {
     return new Promise((acc, rej) => {
       const recipeID = this.props.recipeID;
-      fetch(RECIPE_ENDPOINT+`${recipeID}`)
-        .then((response) => response.json())
+        this.recipesManager.getRecipe(recipeID)
         .then((data) => {
           this.setState({ ...data }); acc();
         })
@@ -150,21 +153,10 @@ class RecipeExecute extends Component {
         this.setState({missingEquipment: true});
         this.notifier.warning("la capacita' dell'equipaggiamento e' insufficiente");
       } else {
-        fetch(BEER_LIST_ENDPOINT, {
-          method: "POST",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
+        this.beersManager.postBeer({
             name: this.state.newBeerName,
             recipeID: this.state.recipeID,
-            quantity: this.state.newBeerQuantity,
-          }),
-        })
-        .then((response) => {
-          if (response.status >= 400)
-            throw new Error();
+            quantity: this.state.newBeerQuantity
         })
         .then(() => {
           this.props.onConfirm();

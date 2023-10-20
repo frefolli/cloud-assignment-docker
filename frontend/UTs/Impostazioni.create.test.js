@@ -3,7 +3,7 @@ import React from "react";
 import { render, screen, fireEvent, waitFor, getByRole } from "@testing-library/react";
 import Impostazioni from "../src/pages/Impostazioni";
 import { act } from "react-test-renderer";
-import { SETTINGS_ENDPOINT, SETTING_LIST_ENDPOINT } from "../src/utils/Protocol";
+import { SETTINGS_ENDPOINT } from "../src/utils/Protocol";
 
 var settings = {
     settingID: "value"
@@ -20,25 +20,25 @@ var statusFlick = {
 }
 
 function getStatus(url) {
-    if (url === SETTING_LIST_ENDPOINT && !statusFlick.settings)
+    if (url === SETTINGS_ENDPOINT && !statusFlick.settings)
         return 400
-    if (url.startsWith(SETTINGS_ENDPOINT) && !statusFlick.setting)
+    if (url.startsWith(SETTINGS_ENDPOINT + "/") && !statusFlick.setting)
         return 400
     return 200
 }
 
 global.fetch = jest.fn().mockImplementation((url) => {
-    if (url === SETTING_LIST_ENDPOINT && !contentFlick.settings)
+    if (url === SETTINGS_ENDPOINT && !contentFlick.settings)
         return Promise.resolve({})
-    if (url.startsWith(SETTINGS_ENDPOINT) && !contentFlick.setting)
+    if (url.startsWith(SETTINGS_ENDPOINT + "/") && !contentFlick.setting)
         return Promise.resolve({})
     return Promise.resolve({
         status: getStatus(url),
         json: () => {
-            if (url === SETTING_LIST_ENDPOINT && contentFlick.settings)
+            if (url === SETTINGS_ENDPOINT && contentFlick.settings)
                 return Promise.resolve(Object.keys(settings).map(settingID => settings[settingID]));
-            if (url.startsWith(SETTINGS_ENDPOINT) && contentFlick.setting)
-                return Promise.resolve(settings[url.replace(SETTINGS_ENDPOINT, "")]);
+            if (url.startsWith(SETTINGS_ENDPOINT + "/") && contentFlick.setting)
+                return Promise.resolve(settings[url.replace(SETTINGS_ENDPOINT + "/", "")]);
         }
     })
 })

@@ -10,11 +10,11 @@ import { SETTINGS_ENDPOINT, SHOPPING_ENDPOINT } from '../src/utils/Protocol';
 global.fetch = jest.fn().mockImplementation((url) =>
   Promise.resolve({
     json: () => {
-      if (url.startsWith(SETTINGS_ENDPOINT + "equipment"))
+      if (url.startsWith(SETTINGS_ENDPOINT + "/" + "equipment"))
         return Promise.resolve({value:"30"})
-        if (url.startsWith(SETTINGS_ENDPOINT))
+        if (url.startsWith(SETTINGS_ENDPOINT + "/"))
           return Promise.resolve({value:"default"})
-      if (url.startsWith(SHOPPING_ENDPOINT))
+      if (url.startsWith(SHOPPING_ENDPOINT + "/"))
         return Promise.resolve([]);
        return Promise.resolve({});
     },

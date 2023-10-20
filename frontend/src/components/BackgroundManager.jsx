@@ -1,6 +1,7 @@
 import React from 'react';
 import backgrounds from '../theme/backgrounds';
-import { BACKGROUND_MANAGER_ESCAPE, BACKGROUND_MANAGER_TRIGGER, DEFAULT_BACKGROUND, LAST_USED_BACKGROUND_LOCALSTORAGE_KEY, SETTINGS_ENDPOINT } from '../utils/Protocol';
+import { BACKGROUND_MANAGER_ESCAPE, BACKGROUND_MANAGER_TRIGGER, DEFAULT_BACKGROUND, LAST_USED_BACKGROUND_LOCALSTORAGE_KEY } from '../utils/Protocol';
+import SettingsManager from '../utils/SettingsManager';
 
 /**
  * Manages and displays background images for the application.
@@ -23,27 +24,25 @@ export default class BackgroundManager extends React.Component {
     constructor(props) {
         super(props);
         this.state = {};
+        this.settingsManager = new SettingsManager();
+    }
+
+    setBackground(value) {
+        if (value === undefined || backgrounds[value] === undefined)
+            value = "default";
+        localStorage.setItem(LAST_USED_BACKGROUND_LOCALSTORAGE_KEY, value);
+        document.body.style.backgroundImage = `url("/backgrounds/${backgrounds[value]}")`;
+        this.setState({});
     }
 
     triggerReload = () => {
         return new Promise((acc, rej) => {
-            fetch(SETTINGS_ENDPOINT + "background")
-            .then((response) => {
-                if (response.status >= 400 && response.status <= 600) {
-                    return {value: DEFAULT_BACKGROUND}
-                }
-                return response.json();
-            })
+            this.settingsManager.getSetting("background")
             .then(data => {
-                let value = data.value;
-                if (backgrounds[value] === undefined)
-                    value = "default";
-                localStorage.setItem(LAST_USED_BACKGROUND_LOCALSTORAGE_KEY, value);
-                document.body.style.backgroundImage = `url("/backgrounds/${backgrounds[value]}")`;
-                this.setState({});
+                this.setBackground(data.value);
                 acc()
             })
-            .catch(() => acc())
+            .catch(() => this.setBackground())
         });
     }
 
@@ -51,7 +50,7 @@ export default class BackgroundManager extends React.Component {
         if (this.props.testBackgroundCookie) {
             document.cookie = BACKGROUND_MANAGER_TRIGGER;
         }
-        document.body.style.backgroundImage = `url("/backgrounds/${backgrounds[localStorage.getItem(LAST_USED_BACKGROUND_LOCALSTORAGE_KEY) || DEFAULT_BACKGROUND]}")`;
+        this.setBackground(localStorage.getItem(LAST_USED_BACKGROUND_LOCALSTORAGE_KEY));
         document.body.style.backgroundSize = "cover";
         this.triggerReload();
     }

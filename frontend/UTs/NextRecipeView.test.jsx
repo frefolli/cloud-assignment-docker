@@ -3,7 +3,7 @@ import "@testing-library/jest-dom/extend-expect";
 import { act } from "react-test-renderer";
 import NextRecipeView from "../src/components/NextRecipeView";
 import { fireEvent, render, screen } from "@testing-library/react";
-import { BEER_LIST_ENDPOINT, RECIPE_ENDPOINT, RECIPE_LIST_ENDPOINT, SETTINGS_ENDPOINT, SETTING_LIST_ENDPOINT, SHOPPING_ENDPOINT } from "../src/utils/Protocol";
+import { BEERS_ENDPOINT, RECIPES_ENDPOINT, SETTINGS_ENDPOINT, SHOPPING_ENDPOINT } from "../src/utils/Protocol";
 import Home from "../src/pages/Home";
 
 var settings = {
@@ -39,53 +39,53 @@ var statusFlicks = {
 };
 
 function getStatus(url) {
-  if (url.startsWith(SETTINGS_ENDPOINT + "equipment"))
+  if (url.startsWith(SETTINGS_ENDPOINT + "/" + "equipment"))
   return statusFlicks.equipment;
-  if (url.startsWith(SETTINGS_ENDPOINT + "nextRecipeID"))
+  if (url.startsWith(SETTINGS_ENDPOINT + "/" + "nextRecipeID"))
   return statusFlicks.nextRecipeID;
-  if (url.startsWith(SETTINGS_ENDPOINT + "nextRecipeQuantity"))
+  if (url.startsWith(SETTINGS_ENDPOINT + "/" + "nextRecipeQuantity"))
   return statusFlicks.nextRecipeQuantity;
-  if (url.startsWith(RECIPE_ENDPOINT))
+  if (url.startsWith(RECIPES_ENDPOINT + "/"))
   return statusFlicks.recipe;
-  if (url.startsWith(BEER_LIST_ENDPOINT))
+  if (url.startsWith(BEERS_ENDPOINT))
   return statusFlicks.beer;
-  if (url.startsWith(SETTING_LIST_ENDPOINT))
+  if (url.startsWith(SETTINGS_ENDPOINT))
   return statusFlicks.settings;
   return 200;
 };
 
 global.fetch = jest.fn().mockImplementation((url, body) => {
-  if (url.startsWith(SHOPPING_ENDPOINT) && (!contentFlicks.shopping))
+  if (url.startsWith(SHOPPING_ENDPOINT + "/") && (!contentFlicks.shopping))
   return Promise.resolve({status: getStatus(url)});
-  if (url.startsWith(SETTINGS_ENDPOINT + "equipment") && (!contentFlicks.equipment))
+  if (url.startsWith(SETTINGS_ENDPOINT + "/" + "equipment") && (!contentFlicks.equipment))
   return Promise.resolve({status: getStatus(url)});
-  if (url.startsWith(SETTINGS_ENDPOINT + "nextRecipeID") && (!contentFlicks.nextRecipeID))
+  if (url.startsWith(SETTINGS_ENDPOINT + "/" + "nextRecipeID") && (!contentFlicks.nextRecipeID))
   return Promise.resolve({status: getStatus(url)});
-  if (url.startsWith(SETTINGS_ENDPOINT + "nextRecipeQuantity") && (!contentFlicks.nextRecipeQuantity))
+  if (url.startsWith(SETTINGS_ENDPOINT + "/" + "nextRecipeQuantity") && (!contentFlicks.nextRecipeQuantity))
   return Promise.resolve({status: getStatus(url)});
-  if (url.startsWith(RECIPE_ENDPOINT) && (!contentFlicks.recipe))
+  if (url.startsWith(RECIPES_ENDPOINT + "/") && (!contentFlicks.recipe))
   return Promise.resolve({status: getStatus(url)});
-  if (url.startsWith(BEER_LIST_ENDPOINT) && (!contentFlicks.beer))
+  if (url.startsWith(BEERS_ENDPOINT) && (!contentFlicks.beer))
   return Promise.resolve({status: getStatus(url)});
   return Promise.resolve({
     status: getStatus(url),
     json: () => {
-      if (url.startsWith(SETTINGS_ENDPOINT + "nextRecipeID"))
+      if (url.startsWith(SETTINGS_ENDPOINT + "/" + "nextRecipeID"))
       return Promise.resolve({value:settings.nextRecipeID})
-      if (url.startsWith(SETTINGS_ENDPOINT + "nextRecipeQuantity"))
+      if (url.startsWith(SETTINGS_ENDPOINT + "/" + "nextRecipeQuantity"))
       return Promise.resolve({value:settings.nextRecipeQuantity})
-      if (url.startsWith(SETTINGS_ENDPOINT + "equipment"))
+      if (url.startsWith(SETTINGS_ENDPOINT + "/" + "equipment"))
       return Promise.resolve({value:settings.equipment})
-      if (url.startsWith(SETTINGS_ENDPOINT))
+      if (url.startsWith(SETTINGS_ENDPOINT + "/"))
       return Promise.resolve({value:"default"})
-      if (url === RECIPE_LIST_ENDPOINT)
+      if (url === RECIPES_ENDPOINT)
       return Promise.resolve(Object.keys(recipes));
       else {
-        if (url.startsWith(RECIPE_ENDPOINT)) {
-          let recipeID = url.replace(RECIPE_ENDPOINT, "");
+        if (url.startsWith(RECIPES_ENDPOINT + "/")) {
+          let recipeID = url.replace(RECIPES_ENDPOINT + "/", "");
           return Promise.resolve(recipes[recipeID]);
-        } else if (url.startsWith(SHOPPING_ENDPOINT)) {
-          let recipeID = url.replace(SHOPPING_ENDPOINT, "");
+        } else if (url.startsWith(SHOPPING_ENDPOINT + "/")) {
+          let recipeID = url.replace(SHOPPING_ENDPOINT + "/", "");
           return Promise.resolve(recipes[recipeID].ingredients);
         } else {
           return Promise.resolve(null);

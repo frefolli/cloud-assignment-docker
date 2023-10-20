@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { FAKE_NOTIFIER, isNotValidPositiveQuantity, RECIPE_ENDPOINT } from '../utils/Protocol';
+import { FAKE_NOTIFIER, isNotValidPositiveQuantity } from '../utils/Protocol';
+import RecipesManager from '../utils/RecipesManager';
 import InputFieldSetting from "./InputFieldSetting";
 import InputTextAreaSetting from "./InputTextAreaSetting";
 import JimFlex from "./JimFlex";
@@ -30,11 +31,11 @@ class RecipeEdit extends Component{
       name: "", description: "", ingredients: []
     };
     this.notifier = this.props.notifier || FAKE_NOTIFIER;
+    this.recipesManager = new RecipesManager(this.props.recipeID)
   }
 
   triggerReload = () => {
-      fetch(RECIPE_ENDPOINT +`${this.props.recipeID}`)
-      .then(response => response.json())
+      this.recipesManager.getRecipe(this.props.recipeID)
       .then(data => this.setState({newIngredientName: "", newIngredientQuantity: "0", ...data}))
       .catch(this.notifier.connectionError)
   }
@@ -111,72 +112,45 @@ class RecipeEdit extends Component{
   }
 
   deleteIngredient = (id) => {
-    fetch(RECIPE_ENDPOINT + `${this.state.recipeID}/${id}`, {
-        method: 'DELETE',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        }
-    })
-    .then(this.notifier.onRequestError("impossibile eliminare l'ingrediente"))
+    this.recipesManager.deleteIngredient(this.state.recipeID, id)
     .then(() => {
       this.triggerReload();
-    });
+    })
+    .catch(() => this.notifier.error("impossibile eliminare l'ingrediente"));
   }
 
   editQuantity = (id) => {
     let newQuantity = [...this.state.ingredients].filter(i => i.ingredientID === id)[0].quantity;
     if (isNotValidPositiveQuantity(newQuantity))
       return this.notifier.warning("la quantita' degli ingredienti deve essere strettamente positiva");
-    fetch(RECIPE_ENDPOINT+`${this.state.recipeID}/${id}`, {
-        method: 'PUT',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({quantity: newQuantity})
-    })
-    .then(this.notifier.onRequestSuccess("quantita' aggiornata correttamente'"))
-    .then(this.notifier.onRequestError("impossibile modificare la quantita'"))
+    this.recipesManager.putIngredient(this.state.recipeID, id, {quantity: newQuantity})
+    .then(() => this.notifier.success("quantita' aggiornata correttamente'"))
     .then(() => {
       this.triggerReload();
-    });
+    })
+    .catch(() => this.notifier.error("impossibile modificare la quantita'"));
   }
 
   editName = () => {
     if (this.state.name === "")
       return this.notifier.warning("il nome della ricetta non deve essere vuoto");
-    fetch(RECIPE_ENDPOINT + `${this.state.recipeID}`, {
-        method: 'PUT',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({name: this.state.name})
-    })
-    .then(this.notifier.onRequestError("impossibile modificare il nome"))
-    .then(this.notifier.onRequestSuccess("nome modificato correttamente"))
+    this.recipesManager.putRecipe(this.state.recipeID, {name: this.state.name})
+    .then(() => this.notifier.success("nome modificato correttamente"))
     .then(() => {
       this.props.onConfirm();
       this.triggerReload();
-    });
+    })
+    .catch(() => this.notifier.error("impossibile modificare il nome"));
   }
 
   editDescription = () => {
-    fetch(RECIPE_ENDPOINT + `${this.state.recipeID}`, {
-        method: 'PUT',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({description: this.state.description})
-    })
-    .then(this.notifier.onRequestError("impossibile modificare la descrizione"))
-    .then(this.notifier.onRequestSuccess("descrizione modificata correttamente"))
+    this.recipesManager.putRecipe(this.state.recipeID, {description: this.state.description})
+    .then(() => this.notifier.success("descrizione modificata correttamente"))
     .then(() => {
       this.props.onConfirm();
       this.triggerReload();
-    });
+    })
+    .catch(() => this.notifier.error("impossibile modificare la descrizione"));
   }
 
   addIngredient = () => {
@@ -186,18 +160,15 @@ class RecipeEdit extends Component{
       return this.notifier.warning("i nomi degli ingredienti devono essere distinti");
     if (isNotValidPositiveQuantity(this.state.newIngredientQuantity))
       return this.notifier.warning("la quantita' degli ingredienti deve essere strettamente positiva");
-    fetch(RECIPE_ENDPOINT+`${this.state.recipeID}`, {
-      method: 'POST',
-      headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({name: this.state.newIngredientName, quantity: this.state.newIngredientQuantity})
+    this.recipesManager.postIngredient(this.state.recipeID, {
+        name: this.state.newIngredientName,
+        quantity: this.state.newIngredientQuantity
     })
-    .then(this.notifier.onRequestError("impossibile aggiungere l'ingrediente"))
+    .then(() => this.notifier.success("ingrediente aggiunto correttamente"))
     .then(() => {
       this.triggerReload();
     })
+    .catch(this.notifier.onRequestError("impossibile aggiungere l'ingrediente"));
   }
 }
 

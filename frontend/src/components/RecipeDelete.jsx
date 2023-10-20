@@ -1,6 +1,7 @@
 import React, { Component }  from "react";
 import MButton from '../components/MButton';
-import {FAKE_NOTIFIER, RECIPE_ENDPOINT} from '../utils/Protocol';
+import {FAKE_NOTIFIER} from '../utils/Protocol';
+import RecipesManager from '../utils/RecipesManager';
 
 /**
  * This component allows the user to confirm the deletion of a recipe. It displays the name, description, and asks for confirmation.
@@ -13,6 +14,7 @@ import {FAKE_NOTIFIER, RECIPE_ENDPOINT} from '../utils/Protocol';
  * @param {object} [props.notifier] - An optional notifier object to handle notifications.
  *
  * @returns {JSX.Element} The RecipeDelete component for confirming the deletion of a recipe.
+
  *
  * @example
  * // Example usage of the RecipeDelete component
@@ -24,11 +26,11 @@ class RecipeDelete extends Component{
     super(props);
     this.state = {name: "", description: "", ingredients: []};
     this.notifier = this.props.notifier || FAKE_NOTIFIER;
+    this.recipesManager = new RecipesManager();
   }
 
   triggerReload = () => {
-      fetch(`/api/recipes/${this.props.recipeID}`)
-      .then(response => response.json())
+      this.recipesManager.getRecipe(this.props.recipeID)
       .then(data => this.setState({...data}))
       .catch(() => this.notifier.error("verificare la connessione"))
   }
@@ -51,13 +53,7 @@ class RecipeDelete extends Component{
   }
 
   deleteRecipe = (id) => {
-    fetch(RECIPE_ENDPOINT+ `${id}`, {
-        method: 'DELETE',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        }
-    })
+    this.recipesManager.deleteRecipe(id)
     .then(this.notifier.onRequestError("impossibile eliminare la ricetta"))
     .then(() => this.props.onConfirm(id))
 }
