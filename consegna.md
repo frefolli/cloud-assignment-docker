@@ -121,7 +121,7 @@ These tests run against endpoints in order to test both Spring API interface and
 
 #### Frontend
 
-Our FE ITs require a copy of our to be running in background. They ensure API request and handling is done correctly. These tests are designed to test the src/utils/\*Manager.js we created to abstract and centralize the API access. As such, they actually end up testing quasi the whole tech stack: JS Managers $\Leftrightarrow$ Spring REST $\Leftrightarrow$ SQLite DB.
+Our FE ITs require a copy of our to be running in background. They ensure API request and handling is done correctly. These tests are designed to test the src/utils/\*Manager.js we created to abstract and centralize the API access. As such, they actually end up testing almost the whole tech stack: JS Managers $\Leftrightarrow$ Spring REST $\Leftrightarrow$ SQLite DB.
 
 The instance of BE is started as a GitLab CI/CD Action service, and uses the `spring-boot:run` goal, thus we don't have to manually package the Spring Boot project, which would break our Pipeline semanthics.
 
