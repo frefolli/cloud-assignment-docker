@@ -37,6 +37,15 @@ variables:
 #
 # Running `mvn compile -pl backend` will trigger the compilation of only backend, which is great
 # as it applies to the specified lifecycle (es: test, verify, package ...).
+#
+# We also enact a quality policy which allows job failures if-and-only-if such job is a verify job.
+# Verify is allowed to fail for two reasons:
+# - it's not really a critical phase for our pipeline, because most of it it's just verifing style and/or common pitfalls.
+#   - in the original project we already addressed that specific requirement by using SonarQube, but in this project it won't be used (more on that later)
+# - using GitLab CI/CD semanthics we can let individual jobs upload some deliverables with artifacts mechanics
+#   - if a job in this phase fails, it uploads the failure report
+#   - we aspire also to cache some reports to deliver them in the base site (more on that later)
+# Clean, Build, UTs, ITs, Package, Release and Docs MUSTN'T FAIL
 cache:
   - key: "$CI_COMMIT_REF_SLUG"
     paths:
@@ -207,6 +216,7 @@ backend-unit-test:
 # Run Frontend tests with Maven
 # Because our solution for running lints on Frontend binds the previous stage to "process-classes", which is a "dependency" lifecycle of `test`,
 #   we need to manually disable such lifecycle.
+# These tests run against endpoints in order to test both Spring API interface and Controller Bl. They tests half of the tech stack: Spring REST <-> SQLite DB.
 frontend-unit-test:
   when: manual
   stage: unit-test
@@ -221,6 +231,23 @@ backend-integration-test:
   stage: integration-test
   script:
     - mvn $MAVEN_CLI_OPTS -pl backend verify -Dskip.UTs -Dskip.lint
+# Run Frontend tests with Maven
+# Our FE ITs require a copy of our to be running in background. They ensure API request and handling is done correctly.
+# These tests are designed to test the src/utils/*Manager.js we created to abstract and centralize the API access.
+# As such, they actually end up testing quasi the whole tech stack: JS Managers <-> Spring REST <-> SQLite DB.
+#
+# The instance of BE is started as a GitLab CI/CD Action service, and uses the `spring-boot:run` goal,
+#   thus we don't have to manually package the Spring Boot project, which would break our Pipeline semanthics.
+frontend-integration-test:
+  when: manual
+  stage: integration-test
+  services:
+    - name: maven:3.9.4-amazoncorretto-17-debian-bookworm
+      alias: backend-instance
+      entrypoint: ["/bin/bash"]
+      command: ["mvn $MAVEN_CLI_OPTS -pl backend spring-boot:run"]
+  script:
+    - mvn $MAVEN_CLI_OPTS -pl frontend test -Dskip.lint -Dskip.UTs
 
 # PACKAGE
 
