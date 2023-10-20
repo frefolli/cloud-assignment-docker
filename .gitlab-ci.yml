@@ -202,6 +202,7 @@ frontend-flow:
     - mvn $MAVEN_CLI_OPTS -pl frontend process-classes -Dskip.eslint
   allow_failure: true
   # FlowJS doesn't provide deliverables
+  # So no artifact could be uploaded
   dependencies: []
 
 # UNIT-TEST
@@ -216,7 +217,6 @@ backend-unit-test:
 # Run Frontend tests with Maven
 # Because our solution for running lints on Frontend binds the previous stage to "process-classes", which is a "dependency" lifecycle of `test`,
 #   we need to manually disable such lifecycle.
-# These tests run against endpoints in order to test both Spring API interface and Controller Bl. They tests half of the tech stack: Spring REST <-> SQLite DB.
 frontend-unit-test:
   when: manual
   stage: unit-test
@@ -226,6 +226,7 @@ frontend-unit-test:
 # INTEGRATION-TEST
 # 
 # Run Backend tests with Maven
+# These tests run against endpoints in order to test both Spring API interface and Controller Bl. They tests half of the tech stack: Spring REST <-> SQLite DB.
 backend-integration-test:
   when: manual
   stage: integration-test
