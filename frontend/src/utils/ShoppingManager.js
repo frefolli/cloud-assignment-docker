@@ -26,6 +26,8 @@ export default class ShoppingManager {
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify(ingredients),
             })
+            .then(data => acc(data))
+            .catch(err => rej(err));
         });
     }
 }
