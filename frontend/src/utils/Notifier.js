@@ -10,8 +10,10 @@ export default class Notifier {
   error = (message) => this.internalNotify(message, 'error');
   warning = (message) => this.internalNotify(message, 'warning');
 
-  responseStatusIsOK = (response) => (response.status >= 200 && response.status < 300);
-  responseStatusIsNotOK = (response) => (response.status >= 400 && response.status < 600);
+  responseStatusIsOK = (response) =>
+    (response.status >= 200 && response.status < 300);
+  responseStatusIsNotOK = (response) =>
+    (response.status >= 400 && response.status < 600);
 
   onRequestErrorResolvePromise = (callback, acc, rej) => (response) => {
     if (this.responseStatusIsNotOK(response)) {
@@ -27,8 +29,10 @@ export default class Notifier {
     return response;
   };
 
-  onRequestError = (message) => this.onRequestErrorResolvePromise(() => this.error(message));
-  onRequestSuccess = (message) => this.onRequestSuccessResolvePromise(() => this.success(message));
+  onRequestError = (message) =>
+    this.onRequestErrorResolvePromise(() => this.error(message));
+  onRequestSuccess = (message) =>
+    this.onRequestSuccessResolvePromise(() => this.success(message));
 
   connectionError = () => this.error('verificare la connessione');
 }
