@@ -236,7 +236,7 @@ package:
       - frontend/node/         # Local NodeJS installation
       - frontend/node_modules/ # Local NPM repository
       - .m2/repository/        # Local Maven repository
-    #policy: pull vediamo se serve
+    policy: pull
 
   dependencies: []
 
