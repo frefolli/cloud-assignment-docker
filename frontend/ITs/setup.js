@@ -6,3 +6,4 @@ global.fetch = (url, opts) => oldFetch("http://localhost:8080" + url, opts);
 // - ResetManager
 // - SettingsManager
 // - RecipesManager
+// - BeersManager

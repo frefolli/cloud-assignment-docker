@@ -41,7 +41,7 @@ export default class BeersManager {
     
     putBeer(beerID, beer) {
         return new Promise((acc, rej) => {
-            fetch(BEERS_ENDPOINT, {
+            fetch(BEERS_ENDPOINT + `/${beerID}`, {
                 method: 'PUT',
                 headers: {
                     'Accept': 'application/json',
@@ -83,7 +83,7 @@ export default class BeersManager {
     
     putNote(beerID, id, note) {
         return new Promise((acc, rej) => {
-            fetch(BEERS_ENDPOINT + `${beerID}/${id}`, {
+            fetch(BEERS_ENDPOINT + `/${beerID}/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Accept': 'application/json',

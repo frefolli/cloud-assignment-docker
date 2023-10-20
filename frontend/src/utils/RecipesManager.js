@@ -36,7 +36,7 @@ export default class RecipesManager {
     
     putRecipe(recipeID, recipe) {
         return new Promise((acc, rej) => {
-            fetch(RECIPES_ENDPOINT, {
+            fetch(RECIPES_ENDPOINT + `/${recipeID}`, {
                 method: 'PUT',
                 headers: {
                     'Accept': 'application/json',
@@ -78,7 +78,7 @@ export default class RecipesManager {
     
     putIngredient(recipeID, id, ingredient) {
         return new Promise((acc, rej) => {
-            fetch(RECIPES_ENDPOINT + `${recipeID}/${id}`, {
+            fetch(RECIPES_ENDPOINT + `/${recipeID}/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Accept': 'application/json',
