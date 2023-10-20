@@ -80,6 +80,9 @@ Frontend and Backend can be built using two concurrent jobs, since they are in f
 
 ### Verify
 
+The original project ran SonarQube against both Frontend and Backend thanks to the SonarCloud account provided by Ingegneria del Software course. In order to avoid abouse of this priviledge and useless bloats on that account, we decided to skip the usage of this tool.
+Every verification job allows mvn to fail as a trigger for upload of checking frameworks reports. We don't feel the need for a distinct cache space for these jobs, so we kept the main one.
+
 #### Backend
  
 As backend linters we run
@@ -94,17 +97,11 @@ We also decided to run CheckStyle on the backend part using the default Sun styl
 
 Finally instead of running Valgrind, which could be useful if running native application, although it was suggested in the Assignment 1 paper, we run additional checks with PMD, another source code analyzer, which "finds common programming flaws like unused variables, empty catch blocks, unnecessary object creation, and so forth".
 
-The original project ran SonarQube against both Frontend and Backend thanks to the SonarCloud   account provided by Ingegneria del Software course. In order to avoid abouse of this priviledge and useless bloats on that account, we decided to skip the usage of this tool.
-
-Every verification job allows mvn to fail as a trigger for upload of checking frameworks reports. We don't feel the need for a distinct cache space for these jobs, so we kept the main one.
-
 #### Frontend
 
 As frontend linters we run:
 - 1) ESLint
 - 2) Flow
-
-As previous said, we skip the SonarQube analysis that was configured by us in the original trunk. Every verification job allows mvn to fail as a trigger for upload of checking frameworks reports. We don't feel the need for a distinct cache space for these jobs, so we kept the main one.
 
 In this part we call the `process-classes` lifecycle of Maven because is after compilation and before actual tests. This way we can have Maven to install needed dependencies and let it run after that phase the linter configured. Talking about linters, we configured ESLint and Flow as suggested by the Assignment 1 paper.
 
@@ -114,7 +111,7 @@ We set up a weird trigger for these two frameworks: instead of enabling them wit
 
 #### Frontend
 
-The main concern of Frontend UTs is providing a good quality UI, and proving that the pages and components works provided the API interaction works, React UI $\Leftright$ Managers. Thus inductivly, after having proven that Managers work correctly, when can state a general statement of correctness of the macro system with more accuracy.
+The main concern of Frontend UTs is providing a good quality UI experience, and proving that the pages and components works provided that API interaction works; in other words we that the relationship React UI $\Leftrightarrow$ Managers. Thus inductivly, after having proven that Managers work correctly, when can state a general statement of correctness of the macro system with more accuracy.
 
 ### Integration Test
 
@@ -124,7 +121,7 @@ These tests run against endpoints in order to test both Spring API interface and
 
 #### Frontend
 
-Our FE ITs require a copy of our to be running in background. They ensure API request and handling is done correctly. These tests are designed to test the src/utils/\*Manager.js we created to abstract and centralize the API access. As such, they actually end up testing quasi the whole tech stack: JS Managers <-> Spring REST <-> SQLite DB.
+Our FE ITs require a copy of our to be running in background. They ensure API request and handling is done correctly. These tests are designed to test the src/utils/\*Manager.js we created to abstract and centralize the API access. As such, they actually end up testing quasi the whole tech stack: JS Managers $\Leftrightarrow$ Spring REST $\Leftrightarrow$ SQLite DB.
 
 The instance of BE is started as a GitLab CI/CD Action service, and uses the `spring-boot:run` goal, thus we don't have to manually package the Spring Boot project, which would break our Pipeline semanthics.
 
