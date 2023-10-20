@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import {BEERS_ENDPOINT, DEFAULT_NOTE_TYPE, FAKE_NOTIFIER} from '../utils/Protocol';
+import {DEFAULT_NOTE_TYPE, FAKE_NOTIFIER} from '../utils/Protocol';
 import BeerNoteTable from "./BeerNoteTable";
 import InputFieldSetting from "./InputFieldSetting";
+import BeersManager from '../utils/BeersManager';
 
 /**
  * This class represents a component for editing beer details, including name and notes.
@@ -26,11 +27,11 @@ class BeerEdit extends Component {
       noteType: DEFAULT_NOTE_TYPE, description: ""
     };
     this.notifier = this.props.notifier || FAKE_NOTIFIER;
+    this.beersManager = new BeersManager();
   }
 
   triggerReload = () => {
-    fetch(BEERS_ENDPOINT + `${this.props.beerID}`)
-    .then(response => response.json())
+    this.beersManager.getBeer(this.props.beerID)
     .then(data => {
       this.setState({...data, noteType: DEFAULT_NOTE_TYPE, description: ""});
     })
@@ -49,9 +50,7 @@ class BeerEdit extends Component {
 
   handleDeleteNote = (note) => {
     const { beerID, noteID } = note;
-    fetch(BEERS_ENDPOINT + `${beerID}/${noteID}`, {
-      method: "DELETE",
-    })
+    this.beersManager.deleteNote(beerID, noteID)
     .then(this.notifier.onRequestError("impossibile eliminare la nota"))
     .then(() => this.triggerReload());
   };
@@ -76,44 +75,26 @@ class BeerEdit extends Component {
     if (name === "")
       return this.notifier.warning("il nome della birra non deve essere vuoto");
 
-    fetch(BEERS_ENDPOINT + `${beerID}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ name }),
-    })
-    .then(this.notifier.onRequestSuccess("nome modificato correttamente"))
-    .then(this.notifier.onRequestError("impossibile cambiare il nome"))
+    this.beersManager.putBeer(beerID, {name: name})
+    .then(() => this.notifier.success("nome modificato correttamente"))
     .then(() => this.triggerReload())
     .then(() => this.props.onConfirm())
+    .catch(() => this.notifier.error("impossibile cambiare il nome"));
   };
 
   handleAddNote = (noteType, description) => {
     const { beerID } = this.props;
-    fetch(BEERS_ENDPOINT + `${beerID}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ description: description, noteType: noteType }),
-    })
-    .then(this.notifier.onRequestError("impossibile aggiungere la nota"))
-    .then(() => this.triggerReload());
+    this.beersManager.postNote(beerID, {name: name})
+    .then(() => this.triggerReload())
+    .catch(() => this.notifier.error("impossibile aggiungere la nota"));
   };
 
   handleEditNote = (note) => {
     const { beerID, description, noteType, noteID } = note;
 
-    fetch(BEERS_ENDPOINT + `${beerID}/${noteID}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ description, noteType }),
-    })
-    .then(this.notifier.onRequestError("impossibile aggiornare la nota"))
-    .then(() => this.triggerReload());
+    this.beersManager.putNote(beerID, noteID, {description, noteType})
+    .then(() => this.triggerReload())
+    .catch(() => this.notifier.error("impossibile aggiornare la nota"));
   };
 
   render() {

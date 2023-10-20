@@ -5,7 +5,8 @@ import RecipeEdit from "../components/RecipeEdit";
 import RecipeDelete from "../components/RecipeDelete";
 import RecipeExecute from "../components/RecipeExecute";
 import MButton from '../components/MButton';
-import { FAKE_NOTIFIER, isNotValidPositiveQuantity, RECIPE_LIST_ENDPOINT } from '../utils/Protocol';
+import { FAKE_NOTIFIER, isNotValidPositiveQuantity } from '../utils/Protocol';
+import RecipesManager from '../utils/RecipesManager';
 import Selector from '../components/Selector';
 import RecipeTable from '../components/RecipeTable';
 import JimTable from '../components/JimTable';
@@ -30,14 +31,13 @@ export default class Ricette extends Component {
         };
         this.notifier = this.props.notifier || FAKE_NOTIFIER;
         this.settingsManager = new SettingsManager();
+        this.recipesManager = new RecipesManager();
     }
 
     triggerReload = () => {
         return new Promise((acc, rej) => {
-          fetch(RECIPE_LIST_ENDPOINT)
-          .then(response => response.json())
-          .then(recipeIDs => Promise.all(recipeIDs.map(recipeID => fetch(`/api/recipes/${recipeID}`))))
-          .then(responses => Promise.all(responses.map(response => response.json())))
+          this.recipesManager.getRecipeList()
+          .then(recipeIDs => Promise.all(recipeIDs.map(recipeID => this.recipesManager.getRecipe(recipeID))))
           .then(data => this.setState({
             recipes: data, recipesFiltered: data,
             newRecipeName: "", newRecipeDescription: "",
@@ -249,22 +249,14 @@ export default class Ricette extends Component {
     addRecipe = () => {
       if (this.state.newRecipeName === "")
         return this.notifier.warning("il nome della ricetta non deve essere vuoto");
-      fetch(RECIPE_LIST_ENDPOINT, {
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({name: this.state.newRecipeName, description: this.state.newRecipeDescription})
-      })
-      .then(this.notifier.onRequestError("impossibile creare la ricetta"))
-      .then(this.notifier.onRequestSuccess("ricetta creata correttamente"))
-      .then(() => this.triggerReload());
+      this.recipesManager.postRecipe({name: this.state.newRecipeName, description: this.state.newRecipeDescription})
+      .then(() => this.notifier.success("ricetta creata correttamente"))
+      .then(() => this.triggerReload())
+      .catch(() => this.notifier.error("impossibile creare la ricetta"));
     }
 
     filterRecipe = () => {
-      fetch(RECIPE_LIST_ENDPOINT + `?name=${this.state.filterName}`)
-      .then(response => response.json())
+      this.recipesManager.getRecipeList({name: this.state.filterName})
       .then(recipesIDsFiltered => {
         let recipeFiltered = this.state.recipes.filter(recipe => recipesIDsFiltered.includes(recipe.recipeID));
         this.setState({recipesFiltered: recipeFiltered});

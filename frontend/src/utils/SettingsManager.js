@@ -1,9 +1,9 @@
-import { SETTINGS_ENDPOINT, SETTING_LIST_ENDPOINT } from "./Protocol";
+import { SETTINGS_ENDPOINT } from "./Protocol";
 
 export default class SettingsManager {
     getSettings() {
         return new Promise((acc, rej) => {
-            fetch(SETTING_LIST_ENDPOINT)
+            fetch(SETTINGS_ENDPOINT)
             .then(response => response.json())
             .then(data => acc(data))
             .catch(rej)
@@ -12,7 +12,7 @@ export default class SettingsManager {
 
     getSetting(settingID) {
         return new Promise((acc, rej) => {
-            fetch(SETTINGS_ENDPOINT+`${settingID}`)
+            fetch(SETTINGS_ENDPOINT+`/${settingID}`)
             .then(response => response.json())
             .then(data => acc(data))
             .catch(rej)
@@ -21,7 +21,7 @@ export default class SettingsManager {
 
     putSetting(settingID, newValue) {
         return new Promise((acc, rej) => {
-            fetch(SETTINGS_ENDPOINT+`${settingID}`, {
+            fetch(SETTINGS_ENDPOINT+`/${settingID}`, {
                 method: 'PUT',
                 headers: {
                     'Accept': 'application/json',
@@ -43,7 +43,7 @@ export default class SettingsManager {
     
     postSetting(settingID, newValue) {
         return new Promise((acc, rej) => {
-            fetch(SETTING_LIST_ENDPOINT, {
+            fetch(SETTINGS_ENDPOINT, {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',

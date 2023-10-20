@@ -1,5 +1,6 @@
 import React from 'react';
-import { FAKE_NOTIFIER, ADVICE_ENDPOINT, ADVICE_VIEW_TRIGGER, ADVICE_VIEW_ESCAPE, NEXT_RECIPE_VIEW_TRIGGER } from '../utils/Protocol';
+import { FAKE_NOTIFIER, ADVICE_VIEW_TRIGGER, ADVICE_VIEW_ESCAPE, NEXT_RECIPE_VIEW_TRIGGER } from '../utils/Protocol';
+import AdviceManager from '../utils/AdviceManager';
 import RecipeView from './RecipeView';
 import RecipeExecute from './RecipeExecute';
 
@@ -31,13 +32,13 @@ export default class AdviceView extends React.Component {
       advice: null,
     };
     this.notifier = this.props.notifier || FAKE_NOTIFIER;
+    this.adviceManager = new AdviceManager();
   }
 
   triggerReload = () => {
     return new Promise((acc, rej) => {
       this.setState(({advice: null}), () => {
-        fetch(ADVICE_ENDPOINT)
-        .then((res) => res.json())
+        this.adviceManager.getAdvice()
         .then((data) => this.setState({ advice: data}))
         .catch(() => this.setState({ advice: null }))
         .then(acc);

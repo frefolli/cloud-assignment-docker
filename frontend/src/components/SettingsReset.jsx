@@ -1,6 +1,7 @@
 import React, { Component }  from "react";
 import MButton from '../components/MButton';
-import { BACKGROUND_MANAGER_TRIGGER, FAKE_NOTIFIER, NAVBAR_THEME_MANAGER_TRIGGER, RESET_ENDPOINT, THEME_MANAGER_TRIGGER } from '../utils/Protocol';
+import { BACKGROUND_MANAGER_TRIGGER, FAKE_NOTIFIER, NAVBAR_THEME_MANAGER_TRIGGER, THEME_MANAGER_TRIGGER } from '../utils/Protocol';
+import ResetManager from '../utils/ResetManager';
 
 /**
  * The SettingsReset component allows users to reset all application settings and data.
@@ -27,6 +28,7 @@ class SettingsReset extends Component{
   constructor(props) {
     super(props);
     this.notifier = this.props.notifier || FAKE_NOTIFIER;
+    this.resetManager = new ResetManager();
   }
 
   notifyMaster = () => {
@@ -46,13 +48,7 @@ class SettingsReset extends Component{
   }
 
   resetAllSettings = () => {
-    fetch(RESET_ENDPOINT, {
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-    })
+    this.resetManager.doReset()
     .then(this.notifier.onRequestError("impossibile cancellare i dati"))
     .then(this.notifier.onRequestSuccessResolvePromise(() => {
       document.cookie=BACKGROUND_MANAGER_TRIGGER;

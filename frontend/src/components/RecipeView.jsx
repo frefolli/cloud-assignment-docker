@@ -1,6 +1,7 @@
 import React from "react";
-import { FAKE_NOTIFIER, RECIPE_ENDPOINT } from '../utils/Protocol';
+import { FAKE_NOTIFIER } from '../utils/Protocol';
 import RecipeIngredientTableReadOnly from "./RecipeIngredientTableReadOnly";
+import RecipesManager from '../utils/RecipesManager';
 
 /**
  * The RecipeView component displays detailed information about a specific recipe, including its name, description, and ingredients in read-only mode.
@@ -23,11 +24,11 @@ export default class RecipeView extends React.Component {
     super(props);
     this.state = {name: "", description: "", ingredients: []};
     this.notifier = this.props.notifier || FAKE_NOTIFIER;
+    this.recipesManager = new RecipesManager();
   }
 
   triggerReload = () => {
-      fetch(RECIPE_ENDPOINT + `${this.props.recipeID}`)
-      .then(response => response.json())
+      this.recipesManager.getRecipe(this.props.recipeID)
       .then(data => this.setState({...data}))
       .catch(this.notifier.connectionError)
   }

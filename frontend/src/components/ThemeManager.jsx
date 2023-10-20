@@ -1,7 +1,8 @@
 import React from 'react';
 import themes from '../theme/themes';
-import { DEFAULT_THEME, LAST_USED_THEME_LOCALSTORAGE_KEY, SETTINGS_ENDPOINT } from '../utils/Protocol';
+import { DEFAULT_THEME, LAST_USED_THEME_LOCALSTORAGE_KEY } from '../utils/Protocol';
 import { ThemeProvider } from '@mui/material';
+import SettingsManager from '../utils/SettingsManager';
 
 /**
  * The ThemeManager component handles the management of application themes. It allows users to switch between different themes
@@ -28,27 +29,25 @@ export default class ThemeManager extends React.Component {
     constructor(props) {
         super(props);
         this.state = {currentTheme: localStorage.getItem(LAST_USED_THEME_LOCALSTORAGE_KEY) || DEFAULT_THEME};
+        this.settingsManager = new SettingsManager();
     }
     
     triggerReload() {
         return new Promise((acc, rej) => {
-            fetch(SETTINGS_ENDPOINT + "color")
-            .then((response) => {
-                if (response.status >= 400 && response.status <= 600) {
-                    return {value: DEFAULT_THEME}
-                }
-                return response.json();
-            })
+            this.settingsManager.getSetting("color")
             .then(data => {
-                let value = data.value;
-                if (themes[value] === undefined)
-                    value = DEFAULT_THEME;
-                localStorage.setItem(LAST_USED_THEME_LOCALSTORAGE_KEY, value);
-                this.setState({currentTheme: value});
+                this.setTheme(data.value);
                 acc();
             })
-          .catch(() => acc())
+            .catch(() => {this.setTheme()})
         })
+    }
+
+    setTheme(theme) {
+        if (theme === undefined || themes[theme] === undefined)
+            theme = DEFAULT_THEME;
+        localStorage.setItem(LAST_USED_THEME_LOCALSTORAGE_KEY, theme);
+        this.setState({currentTheme: theme});
     }
     
     componentDidMount() {
