@@ -1,7 +1,7 @@
-import { createTheme } from '@mui/material/styles';
+import {createTheme} from '@mui/material/styles';
 
 const themes = {
-  default: createTheme({
+  'default': createTheme({
     palette: {
       mode: 'light',
       primary: {
@@ -14,11 +14,11 @@ const themes = {
     },
   }),
 
-  light: createTheme({
+  'light': createTheme({
     palette: {
       primary: {
         main: '#ffca28',
-        contrastText: "#fff",
+        contrastText: '#fff',
       },
       secondary: {
         main: '#9c27b0',
@@ -26,7 +26,7 @@ const themes = {
     },
   }),
 
-  dark: createTheme({
+  'dark': createTheme({
     palette: {
       primary: {
         main: '#000000',
@@ -37,11 +37,11 @@ const themes = {
     },
   }),
 
-  "twin-light": createTheme({
+  'twin-light': createTheme({
     palette: {
       primary: {
         main: '#ffca28',
-        contrastText: "#fff",
+        contrastText: '#fff',
       },
       secondary: {
         main: '#9c27b0',
@@ -49,7 +49,7 @@ const themes = {
     },
   }),
 
-  "twin-dark": createTheme({
+  'twin-dark': createTheme({
     palette: {
       primary: {
         main: '#000000',
@@ -58,7 +58,7 @@ const themes = {
         main: '#9c27b0',
       },
     },
-  })
-}
+  }),
+};
 
 export default themes;

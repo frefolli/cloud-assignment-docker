@@ -1,6 +1,6 @@
-import React from "react";
-import { FAKE_NOTIFIER } from '../utils/Protocol';
-import RecipeIngredientTableReadOnly from "./RecipeIngredientTableReadOnly";
+import React from 'react';
+import {FAKE_NOTIFIER} from '../utils/Protocol';
+import RecipeIngredientTableReadOnly from './RecipeIngredientTableReadOnly';
 import RecipesManager from '../utils/RecipesManager';
 
 /**
@@ -22,16 +22,16 @@ import RecipesManager from '../utils/RecipesManager';
 export default class RecipeView extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {name: "", description: "", ingredients: []};
+    this.state = {name: '', description: '', ingredients: []};
     this.notifier = this.props.notifier || FAKE_NOTIFIER;
     this.recipesManager = new RecipesManager();
   }
 
   triggerReload = () => {
-      this.recipesManager.getRecipe(this.props.recipeID)
-      .then(data => this.setState({...data}))
-      .catch(this.notifier.connectionError)
-  }
+    this.recipesManager.getRecipe(this.props.recipeID)
+        .then((data) => this.setState({...data}))
+        .catch(this.notifier.connectionError);
+  };
 
   componentDidMount() {
     this.triggerReload();

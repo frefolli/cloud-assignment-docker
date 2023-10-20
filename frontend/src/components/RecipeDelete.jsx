@@ -1,4 +1,4 @@
-import React, { Component }  from "react";
+import React, {Component} from 'react';
 import MButton from '../components/MButton';
 import {FAKE_NOTIFIER} from '../utils/Protocol';
 import RecipesManager from '../utils/RecipesManager';
@@ -21,43 +21,42 @@ import RecipesManager from '../utils/RecipesManager';
  * <RecipeDelete recipeID={recipe.id} onConfirm={handleRecipeDeletion} notifier={notifier} />
  */
 
-class RecipeDelete extends Component{
+class RecipeDelete extends Component {
   constructor(props) {
     super(props);
-    this.state = {name: "", description: "", ingredients: []};
+    this.state = {name: '', description: '', ingredients: []};
     this.notifier = this.props.notifier || FAKE_NOTIFIER;
     this.recipesManager = new RecipesManager();
   }
 
   triggerReload = () => {
-      this.recipesManager.getRecipe(this.props.recipeID)
-      .then(data => this.setState({...data}))
-      .catch(() => this.notifier.error("verificare la connessione"))
-  }
+    this.recipesManager.getRecipe(this.props.recipeID)
+        .then((data) => this.setState({...data}))
+        .catch(() => this.notifier.error('verificare la connessione'));
+  };
 
   componentDidMount() {
     this.triggerReload();
   }
 
-  render(){
+  render() {
     return (
-        <div>
-          <center>
-            <h1>{this.state.name}</h1>
-            <p>{this.state.description}</p>
-            <p>Sei sicuro di voler rimuovere la ricetta?</p>
-            <MButton text="Conferma" onClick={() => this.deleteRecipe(this.state.recipeID)} />
-          </center>
-        </div>
+      <div>
+        <center>
+          <h1>{this.state.name}</h1>
+          <p>{this.state.description}</p>
+          <p>Sei sicuro di voler rimuovere la ricetta?</p>
+          <MButton text="Conferma" onClick={() => this.deleteRecipe(this.state.recipeID)} />
+        </center>
+      </div>
     );
   }
 
   deleteRecipe = (id) => {
     this.recipesManager.deleteRecipe(id)
-    .then(this.notifier.onRequestError("impossibile eliminare la ricetta"))
-    .then(() => this.props.onConfirm(id))
-}
-
+        .then(this.notifier.onRequestError('impossibile eliminare la ricetta'))
+        .then(() => this.props.onConfirm(id));
+  };
 }
 
 export default RecipeDelete;

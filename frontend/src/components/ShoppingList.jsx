@@ -1,6 +1,6 @@
-import React, { Component } from "react";
+import React, {Component} from 'react';
 import ShoppingManager from '../utils/ShoppingManager';
-import RecipeIngredientTableReadOnly from "./RecipeIngredientTableReadOnly";
+import RecipeIngredientTableReadOnly from './RecipeIngredientTableReadOnly';
 
 /**
  * The ShoppingList component retrieves a list of missing ingredients for a recipe and displays them.
@@ -31,12 +31,12 @@ class ShoppingList extends Component {
 
   componentDidMount() {
     this.shoppingManager.getShoppingList({
-        recipeID: this.state.recipeID,
-        quantity: this.state.newBeerQuantity
+      recipeID: this.state.recipeID,
+      quantity: this.state.newBeerQuantity,
     })
-    .then((response) => response.json())
-    .then((data) => this.setState({ missingIngredients: data }))
-    .catch(err => {}); // TODO: link notifier
+        .then((response) => response.json())
+        .then((data) => this.setState({missingIngredients: data}))
+        .catch((err) => {}); // TODO: link notifier
   }
 
 
@@ -51,7 +51,5 @@ class ShoppingList extends Component {
       </div>
     );
   }
-
-
 }
 export default ShoppingList;

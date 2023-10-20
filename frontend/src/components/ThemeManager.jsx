@@ -1,7 +1,7 @@
 import React from 'react';
 import themes from '../theme/themes';
-import { DEFAULT_THEME, LAST_USED_THEME_LOCALSTORAGE_KEY } from '../utils/Protocol';
-import { ThemeProvider } from '@mui/material';
+import {DEFAULT_THEME, LAST_USED_THEME_LOCALSTORAGE_KEY} from '../utils/Protocol';
+import {ThemeProvider} from '@mui/material';
 import SettingsManager from '../utils/SettingsManager';
 
 /**
@@ -26,49 +26,52 @@ import SettingsManager from '../utils/SettingsManager';
  */
 
 export default class ThemeManager extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {currentTheme: localStorage.getItem(LAST_USED_THEME_LOCALSTORAGE_KEY) || DEFAULT_THEME};
-        this.settingsManager = new SettingsManager();
-    }
-    
-    triggerReload() {
-        return new Promise((acc, rej) => {
-            this.settingsManager.getSetting("color")
-            .then(data => {
-                this.setTheme(data.value);
-                acc();
-            })
-            .catch(() => {this.setTheme()})
-        })
-    }
+  constructor(props) {
+    super(props);
+    this.state = {currentTheme: localStorage.getItem(LAST_USED_THEME_LOCALSTORAGE_KEY) || DEFAULT_THEME};
+    this.settingsManager = new SettingsManager();
+  }
 
-    setTheme(theme) {
-        if (theme === undefined || themes[theme] === undefined)
-            theme = DEFAULT_THEME;
-        localStorage.setItem(LAST_USED_THEME_LOCALSTORAGE_KEY, theme);
-        this.setState({currentTheme: theme});
-    }
-    
-    componentDidMount() {
-        if (this.props.testThemeCookie) {
-            document.cookie = this.props.trigger;
-        }
-        this.triggerReload()
-            .then(this.saveTheme)
-    }
+  triggerReload() {
+    return new Promise((acc, rej) => {
+      this.settingsManager.getSetting('color')
+          .then((data) => {
+            this.setTheme(data.value);
+            acc();
+          })
+          .catch(() => {
+            this.setTheme();
+          });
+    });
+  }
 
-    render() {
-        if (document.cookie.includes(this.props.trigger)) {
-            document.cookie = this.props.escape;
-            this.triggerReload();
-        }
-        return (
-            <ThemeProvider
-                theme={themes[this.state.currentTheme]}
-            >
-                {this.props.children}
-            </ThemeProvider>
-        );
+  setTheme(theme) {
+    if (theme === undefined || themes[theme] === undefined) {
+      theme = DEFAULT_THEME;
     }
+    localStorage.setItem(LAST_USED_THEME_LOCALSTORAGE_KEY, theme);
+    this.setState({currentTheme: theme});
+  }
+
+  componentDidMount() {
+    if (this.props.testThemeCookie) {
+      document.cookie = this.props.trigger;
+    }
+    this.triggerReload()
+        .then(this.saveTheme);
+  }
+
+  render() {
+    if (document.cookie.includes(this.props.trigger)) {
+      document.cookie = this.props.escape;
+      this.triggerReload();
+    }
+    return (
+      <ThemeProvider
+        theme={themes[this.state.currentTheme]}
+      >
+        {this.props.children}
+      </ThemeProvider>
+    );
+  }
 }

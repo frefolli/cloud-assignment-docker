@@ -1,13 +1,13 @@
-import { SvgIcon } from '@mui/material';
+import {SvgIcon} from '@mui/material';
 import React from 'react';
 export default class BirreIcon extends React.Component {
-    render() {
-        return (
-            <SvgIcon version="1.0" xmlns="http://www.w3.org/2000/svg"
-                width="512.000000pt" height="512.000000pt" viewBox="0 0 512.000000 512.000000"
-                preserveAspectRatio="xMidYMid meet">
-                <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)" stroke="none">
-                    <path d="M1660 5054 c-8 -3 -58 -26 -110 -52 -78 -39 -110 -63 -191 -142 -86
+  render() {
+    return (
+      <SvgIcon version="1.0" xmlns="http://www.w3.org/2000/svg"
+        width="512.000000pt" height="512.000000pt" viewBox="0 0 512.000000 512.000000"
+        preserveAspectRatio="xMidYMid meet">
+        <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)" stroke="none">
+          <path d="M1660 5054 c-8 -3 -58 -26 -110 -52 -78 -39 -110 -63 -191 -142 -86
                     -85 -102 -107 -148 -200 -53 -108 -78 -188 -86 -275 -4 -55 -22 -75 -68 -75
                     -45 0 -157 -49 -219 -97 -52 -40 -157 -176 -159 -206 0 -7 -3 -23 -6 -37 -8
                     -43 -12 -239 -12 -735 0 -479 3 -599 13 -643 9 -40 41 -86 75 -109 43 -29 134
@@ -37,9 +37,9 @@ export default class BirreIcon extends React.Component {
                     10 -3 41 -7 70 -9z m1785 -2087 c8 -1 36 -22 63 -48 l48 -46 0 -740 0 -740
                     -49 -48 c-58 -58 -76 -62 -246 -58 l-80 2 0 840 0 839 70 3 c59 3 127 1 194
                     -4z"/>
-                </g>
+        </g>
 
-            </SvgIcon>
-        );
-    }
+      </SvgIcon>
+    );
+  }
 }

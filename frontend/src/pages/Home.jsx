@@ -1,11 +1,11 @@
-import React, { Component } from "react";
-import NextRecipeView from "../components/NextRecipeView";
-import BodyThemeManager from "../components/BodyThemeManager";
+import React, {Component} from 'react';
+import NextRecipeView from '../components/NextRecipeView';
+import BodyThemeManager from '../components/BodyThemeManager';
 import ContentCard from '../components/ContentCard';
-import AdviceView from "../components/AdviceView";
-import Greeter from "../components/Greeter";
+import AdviceView from '../components/AdviceView';
+import Greeter from '../components/Greeter';
 import JimFlex from '../components/JimFlex';
-import { FAKE_NOTIFIER } from '../utils/Protocol';
+import {FAKE_NOTIFIER} from '../utils/Protocol';
 
 class Home extends Component {
   constructor(props) {
