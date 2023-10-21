@@ -280,4 +280,22 @@ package:
 # RELEASE
 
 # DOCS
+frontend-docs:
+  when: manual
+  stage: docs
+  script:
+    - mvn $MAVEN_CLI_OPTS site -pl frontend
+  artifacts:
+    paths:
+      - frontend/docs
 
+pages:
+  stage: docs
+  script:
+    - mkdir .public
+    - mv frontend/docs/index.html .public/
+  artifacts:
+    paths:
+      - .public
+  only:
+    - master
