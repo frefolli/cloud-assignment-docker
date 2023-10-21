@@ -1,34 +1,46 @@
 import React from 'react';
 import themes from '../theme/themes';
-import {DEFAULT_THEME, LAST_USED_THEME_LOCALSTORAGE_KEY} from '../utils/Protocol';
+import {DEFAULT_THEME,
+  LAST_USED_THEME_LOCALSTORAGE_KEY} from '../utils/Protocol';
 import {ThemeProvider} from '@mui/material';
 import SettingsManager from '../utils/SettingsManager';
 
 /**
- * The ThemeManager component handles the management of application themes. It allows users to switch between different themes
+ * The ThemeManager component handles the management of application themes.
+ * It allows users to switch between different themes
  * and persist the selected theme in local storage.
  *
  * @class ThemeManager
  *
  * @param {Object} props - The component's properties.
  * @param {string} props.trigger - The cookie value to trigger the theme change.
- * @param {string} props.escape - The cookie value to escape from the theme change.
+ * @param {string} props.escape - The cookie value to escape
+ * from the theme change.
  * @param {boolean} props.testThemeCookie - A flag to test the theme cookie.
- * @param {ReactNode} props.children - The child components to be rendered within the themed context.
+ * @param {ReactNode} props.children - The child components to be rendered
+ * within the themed context.
  *
  * @returns {JSX.Element} The `ThemeManager` component.
  *
  * @example
  * // Example usage of the ThemeManager component
- * <ThemeManager trigger="themeChange" escape="themeEscape" testThemeCookie={true}>
+ * <ThemeManager trigger="themeChange"
+ *   escape="themeEscape" testThemeCookie={true}>
  *   <App />
  * </ThemeManager>
  */
 
 export default class ThemeManager extends React.Component {
+  static propTypes = {
+    testThemeCookie: PropType.object,
+    trigger: PropType.object,
+    escape: PropType.object,
+    children: PropType.object,
+  };
   constructor(props) {
     super(props);
-    this.state = {currentTheme: localStorage.getItem(LAST_USED_THEME_LOCALSTORAGE_KEY) || DEFAULT_THEME};
+    this.state = {currentTheme:
+      localStorage.getItem(LAST_USED_THEME_LOCALSTORAGE_KEY) || DEFAULT_THEME};
     this.settingsManager = new SettingsManager();
   }
 

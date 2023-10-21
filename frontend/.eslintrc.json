@@ -23,7 +23,9 @@
                 "ArrowFunctionExpression": false,
                 "FunctionExpression": false
             }
-        }]
+        }],
+        "max-len": "warn",
+        "react/prop-types": "warn"
     },
     "settings": {
         "react": {

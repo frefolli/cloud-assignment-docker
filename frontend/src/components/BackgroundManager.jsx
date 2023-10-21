@@ -29,7 +29,7 @@ export default class BackgroundManager extends React.Component {
 
   setBackground(value) {
     if (value === undefined || backgrounds[value] === undefined) {
-      value = 'default';
+      value = DEFAULT_BACKGROUND;
     }
     localStorage.setItem(LAST_USED_BACKGROUND_LOCALSTORAGE_KEY, value);
     document.body.style.backgroundImage = `url("/backgrounds/${backgrounds[value]}")`;

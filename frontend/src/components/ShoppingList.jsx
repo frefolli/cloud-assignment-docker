@@ -3,13 +3,16 @@ import ShoppingManager from '../utils/ShoppingManager';
 import RecipeIngredientTableReadOnly from './RecipeIngredientTableReadOnly';
 
 /**
- * The ShoppingList component retrieves a list of missing ingredients for a recipe and displays them.
+ * The ShoppingList component retrieves a list of
+ * missing ingredients for a recipe and displays them.
  *
  * @class ShoppingList
  *
  * @param {Object} props - The component's properties.
- * @param {string} props.recipeID - The ID of the recipe for which to retrieve the missing ingredients.
- * @param {number} props.quantity - The quantity of the recipe to consider when finding missing ingredients.
+ * @param {string} props.recipeID - The ID of the recipe for which
+ * to retrieve the missing ingredients.
+ * @param {number} props.quantity - The quantity of the recipe to consider
+ * when finding missing ingredients.
  *
  * @returns {JSX.Element} The ShoppingList component.
  *
@@ -19,6 +22,10 @@ import RecipeIngredientTableReadOnly from './RecipeIngredientTableReadOnly';
  */
 
 class ShoppingList extends Component {
+  static propTypes = {
+    quantity: PropType.number,
+    recipeID: PropType.string,
+  };
   constructor(props) {
     super(props);
     this.state = {

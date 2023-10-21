@@ -48,7 +48,7 @@ export default class NextRecipeView extends Component {
           .then((data) => {
             if (data.value !== '') {
               this.setState({nextRecipeID: data.value}, acc);
-            } else rej();
+            } else rej(new Error('DB is broken'));
           })
           .catch((err) => {
             this.settingsManager.putSetting('nextRecipeID', '')
@@ -63,7 +63,7 @@ export default class NextRecipeView extends Component {
           .then((data) => {
             if (Number(data.value) > 0) {
               this.setState({nextRecipeQuantity: data.value}, acc);
-            } else rej();
+            } else rej(new Error('DB is broken'));
           })
           .catch((err) => {
             this.settingsManager.putSetting('nextRecipeQuantity', '0')
@@ -89,7 +89,7 @@ export default class NextRecipeView extends Component {
           .then((data) => {
             if (data.value !== '') {
               this.setState({equipment: Number(data.value)}, acc);
-            } else rej();
+            } else rej(new Error('DB is broken'));
           })
           .catch((err) => rej(err));
     });
@@ -136,7 +136,7 @@ export default class NextRecipeView extends Component {
           <div>
             <center>
               <h2>Equipaggiamento Mancante</h2>
-              <h2>Si chiede di fare {this.state.nextRecipeQuantity} litri ma si dispone di una capacita' di {this.state.equipment} litri</h2>
+              <h2>Si chiede di fare {this.state.nextRecipeQuantity} litri ma si dispone di una capacita&apos; di {this.state.equipment} litri</h2>
             </center>
           </div>
         );
@@ -144,7 +144,7 @@ export default class NextRecipeView extends Component {
         return (<ShoppingList recipeID={this.state.nextRecipeID} quantity={this.state.nextRecipeQuantity}/>);
       } else {
         return <div>
-          <h3 style={{textAlign: 'center'}}>Quantita' in litri prevista: {this.state.nextRecipeQuantity}</h3>
+          <h3 style={{textAlign: 'center'}}>Quantita&apos; in litri prevista: {this.state.nextRecipeQuantity}</h3>
           <table className="myTable">
             <tbody>
               <tr>

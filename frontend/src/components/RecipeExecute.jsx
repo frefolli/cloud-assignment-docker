@@ -53,8 +53,8 @@ class RecipeExecute extends Component {
           .then((data) => {
             this.setState({...data}); acc();
           })
-          .catch(() => {
-            this.notifier.connectionError(); rej();
+          .catch((err) => {
+            this.notifier.connectionError(); rej(err);
           });
     });
   };
@@ -66,7 +66,7 @@ class RecipeExecute extends Component {
             if (data.value !== '') {
               this.setState({equipment: Number(data.value)});
               acc(data.value);
-            } else rej();
+            } else rej(new Error('DB is broken'));
           })
           .catch((err) => {
             this.notifier.connectionError();

@@ -9,7 +9,8 @@ import CardContent from '@mui/material/CardContent';
  * @class TitleCard
  *
  * @param {Object} props - The component's properties.
- * @param {ReactNode} props.children - The content to be displayed within the card.
+ * @param {ReactNode} props.children - The content to be
+ * displayed within the card.
  *
  * @returns {JSX.Element} The `TitleCard` component.
  *
@@ -22,6 +23,9 @@ import CardContent from '@mui/material/CardContent';
  */
 
 export default class TitleCard extends React.Component {
+  static propTypes = {
+    children: PropType.object,
+  };
   render() {
     return (
       <Box style={{margin: '1.5%', padding: '1%'}}>
