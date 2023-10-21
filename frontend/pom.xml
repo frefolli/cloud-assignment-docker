@@ -173,6 +173,18 @@
               <skip>${skip.ITs}</skip>
             </configuration>
           </execution>
+
+          <execution>
+            <phase>generate-resources</phase>
+            <id>documentation</id>
+            <goals>
+              <goal>npm</goal>
+            </goals>
+            <configuration>
+              <arguments>run generate-docs</arguments>
+            </configuration>
+          </execution>
+
         </executions>
       </plugin>
     </plugins>
