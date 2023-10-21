@@ -236,14 +236,14 @@ package:
       - frontend/node/         # Local NodeJS installation
       - frontend/node_modules/ # Local NPM repository
       - .m2/repository/        # Local Maven repository
-    policy: pull
+    policy: pull # this stage shall not write to the cache
 
   dependencies: []
 
   artifacts:
     paths:
       - backend/target/backend-1.0.0.jar
-    when: on_success #when packaging fails... we don't have any jar.
+    when: on_success #when packaging fails... we don't have any jar. It's default not to produce artificts on fail but it's better to write it down to make ic clear :)
 
   script:
     - mvn $MAVEN_CLI_OPTS package -Dskip.lint -Dskip.test  #tests where already done, so let's not repeat them.
