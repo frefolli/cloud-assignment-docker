@@ -1,13 +1,16 @@
-import React, { Component } from "react";
-import IngredientDelete from "../components/IngredientDelete";
-import Modal from "../components/Modal";
+import React, {Component} from 'react';
+import IngredientDelete from '../components/IngredientDelete';
+import Modal from '../components/Modal';
 import {FAKE_NOTIFIER} from '../utils/Protocol';
-import BodyThemeManager from "../components/BodyThemeManager";
-import InventoryTable from "../components/InventoryTable";
-import LoadingScreen from "../components/LoadingScreen";
+import BodyThemeManager from '../components/BodyThemeManager';
+import InventoryTable from '../components/InventoryTable';
+import LoadingScreen from '../components/LoadingScreen';
 import InventoryManager from '../utils/InventoryManager';
 
 class Inventario extends Component {
+  static propTypes = {
+    notifier: PropTypes.object,
+  };
   constructor(props) {
     super(props);
     this.state = {
@@ -22,18 +25,18 @@ class Inventario extends Component {
 
   triggerReload = () => {
     this.inventoryManager.getIngredientList()
-    .then((data) => {
-      this.setState({ inventory: data, isLoading: false })
-    })
-    .catch(this.notifier.connectionError)
-  }
+        .then((data) => {
+          this.setState({inventory: data, isLoading: false});
+        })
+        .catch(this.notifier.connectionError);
+  };
 
   componentDidMount() {
     this.triggerReload();
   }
 
   setShowModal = (value) => {
-    this.setState({ showModal: value });
+    this.setState({showModal: value});
   };
 
   handleDelete = (ingredientID) => {
@@ -41,20 +44,21 @@ class Inventario extends Component {
       showModal: true,
       ingredientID,
     });
-  }
+  };
 
   handleDeleteConfirm = () => {
-    const { ingredientID } = this.state;
+    const {ingredientID} = this.state;
     this.inventoryManager.deleteIngredient(ingredientID)
-    .then(() => {
-      this.setShowModal(false);
-      this.triggerReload();
-    })
-    .catch(() => this.notifier.error("impossibile eliminare l'ingrediente"));
+        .then(() => {
+          this.setShowModal(false);
+          this.triggerReload();
+        })
+        .catch(() => this.notifier.error(
+            'impossibile eliminare l\'ingrediente'));
   };
 
   render() {
-    const { inventory } = this.state;
+    const {inventory} = this.state;
 
     return (
       <BodyThemeManager>
@@ -68,7 +72,8 @@ class Inventario extends Component {
             showModal={this.state.showModal}
             setShowModal={this.setShowModal}
           >
-            {this.state.showModal && <IngredientDelete onConfirm={this.handleDeleteConfirm}/>}
+            {this.state.showModal &&
+            <IngredientDelete onConfirm={this.handleDeleteConfirm}/>}
           </Modal>
         </div>
       </BodyThemeManager>
