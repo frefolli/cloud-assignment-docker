@@ -175,7 +175,7 @@
           </execution>
 
           <execution>
-            <phase>generate-resources</phase>
+            <phase>site</phase>
             <id>documentation</id>
             <goals>
               <goal>npm</goal>
