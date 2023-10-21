@@ -298,4 +298,4 @@ pages:
     paths:
       - .public
   only:
-    - docs
+    - master
