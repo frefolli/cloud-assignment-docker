@@ -27,7 +27,8 @@ export const LAST_USED_BACKGROUND_LOCALSTORAGE_KEY = 'lastUsedBackground';
 export const DEFAULT_THEME = 'default';
 export const DEFAULT_BACKGROUND = 'default';
 
-export const INGREDIENT_NAME_OPTIONS = ['acqua', 'additivi', 'lievito', 'luppoli', 'malto', 'zuccheri'];
+export const INGREDIENT_NAME_OPTIONS = [
+  'acqua', 'additivi', 'lievito', 'luppoli', 'malto', 'zuccheri'];
 
 export const NOTE_TYPE_OPTIONS = ['generic', 'taste', 'problem'];
 export const DEFAULT_NOTE_TYPE = 'generic';
@@ -38,4 +39,5 @@ export const NOTE_TYPE_ICONS = {
 };
 export const FAKE_NOTIFIER = new Notifier(() => {});
 export const isValidPositiveQuantity = (value) => (Number(value) > 0);
-export const isNotValidPositiveQuantity = (value) => (! isValidPositiveQuantity(value));
+export const isNotValidPositiveQuantity = (value) =>
+  (! isValidPositiveQuantity(value));

@@ -18,6 +18,9 @@ import BeersManager from '../utils/BeersManager';
 
 
 class Birre extends Component {
+  static propTypes = {
+    notifier: PropTypes.object,
+  };
   constructor(props) {
     super(props);
     this.state = {
@@ -52,11 +55,13 @@ class Birre extends Component {
                 });
                 return updatedBeers
                     .map((beer) => beer.recipeID)
-                    .filter((value, index, self) => (self.indexOf(value) === index) && value !== null);
+                    .filter((value, index, self) =>
+                      (self.indexOf(value) === index) && value !== null);
               })
               .then((updatedRecipes) => {
                 Promise.all(
-                    updatedRecipes.map((recipeID) => this.recipesManager.getRecipe(recipeID)),
+                    updatedRecipes.map((recipeID) =>
+                      this.recipesManager.getRecipe(recipeID)),
                 )
                     .then((data) => {
                       this.setState({recipes: data, isLoading: false});

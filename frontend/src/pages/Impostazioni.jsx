@@ -6,7 +6,14 @@ import Modal from '../components/Modal';
 import MButton from '../components/MButton';
 import SettingsReset from '../components/SettingsReset';
 import NextRecipeReset from '../components/NextRecipeReset';
-import {BACKGROUND_MANAGER_TRIGGER, THEME_MANAGER_TRIGGER, NAVBAR_THEME_MANAGER_TRIGGER, LAST_USED_THEME_LOCALSTORAGE_KEY, DEFAULT_BACKGROUND, DEFAULT_THEME, LAST_USED_BACKGROUND_LOCALSTORAGE_KEY, FAKE_NOTIFIER} from '../utils/Protocol';
+import {BACKGROUND_MANAGER_TRIGGER,
+  THEME_MANAGER_TRIGGER,
+  NAVBAR_THEME_MANAGER_TRIGGER,
+  LAST_USED_THEME_LOCALSTORAGE_KEY,
+  DEFAULT_BACKGROUND,
+  DEFAULT_THEME,
+  LAST_USED_BACKGROUND_LOCALSTORAGE_KEY,
+  FAKE_NOTIFIER} from '../utils/Protocol';
 import InputFieldSetting from '../components/InputFieldSetting';
 import InputSelectorSetting from '../components/InputSelectorSetting';
 import JimTable from '../components/JimTable';
@@ -17,6 +24,10 @@ import twins from '../theme/twins';
 import LoadingScreen from '../components/LoadingScreen';
 
 export default class Impostazioni extends Component {
+  static propTypes = {
+    notifier: PropTypes.object,
+    masterCall: PropTypes.object,
+  };
   constructor(props) {
     super(props);
     this.state = {
@@ -106,7 +117,8 @@ export default class Impostazioni extends Component {
     this.setState({background: newBackground});
     this.settingsManager.putSetting('background', newBackground)
         .then(() => document.cookie=BACKGROUND_MANAGER_TRIGGER)
-        .then(() => localStorage.setItem(LAST_USED_BACKGROUND_LOCALSTORAGE_KEY, newBackground))
+        .then(() => localStorage.setItem(
+            LAST_USED_BACKGROUND_LOCALSTORAGE_KEY, newBackground))
         .then(this.notifyMaster)
         .then(() => {
           if (noTwin !== true) {
@@ -125,7 +137,8 @@ export default class Impostazioni extends Component {
     this.settingsManager.putSetting('color', newColor)
         .then(() => document.cookie=THEME_MANAGER_TRIGGER)
         .then(() => document.cookie=NAVBAR_THEME_MANAGER_TRIGGER)
-        .then(() => localStorage.setItem(LAST_USED_THEME_LOCALSTORAGE_KEY, newColor))
+        .then(() => localStorage.setItem(
+            LAST_USED_THEME_LOCALSTORAGE_KEY, newColor))
         .then(this.notifyMaster)
         .then(() => {
           if (noTwin !== true) {
@@ -140,8 +153,10 @@ export default class Impostazioni extends Component {
 
   handleSetEquipment = () => {
     this.settingsManager.putSetting('equipment', this.state.equipment)
-        .then(() => this.notifier.success('equipaggiamento aggiornato con successo'))
-        .catch(() => this.notifier.error('impossibile cambiare l\'equipaggiamento'));
+        .then(() => this.notifier.success(
+            'equipaggiamento aggiornato con successo'))
+        .catch(() => this.notifier.error(
+            'impossibile cambiare l\'equipaggiamento'));
   };
 
   handleSetName = () => {
@@ -181,9 +196,14 @@ export default class Impostazioni extends Component {
     const currentAction = this.state.currentAction;
     switch (currentAction) {
       case 'resetSettings':
-        return <SettingsReset masterCall={this.props.masterCall} notifier={this.notifier} onConfirm={this.closeModalAndReload}/>;
+        return <SettingsReset
+          masterCall={this.props.masterCall}
+          notifier={this.notifier}
+          onConfirm={this.closeModalAndReload}/>;
       case 'resetRecipeID':
-        return <NextRecipeReset notifier={this.notifier} onConfirm={this.closeModal}/>;
+        return <NextRecipeReset
+          notifier={this.notifier}
+          onConfirm={this.closeModal}/>;
       default:
         return <div></div>;
     }
@@ -224,10 +244,12 @@ export default class Impostazioni extends Component {
           onChange={this.setNewBackground}
           options={this.state.backgrounds}/>
         <JimTable>
-          <MButton center text="Elimina tutti i dati" onClick={this.handleResetSettings}/>
+          <MButton center text="Elimina tutti i dati"
+            onClick={this.handleResetSettings}/>
         </JimTable>
         <JimTable>
-          <MButton center text="Resetta la prossima ricetta da eseguire" onClick={this.handleResetNextRecipeID}/>
+          <MButton center text="Resetta la prossima ricetta da eseguire"
+            onClick={this.handleResetNextRecipeID}/>
         </JimTable>
       </JimFlex>
     );
@@ -236,7 +258,8 @@ export default class Impostazioni extends Component {
       <BodyThemeManager>
         <LoadingScreen isLoading={this.state.isLoading}/>
         {this.state.isLoading ? null : settingsPanel()}
-        <Modal showModal={this.state.showModal} setShowModal={this.setShowModal}>
+        <Modal showModal={this.state.showModal}
+          setShowModal={this.setShowModal}>
           {this.getCurrentComponent()}
         </Modal>
       </BodyThemeManager>

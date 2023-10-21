@@ -19,6 +19,9 @@ import LoadingScreen from '../components/LoadingScreen';
 import {TextField} from '@mui/material';
 
 export default class Ricette extends Component {
+  static propTypes = {
+    notifier: PropTypes.object,
+  };
   constructor(props) {
     super(props);
     this.state = {
@@ -37,7 +40,9 @@ export default class Ricette extends Component {
   triggerReload = () => {
     return new Promise((acc, rej) => {
       this.recipesManager.getRecipeList()
-          .then((recipeIDs) => Promise.all(recipeIDs.map((recipeID) => this.recipesManager.getRecipe(recipeID))))
+          .then((recipeIDs) => Promise.all(
+              recipeIDs.map((recipeID) =>
+                this.recipesManager.getRecipe(recipeID))))
           .then((data) => this.setState({
             recipes: data, recipesFiltered: data,
             newRecipeName: '', newRecipeDescription: '',
@@ -87,11 +92,13 @@ export default class Ricette extends Component {
   }
 
   handleView = (item) => {
-    this.setState({currentAction: 'view', selectedRecipe: item, showModal: true});
+    this.setState({currentAction: 'view',
+      selectedRecipe: item, showModal: true});
   };
 
   handleEdit = (item) => {
-    this.setState({currentAction: 'edit', selectedRecipe: item, showModal: true});
+    this.setState({currentAction: 'edit',
+      selectedRecipe: item, showModal: true});
   };
 
   handleDelete = (item) => {
@@ -102,13 +109,15 @@ export default class Ricette extends Component {
   finalizeDeleteHandle = (id) => {
     if (id === this.state.nextRecipeID) {
       this.settingsManager.putSetting('nextRecipeID', '')
-          .then(() => this.settingsManager.putSetting('nextRecipeQuantity', '0'))
+          .then(() => this.settingsManager.putSetting(
+              'nextRecipeQuantity', '0'))
           .then(this.closeModalAndReload);
     } else this.closeModalAndReload();
   };
 
   handleExecute = (item) => {
-    this.setState({currentAction: 'execute', selectedRecipe: item, showModal: true});
+    this.setState({currentAction: 'execute',
+      selectedRecipe: item, showModal: true});
   };
 
   closeModal = () => this.setShowModal(false);
@@ -122,13 +131,18 @@ export default class Ricette extends Component {
     if (!selectedRecipe) return <div>Caricamento...</div>;
     switch (currentAction) {
       case 'view':
-        return <RecipeView notifier={this.notifier} recipeID={selectedRecipe.recipeID}/>;
+        return <RecipeView notifier={this.notifier}
+          recipeID={selectedRecipe.recipeID}/>;
       case 'edit':
-        return <RecipeEdit notifier={this.notifier} recipeID={selectedRecipe.recipeID} onConfirm={this.triggerReload}/>;
+        return <RecipeEdit notifier={this.notifier}
+          recipeID={selectedRecipe.recipeID} onConfirm={this.triggerReload}/>;
       case 'delete':
-        return <RecipeDelete notifier={this.notifier} recipeID={selectedRecipe.recipeID} onConfirm={this.finalizeDeleteHandle}/>;
+        return <RecipeDelete notifier={this.notifier}
+          recipeID={selectedRecipe.recipeID}
+          onConfirm={this.finalizeDeleteHandle}/>;
       case 'execute':
-        return <RecipeExecute notifier={this.notifier} recipeID={selectedRecipe.recipeID} onConfirm={this.closeModal}/>;
+        return <RecipeExecute notifier={this.notifier}
+          recipeID={selectedRecipe.recipeID} onConfirm={this.closeModal}/>;
       default:
         return <div></div>;
     }
@@ -172,14 +186,18 @@ export default class Ricette extends Component {
 
   programRecipe = () => {
     if (this.state.nextRecipeID === '') {
-      return this.notifier.warning('devi selezionare una ricetta per impostarla');
+      return this.notifier.warning(
+          'devi selezionare una ricetta per impostarla');
     }
     if (isNotValidPositiveQuantity(this.state.nextRecipeQuantity)) {
-      return this.notifier.warning('devi inserire una quantita\' maggiore di zero');
+      return this.notifier.warning(
+          'devi inserire una quantita\' maggiore di zero');
     }
     this.settingsManager.putSetting('nextRecipeID', this.state.nextRecipeID)
-        .then(() => this.settingsManager.putSetting('nextRecipeQuantity', this.state.nextRecipeQuantity))
-        .then(() => this.notifier.success('programmazione ricetta impostata correttamente'))
+        .then(() => this.settingsManager.putSetting(
+            'nextRecipeQuantity', this.state.nextRecipeQuantity))
+        .then(() => this.notifier.success(
+            'programmazione ricetta impostata correttamente'))
         .catch(this.notifier.connectionError);
   };
 
@@ -245,7 +263,8 @@ export default class Ricette extends Component {
             setNewRecipeDescription={this.setNewRecipeDescription}
             addRecipe={this.addRecipe}
           />
-          <Modal showModal={this.state.showModal} setShowModal={this.setShowModal}>
+          <Modal showModal={this.state.showModal}
+            setShowModal={this.setShowModal}>
             {this.getCurrentComponent()}
           </Modal>
         </div>
@@ -255,9 +274,11 @@ export default class Ricette extends Component {
 
   addRecipe = () => {
     if (this.state.newRecipeName === '') {
-      return this.notifier.warning('il nome della ricetta non deve essere vuoto');
+      return this.notifier.warning(
+          'il nome della ricetta non deve essere vuoto');
     }
-    this.recipesManager.postRecipe({name: this.state.newRecipeName, description: this.state.newRecipeDescription})
+    this.recipesManager.postRecipe({name: this.state.newRecipeName,
+      description: this.state.newRecipeDescription})
         .then(() => this.notifier.success('ricetta creata correttamente'))
         .then(() => this.triggerReload())
         .catch(() => this.notifier.error('impossibile creare la ricetta'));
@@ -266,7 +287,8 @@ export default class Ricette extends Component {
   filterRecipe = () => {
     this.recipesManager.getRecipeList({name: this.state.filterName})
         .then((recipesIDsFiltered) => {
-          const recipeFiltered = this.state.recipes.filter((recipe) => recipesIDsFiltered.includes(recipe.recipeID));
+          const recipeFiltered = this.state.recipes.filter(
+              (recipe) => recipesIDsFiltered.includes(recipe.recipeID));
           this.setState({recipesFiltered: recipeFiltered});
         })
         .catch(this.notifier.connectionError);

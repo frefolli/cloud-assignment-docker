@@ -8,6 +8,9 @@ import RemoveShoppingCartIcon from '@mui/icons-material/RemoveShoppingCart';
 import ShoppingManager from '../utils/ShoppingManager';
 
 class Spesa extends Component {
+  static propTypes = {
+    notifier: PropTypes.object,
+  };
   constructor(props) {
     super(props);
     this.state = {
@@ -35,7 +38,9 @@ class Spesa extends Component {
     for (const ingredient of this.state.ingredients) {
       const {quantity} = ingredient;
       if (isNotValidPositiveQuantity(quantity)) {
-        return this.notifier.warning('le quantita\' dei singoli ingredienti devono essere strettamente positive');
+        return this.notifier.warning(
+            'le quantita\' dei singoli ingredienti' +
+          'devono essere strettamente positive');
       }
     }
 
@@ -43,7 +48,8 @@ class Spesa extends Component {
         .then(this.notifier.onRequestErrorResolvePromise(() => {
           throw new Error();
         }))
-        .then(() => this.notifier.success('ingredienti inventariati con successo'))
+        .then(() => this.notifier.success(
+            'ingredienti inventariati con successo'))
         .then(() => {
           this.setState({
             ingredients: [],
@@ -66,21 +72,25 @@ class Spesa extends Component {
 
   handleDeleteIngredient = (name) => {
     this.setState({
-      ingredients: this.state.ingredients.filter((ingredient) => ingredient.name !== name),
+      ingredients: this.state.ingredients.filter(
+          (ingredient) => ingredient.name !== name),
     });
   };
 
   handleAddIngredient = () => {
     if (this.state.newIngredientName === '') {
-      return this.notifier.warning('il nome dell\'ingrediente non deve essere vuoto');
+      return this.notifier.warning(
+          'il nome dell\'ingrediente non deve essere vuoto');
     }
 
-    const sameNameIngredients = this.state.ingredients.filter((ingredient) => ingredient.name === this.state.newIngredientName);
+    const sameNameIngredients = this.state.ingredients.filter(
+        (ingredient) => ingredient.name === this.state.newIngredientName);
     if (sameNameIngredients.length !== 0) {
       this.setState({ingredients: (
         this.state.ingredients.map((ingredient) => {
           if (ingredient.name === this.state.newIngredientName) {
-            ingredient.quantity = Number(ingredient.quantity) + Number(this.state.newIngredientQuantity);
+            ingredient.quantity = Number(ingredient.quantity) +
+            Number(this.state.newIngredientQuantity);
           }
           return ingredient;
         })),
@@ -126,8 +136,10 @@ class Spesa extends Component {
           addIngredient={this.handleAddIngredient}
         />
         <div id="shoppingButtonContainer">
-          <MButton startIcon={<ShoppingCartCheckoutIcon/>} text="Conferma" onClick={this.handleSubmit}/>
-          <MButton startIcon={<RemoveShoppingCartIcon/>} text="Svuota" onClick={this.handleClear}/>
+          <MButton startIcon={<ShoppingCartCheckoutIcon/>}
+            text="Conferma" onClick={this.handleSubmit}/>
+          <MButton startIcon={<RemoveShoppingCartIcon/>}
+            text="Svuota" onClick={this.handleClear}/>
         </div>
       </BodyThemeManager>
     );

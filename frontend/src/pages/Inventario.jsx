@@ -8,6 +8,9 @@ import LoadingScreen from '../components/LoadingScreen';
 import InventoryManager from '../utils/InventoryManager';
 
 class Inventario extends Component {
+  static propTypes = {
+    notifier: PropTypes.object,
+  };
   constructor(props) {
     super(props);
     this.state = {
@@ -50,7 +53,8 @@ class Inventario extends Component {
           this.setShowModal(false);
           this.triggerReload();
         })
-        .catch(() => this.notifier.error('impossibile eliminare l\'ingrediente'));
+        .catch(() => this.notifier.error(
+            'impossibile eliminare l\'ingrediente'));
   };
 
   render() {
@@ -68,7 +72,8 @@ class Inventario extends Component {
             showModal={this.state.showModal}
             setShowModal={this.setShowModal}
           >
-            {this.state.showModal && <IngredientDelete onConfirm={this.handleDeleteConfirm}/>}
+            {this.state.showModal &&
+            <IngredientDelete onConfirm={this.handleDeleteConfirm}/>}
           </Modal>
         </div>
       </BodyThemeManager>
