@@ -250,7 +250,32 @@ frontend-integration-test:
   script:
     - mvn $MAVEN_CLI_OPTS -pl frontend test -Dskip.lint -Dskip.UTs
 
+
 # PACKAGE
+# the objective is to create the .jar in the artifacts of this stage and pass it to the realese
+
+package:  
+  when: manual
+  stage: package
+
+  cache:
+    key: "$CI_COMMIT_REF_SLUG"
+    paths: #riusa la cach quanto puoi
+      - frontend/node/         # Local NodeJS installation
+      - frontend/node_modules/ # Local NPM repository
+      - .m2/repository/        # Local Maven repository
+    policy: pull # this stage shall not write to the cache
+
+  dependencies: []
+
+  artifacts:
+    paths:
+      - backend/target/backend-1.0.0.jar
+    when: on_success #when packaging fails... we don't have any jar. It's default not to produce artificts on fail but it's better to write it down to make ic clear :)
+
+  script:
+    - mvn $MAVEN_CLI_OPTS package -Dskip.lint -Dskip.test  #tests where already done, so let's not repeat them.
+
 
 # RELEASE
 
