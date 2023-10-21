@@ -1,14 +1,14 @@
-import React, { Component } from "react";
-import RecipeView from "./RecipeView";
+import React, {Component} from 'react';
+import RecipeView from './RecipeView';
 import MButton from '../components/MButton';
 import {FAKE_NOTIFIER} from '../utils/Protocol';
-import BeerNoteTableReadOnly from "./BeerNoteTableReadOnly";
+import BeerNoteTableReadOnly from './BeerNoteTableReadOnly';
 import BeersManager from '../utils/BeersManager';
 
 /**
  * This class represents a component for viewing beer details, including name, recipe, and notes.
  * @class BeerView
- * 
+ *
  * @param {Object} props - The component's properties.
  * @param {number} props.beerID - The unique identifier for the beer.
  * @param {Notifier} [props.notifier] - An optional notifier for displaying notifications (default: FAKE_NOTIFIER).
@@ -26,8 +26,8 @@ class BeerView extends Component {
     this.state = {
       showRicetta: false,
       recipeID: null,
-      name: "",
-      notes: []
+      name: '',
+      notes: [],
     };
     this.notifier = this.props.notifier || FAKE_NOTIFIER;
     this.beersManager = new BeersManager();
@@ -35,24 +35,24 @@ class BeerView extends Component {
 
   triggerReload = () => {
     this.beersManager.getBeer(this.props.beerID)
-    .then(data => this.setState({...data}))
-    .catch(this.notifier.connectionError)
-  }
+        .then((data) => this.setState({...data}))
+        .catch(this.notifier.connectionError);
+  };
 
   componentDidMount() {
     this.triggerReload();
   }
 
   handleShowRicetta = async () => {
-    this.setState({ showRicetta: true });
+    this.setState({showRicetta: true});
   };
 
   render() {
-    const { showRicetta, recipeID, name } = this.state;
+    const {showRicetta, recipeID, name} = this.state;
 
-    const action = showRicetta
-    ? (<RecipeView notifier={this.notifier} recipeID={recipeID}/>)
-    : <MButton text="Visualizza Ricetta" onClick={this.handleShowRicetta}/>;
+    const action = showRicetta ?
+    (<RecipeView notifier={this.notifier} recipeID={recipeID}/>) :
+    <MButton text="Visualizza Ricetta" onClick={this.handleShowRicetta}/>;
 
     const recipeView = (
       <div>

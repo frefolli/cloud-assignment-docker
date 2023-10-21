@@ -1,6 +1,6 @@
-import React, { Component }  from "react";
+import React, {Component} from 'react';
 import MButton from '../components/MButton';
-import { BACKGROUND_MANAGER_TRIGGER, FAKE_NOTIFIER, NAVBAR_THEME_MANAGER_TRIGGER, THEME_MANAGER_TRIGGER } from '../utils/Protocol';
+import {BACKGROUND_MANAGER_TRIGGER, FAKE_NOTIFIER, NAVBAR_THEME_MANAGER_TRIGGER, THEME_MANAGER_TRIGGER} from '../utils/Protocol';
 import ResetManager from '../utils/ResetManager';
 
 /**
@@ -24,7 +24,7 @@ import ResetManager from '../utils/ResetManager';
  * />
  */
 
-class SettingsReset extends Component{
+class SettingsReset extends Component {
   constructor(props) {
     super(props);
     this.notifier = this.props.notifier || FAKE_NOTIFIER;
@@ -32,34 +32,35 @@ class SettingsReset extends Component{
   }
 
   notifyMaster = () => {
-    if (this.props.masterCall)
+    if (this.props.masterCall) {
       this.props.masterCall();
-  }
+    }
+  };
 
-  render(){
+  render() {
     return (
-        <div>
-          <center>
-            <p>Sei sicuro di voler rimuovere tutti i tuoi dati?</p>
-            <MButton text="Conferma" onClick={() => this.resetAllSettings()} />
-          </center>
-        </div>
+      <div>
+        <center>
+          <p>Sei sicuro di voler rimuovere tutti i tuoi dati?</p>
+          <MButton text="Conferma" onClick={() => this.resetAllSettings()} />
+        </center>
+      </div>
     );
   }
 
   resetAllSettings = () => {
     this.resetManager.doReset()
-    .then(this.notifier.onRequestError("impossibile cancellare i dati"))
-    .then(this.notifier.onRequestSuccessResolvePromise(() => {
-      document.cookie=BACKGROUND_MANAGER_TRIGGER;
-      document.cookie=THEME_MANAGER_TRIGGER;
-      document.cookie=NAVBAR_THEME_MANAGER_TRIGGER;
-      localStorage.clear();
-      this.notifyMaster();
-      this.notifier.success("dati cancellati con successo");
-    }))
-    .then(() => this.props.onConfirm());
-  }
+        .then(this.notifier.onRequestError('impossibile cancellare i dati'))
+        .then(this.notifier.onRequestSuccessResolvePromise(() => {
+          document.cookie=BACKGROUND_MANAGER_TRIGGER;
+          document.cookie=THEME_MANAGER_TRIGGER;
+          document.cookie=NAVBAR_THEME_MANAGER_TRIGGER;
+          localStorage.clear();
+          this.notifyMaster();
+          this.notifier.success('dati cancellati con successo');
+        }))
+        .then(() => this.props.onConfirm());
+  };
 }
 
 export default SettingsReset;

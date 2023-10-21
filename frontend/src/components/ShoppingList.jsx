@@ -1,15 +1,18 @@
-import React, { Component } from "react";
+import React, {Component} from 'react';
 import ShoppingManager from '../utils/ShoppingManager';
-import RecipeIngredientTableReadOnly from "./RecipeIngredientTableReadOnly";
+import RecipeIngredientTableReadOnly from './RecipeIngredientTableReadOnly';
 
 /**
- * The ShoppingList component retrieves a list of missing ingredients for a recipe and displays them.
+ * The ShoppingList component retrieves a list of
+ * missing ingredients for a recipe and displays them.
  *
  * @class ShoppingList
  *
  * @param {Object} props - The component's properties.
- * @param {string} props.recipeID - The ID of the recipe for which to retrieve the missing ingredients.
- * @param {number} props.quantity - The quantity of the recipe to consider when finding missing ingredients.
+ * @param {string} props.recipeID - The ID of the recipe for which
+ * to retrieve the missing ingredients.
+ * @param {number} props.quantity - The quantity of the recipe to consider
+ * when finding missing ingredients.
  *
  * @returns {JSX.Element} The ShoppingList component.
  *
@@ -19,6 +22,10 @@ import RecipeIngredientTableReadOnly from "./RecipeIngredientTableReadOnly";
  */
 
 class ShoppingList extends Component {
+  static propTypes = {
+    quantity: PropType.number,
+    recipeID: PropType.string,
+  };
   constructor(props) {
     super(props);
     this.state = {
@@ -31,12 +38,12 @@ class ShoppingList extends Component {
 
   componentDidMount() {
     this.shoppingManager.getShoppingList({
-        recipeID: this.state.recipeID,
-        quantity: this.state.newBeerQuantity
+      recipeID: this.state.recipeID,
+      quantity: this.state.newBeerQuantity,
     })
-    .then((response) => response.json())
-    .then((data) => this.setState({ missingIngredients: data }))
-    .catch(err => {}); // TODO: link notifier
+        .then((response) => response.json())
+        .then((data) => this.setState({missingIngredients: data}))
+        .catch((err) => {}); // TODO: link notifier
   }
 
 
@@ -51,7 +58,5 @@ class ShoppingList extends Component {
       </div>
     );
   }
-
-
 }
 export default ShoppingList;
