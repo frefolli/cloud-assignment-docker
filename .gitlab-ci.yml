@@ -285,6 +285,22 @@ package:
 
 
 # RELEASE
+# push to the gitlab registry a docker container freshly built (the .jar file it's copied into it)
+release:
+  when: manual
+  stage: release
+  image: docker:stable 
+  services:
+    - docker:dind
+  cache: {} # Disable cache, explicit declation of job dependencies to download only their artifacts
+  dependencies:
+    - package #the Dockerfile copies the .jar ... so it's needed to create it in the package phase.
+
+  script:
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+    - docker build  -t $CONTAINER_IMAGE . #having -t $CONTAINER_IMAGE:$CI_COMMIT_REF_NAME was a problem for some reason so we took it off.
+    - docker push $CONTAINER_IMAGE #push to the gitlab registry
+
 
 # DOCS
 ## Firstly we build JSDoc and Javadoc documentations
