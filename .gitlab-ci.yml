@@ -293,7 +293,7 @@ pages:
   stage: docs
   script:
     - mkdir .public
-    - mv /frontend/* .public/
+    - mv ./frontend/* .public/
   artifacts:
     paths:
       - .public
