@@ -125,7 +125,7 @@ If this job succeeds a coverage report is produced as summary of both UTs and IT
 
 Our FE ITs require a copy of our to be running in background. They ensure API request and handling is done correctly. These tests are designed to test the src/utils/\*Manager.js we created to abstract and centralize the API access. As such, they actually end up testing almost the whole tech stack: JS Managers $\Leftrightarrow$ Spring REST $\Leftrightarrow$ SQLite DB.
 
-The instance of BE is started as a GitLab CI/CD Action service, and uses the `spring-boot:run` goal, thus we don't have to manually package the Spring Boot project, which would break our Pipeline semanthics.
+The instance of BE is started as a standard linux job instead of a proper GitLab CI/CD Action service because otherwise it couldn't expose the needed port. It uses the `spring-boot:run` goal, thus we don't have to manually package the Spring Boot project, which would break our Pipeline semanthics.
 
 ### Package
 
@@ -139,9 +139,10 @@ The idea is to use the Dockerfile to build a container which has javajdk and sql
 
 ### Docs
 
-We set up three different jobs to achieve this stage. First of all we need to build the rest of documentation that wasn't already built: Javadoc for Backend and JSDoc for Frontend. When these two jobs end we collect their artifacts and some more which were produced within `backend-pmd` and`backend-integration-test` jobs:
+We set up three different jobs to achieve this stage. First of all we need to build the rest of documentation that wasn't already built: Javadoc for Backend and JSDoc for Frontend. When these two jobs end we collect their artifacts and some more which were produced within `backend-pmd`, `backend-integration-test` and `frontend-integration-test` jobs:
 - PMD report
 - Backend coverage report
+- Frontend coverage report
 
 The `public` directory of the GitLab Pages is templated by our skel `docs-site`, all resources are moved inside of it and the artifact is uploaded. GitLab automatically load this artifact to GitLab Pages.
 
