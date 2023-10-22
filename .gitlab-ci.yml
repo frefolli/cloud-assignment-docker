@@ -279,7 +279,8 @@ package:
 
 # RELEASE
 release:
- stage: release
+  when: manual
+  stage: release
   # Redefine the job container image
   image: docker:stable #Docker-in-Docker
   services:
