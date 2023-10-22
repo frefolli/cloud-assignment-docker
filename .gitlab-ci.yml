@@ -293,7 +293,7 @@ pages:
   stage: docs
   script:
     - mkdir .public
-    - mv /builds/frefolli/2023_assignment1_brew_day/frontend/docs/index.html .public/
+    - mv /frontend/docs/* .public/
   artifacts:
     paths:
       - .public
