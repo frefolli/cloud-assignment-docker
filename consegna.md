@@ -119,6 +119,8 @@ The main concern of Frontend UTs is providing a good quality UI experience, and 
 
 These tests run against endpoints in order to test both Spring API interface and Controller Bl. They tests half of the tech stack: Spring REST $\Leftrightarrow$ SQLite DB.
 
+If this job succeeds a coverage report is produced as summary of both UTs and ITs, and it's uploaded as artifact in order to be used within `docs` stage.
+
 #### Frontend
 
 Our FE ITs require a copy of our to be running in background. They ensure API request and handling is done correctly. These tests are designed to test the src/utils/\*Manager.js we created to abstract and centralize the API access. As such, they actually end up testing almost the whole tech stack: JS Managers $\Leftrightarrow$ Spring REST $\Leftrightarrow$ SQLite DB.
@@ -126,11 +128,23 @@ Our FE ITs require a copy of our to be running in background. They ensure API re
 The instance of BE is started as a GitLab CI/CD Action service, and uses the `spring-boot:run` goal, thus we don't have to manually package the Spring Boot project, which would break our Pipeline semanthics.
 
 ### Package
+
 This stage produces as artifact the actual .jar file. When this stage fails, no artifact is produced.
 To do this `mvn package` command is used. The command takes adventage of the already-compiled files located in the cache and skip all the tests(re-running them would be redundant).
+
 ### Release
+
 We're still working on it.
 The idea is to use the Dockerfile to build a container which has javajdk and sqlite on it, alongside the .jar file itself, then push the container to the gitlab registry. The .jar file is the artifact produced by the previous stage.
+
 ### Docs
 
-# Footer
+We set up three different jobs to achieve this stage. First of all we need to build the rest of documentation that wasn't already built: Javadoc for Backend and JSDoc for Frontend. When these two jobs end we collect their artifacts and some more which were produced within `backend-pmd` and`backend-integration-test` jobs:
+- PMD report
+- Backend coverage report
+
+The `public` directory of the GitLab Pages is templated by our skel `docs-site`, all resources are moved inside of it and the artifact is uploaded. GitLab automatically load this artifact to GitLab Pages.
+
+# Pipeline Advancement
+
+The pipeline is almost complete, all stages are performed correctly but `release` which is a WIP.
