@@ -294,7 +294,7 @@ pages:
   script:
     - pwd
     - mkdir .public
-    - mv frontend/docs/index.html .public/
+    - mv /frontend/docs/index.html .public/
   artifacts:
     paths:
       - .public
