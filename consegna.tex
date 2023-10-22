@@ -46,6 +46,8 @@
     \end{tabular}
 \end{center}
 
+Link to the repository: \href{https://gitlab.com/frefolli/2023_assignment1_brew_day}{frefolli/2023\_assignment1\_brew\_day}
+
 \subsection{The Target Application}
 
 We decided to re-use a project we developed for Ingegneria del Software course. The project itself is a Full Stack Web App that enable the user to track it's data about recipes and beers for the sake of a home brewery. The App can be used via a Browser (tested for Firefox and Chromium) from both desktop and mobile devices, since the pages are themselves responsive.
@@ -247,7 +249,7 @@ The pipeline is almost complete, all stages are performed correctly but a full c
 
 \paragraph{The Frontend is built with Node JS and NPM}
 
-Since there isn't a community docker image with both Maven and NPM (especially with JDK17), we use a plugin for Maven which downloads automatically a distribution of Node (typically v19.6). This is actually a bottleneck because once in a while, when the pipeline runs for the first time on a branch or such, Maven fails to download it by either getting an error 525 (SSL Handshake Failed) or directly going in timeout. Eventually it succeeds in downloading it and everything goes ok. Locally we don't have problems at all in downloading this way node, we don't have a clue of the reason for which this happen.
+Since there isn't a community docker image with both Maven and NPM (especially with JDK17), we use a plugin for Maven which downloads automatically a distribution of Node (typically v19.6). This is actually a bottleneck because once in a while, when the pipeline runs for the first time on a branch or such, Maven fails to download it by either getting an error 525 (SSL Handshake Failed) or directly going in timeout. Eventually it succeeds in downloading it and everything goes well. Locally we don't have problems at all in downloading this way node, we don't have a clue of the reason for which this happen.
 
 \paragraph{Gitlab-Runner}
 
