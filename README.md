@@ -142,8 +142,7 @@ To do this `mvn package` command is used. The command takes adventage of the alr
 
 ### Release
 
-We're still working on it.
-The idea is to use the Dockerfile to build a container which has javajdk and sqlite on it, alongside the .jar file itself, then push the container to the gitlab registry. The .jar file is the artifact produced by the previous stage.
+The idea is to use the Dockerfile to build a container which has javajdk and sqlite on it, alongside the .jar file itself, then push the container to the gitlab registry. The .jar file is the artifact produced by the previous stage, so it's required to run this stage in advance.
 
 ### Docs
 
