@@ -30,7 +30,7 @@ The pipeline should embrace this architecture and allow for the two major sides 
 
 ### The Base System
 
-The image used for this CI/CD Action should contain a JDK 17 (used by brew-day) and maven as well. We chose a Debian Bookwork containing the AmazonCorretto redistribution of JDK 17. Having to rely on Debian instead of, for example, Ubuntu enable us to have update yet stable toolkits.
+The image used for this CI/CD Action should contain a JDK 17 (used by brew-day) and maven as well. We chose a Debian Bookwork containing the AmazonCorretto redistribution of JDK 17. Having to rely on Debian instead of, for example, Ubuntu enable us to have updated yet stable toolkits.
 
 It's really important to notice how we don't need to impose dependency on NodeJS but only against Maven. This because our setup allow the `frontend/pom.xml` to download a distribution of node by it self.
 
@@ -126,9 +126,11 @@ Our FE ITs require a copy of our to be running in background. They ensure API re
 The instance of BE is started as a GitLab CI/CD Action service, and uses the `spring-boot:run` goal, thus we don't have to manually package the Spring Boot project, which would break our Pipeline semanthics.
 
 ### Package
-
+This stage produces as artifact the actual .jar file. When this stage fails, no artifact is produced.
+To do this `mvn package` command is used. The command takes adventage of the already-compiled files located in the cache and skip all the tests(re-running them would be redundant).
 ### Release
-
+We're still working on it.
+The idea is to use the Dockerfile to build a container which has javajdk and sqlite on it, alongside the .jar file itself, then push the container to the gitlab registry. The .jar file is the artifact produced by the previous stage.
 ### Docs
 
 # Footer
