@@ -20,11 +20,11 @@ The Backend side comprises an API Server written in Java using Spring Boot, and 
 
 ## The Pipeline
 
-Our application consists basically in a Layered System. The business logic is restricted to `Controllers` layer, which communicates with the `DB` to provide and maintain the state of service, and the `API` Interface, which exposes those services. On the other side, the React `Presentation` layer ensure the user is able to achieve his goals, and a layer of `Managers` provides access to the API of Backend Server.
+Our application consists basically in a Layered System. The business logic is restricted to `Controllers` layer, which communicates with the DB (`SQLite`) to provide and maintain the state of service, and the API Interface (`Endpoints`), which exposes those services. On the other side, the React Presentation layer (`React UI`) ensure the user is able to achieve his goals, and a layer of `Managers` provides access to the API of Backend Server.
 
 ![Software Architecture](Arch.png)
 
-The pipeline should embrace this architecture and allow for the two major sides of the structure to be tested separately, increasing both atomicity and speed of the pipeline.
+The pipeline should embrace this architecture and allow for the two major sides of the structure to be tested separately, increasing both modularity, atomicity and speed of the pipeline.
 
 ![Pipeline Structure](Pipeline.png)
 ### Terminology
@@ -35,12 +35,13 @@ The pipeline should embrace this architecture and allow for the two major sides 
 | BE | Backend |
 | UTs | Unit Tests |
 | ITs | Integration Tests |
+| PR | Pull Request |
 
 ### The Base System
 
 The image used for this CI/CD Action should contain a JDK 17 (used by brew-day) and maven as well. We chose a Debian Bookwork containing the AmazonCorretto redistribution of JDK 17. Having to rely on Debian instead of, for example, Ubuntu enable us to have updated yet stable toolkits.
 
-It's really important to notice how we don't need to impose dependency on NodeJS but only against Maven. This because our setup allow the `frontend/pom.xml` to download a distribution of node by it self.
+It's really important to notice how we don't need to impose dependency on NodeJS but only against Maven. This because our setup allow the `frontend/pom.xml` to download a distribution of node by itself.
 
 ### The Cache
 
@@ -53,9 +54,9 @@ Running `mvn compile -pl backend` will trigger the compilation of only backend, 
 ### The Policy
 
 We also enact a quality policy which allows job failures if-and-only-if such job is a verify job. `Verify` is allowed to fail for two reasons:
-- it's not really a critical phase for our pipeline, because most of it it's just verifing style and/or common pitfalls.
+- it's not really a critical phase for our pipeline, because most of it it's just verifying style and/or common pitfalls.
   - in the original project we already addressed that specific requirement by using SonarQube, but in this project it won't be used (more on that later)
-- using GitLab CI/CD semanthics we can let individual jobs upload some deliverables with artifacts mechanics
+- using GitLab CI/CD semantics  we can let individual jobs upload some deliverables with artifacts mechanics
   - if a job in this phase fails, it uploads the failure report
   - we aspire also to cache some reports to deliver them in the base site (more on that later)
 
@@ -73,10 +74,10 @@ The main structure pipeline follows the stages described in the example `my-dumm
 | unit test | unit tests are run |
 | integration test | integration tests are run |
 | package | the final jar is forged |
-| release | a Docker container is build with that jar |
+| release | a Docker container is built with that jar |
 | docs | documentation is produced or published in GitLab Pages |
 
-Every job FOR NOW has a `when: manual` trigger, this because there's no real need of executing the whole pipeline when testing a single aspect of the pipeline. Only the few jobs that matter get executed by manually running them.
+During the development phase, every job ran with a `when: manual` trigger, because there was no real need of executing the whole pipeline when testing a single aspect of the pipeline. Only the few jobs that matter got executed by manually running them. This is better enforced with dependencies between jobs.
 
 ### Clean
 
@@ -88,7 +89,7 @@ Frontend and Backend can be built using two concurrent jobs, since they are in f
 
 ### Verify
 
-The original project ran SonarQube against both Frontend and Backend thanks to the SonarCloud account provided by Ingegneria del Software course. In order to avoid abouse of this priviledge and useless bloats on that account, we decided to skip the usage of this tool.
+The original project ran SonarQube against both Frontend and Backend thanks to the SonarCloud account provided by Ingegneria del Software course. In order to avoid abuse of this privilege and useless bloats on that account, we decided to skip the usage of this tool.
 Every verification job allows mvn to fail as a trigger for upload of checking frameworks reports. We don't feel the need for a distinct cache space for these jobs, so we kept the main one.
 
 #### Backend
@@ -121,7 +122,7 @@ If these jobs succeed, a coverage report is produced as summary of both UTs and 
 
 #### Frontend
 
-The main concern of Frontend UTs is providing a good quality UI experience, and proving that the pages and components works provided that API interaction works; in other words we that the relationship React UI $\Leftrightarrow$ Managers. Thus inductivly, after having proven that Managers work correctly, when can state a general statement of correctness of the macro system with more accuracy.
+The main concern of Frontend UTs is providing a good quality UI experience, and proving that the pages and components works provided that API interaction works; in other words we that the relationship React UI $\Leftrightarrow$ Managers. Thus inductively, after having proven that Managers work correctly, when can state a general statement of correctness of the macro system with more accuracy.
 
 ### Integration Test
 
@@ -133,16 +134,16 @@ These tests run against endpoints in order to test both Spring API interface and
 
 Our FE ITs require a copy of our to be running in background. They ensure API request and handling is done correctly. These tests are designed to test the src/utils/\*Manager.js we created to abstract and centralize the API access. As such, they actually end up testing almost the whole tech stack: JS Managers $\Leftrightarrow$ Spring REST $\Leftrightarrow$ SQLite DB.
 
-The instance of BE is started as a standard linux job instead of a proper GitLab CI/CD Action service because otherwise it couldn't expose the needed port. It uses the `spring-boot:run` goal, thus we don't have to manually package the Spring Boot project, which would break our Pipeline semanthics.
+The instance of BE is started as a standard linux job instead of a proper GitLab CI/CD Action service because otherwise it couldn't expose the needed port. It uses the `spring-boot:run` goal, thus we don't have to manually package the Spring Boot project, which would break our Pipeline semantics.
 
 ### Package
 
 This stage produces as artifact the actual .jar file. When this stage fails, no artifact is produced.
-To do this `mvn package` command is used. The command takes adventage of the already-compiled files located in the cache and skip all the tests(re-running them would be redundant).
+To do this `mvn package` command is used. The command takes advantage of the already-compiled files located in the cache and skip all the tests(re-running them would be redundant).
 
 ### Release
 
-The idea is to use the Dockerfile to build a container which has javajdk and sqlite on it, alongside the .jar file itself, then push the container to the gitlab registry. The .jar file is the artifact produced by the previous stage, so it's required to run this stage in advance.
+The idea is to use the Dockerfile to build a container which has javajdk and sqlite on it, alongside the .jar file itself, then push the container to the GitLab registry. The .jar file is the artifact produced by the previous stage, so it's required to run this stage in advance.
 
 ### Docs
 
@@ -156,3 +157,13 @@ The `public` directory of the GitLab Pages is templated by our skel `docs-site`,
 # Pipeline Advancement
 
 The pipeline is almost complete, all stages are performed correctly but a full complete execution on master as example is missing.
+
+## Major Issues
+
+### The Frontend is built with Node JS and NPM
+
+Since there isn't a community docker image with both Maven and NPM (especially with JDK17), we use a plugin for Maven which downloads automatically a distribution of Node (typically v19.6). This is actually a bottleneck because once in a while, when the pipeline runs for the first time on a branch or such, Maven fails to download it by either getting an error 525 (SSL Handshake Failed) or directly going in timeout. Eventually it succeeds in downloading it and everything goes ok. Locally we don't have problems at all in downloading this way node, we don't have a clue of the reason for which this happen.
+
+### Gitlab-Runner
+
+As said previously, developing the pipeline we set up some triggers to ensure that only the precise jobs where executed (typically in a PR). This wasn't enough, though. In order to have a better usage of our limited cloud computing time we installed on our machines $gitlab-runner$, which is the same piece of software used by GitLab to execute a pipeline, then both "hosting" an executor and temporally excluding Cloud runners from execution. This allowed us to fear-less make changes and experiments about the pipeline.
