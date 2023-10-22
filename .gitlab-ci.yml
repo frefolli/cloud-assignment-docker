@@ -255,7 +255,7 @@ frontend-integration-test:
       entrypoint: ["/bin/bash"]
       command: ["mvn $MAVEN_CLI_OPTS -pl backend spring-boot:run"]
   script:
-    - mvn $MAVEN_CLI_OPTS -pl frontend test -Dskip.lint -Dskip.UTs
+    - mvn $MAVEN_CLI_OPTS -pl frontend verify -Dskip.lint -Dskip.UTs
   # This job uploads also the Jest coverage report which is a summary of UTs and ITs, surely useful when developing a feature branch but it could be uploaded to GitLab Pages as a statement of quality, and it's our case.
   artifacts:
     paths:
