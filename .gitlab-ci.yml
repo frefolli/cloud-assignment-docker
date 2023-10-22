@@ -271,6 +271,8 @@ package:
       - frontend/node/         # Local NodeJS installation
       - frontend/node_modules/ # Local NPM repository
       - .m2/repository/        # Local Maven repository
+      - backend/target/        # Maven output directory for Backend
+      - frontend/build/        # NPM output directory for Frontend
     policy: pull # this stage shall not write to the cache
 
   dependencies: []
