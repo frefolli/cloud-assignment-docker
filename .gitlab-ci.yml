@@ -256,7 +256,10 @@ frontend-integration-test:
       command: ["mvn $MAVEN_CLI_OPTS -pl backend spring-boot:run"]
   script:
     - mvn $MAVEN_CLI_OPTS -pl frontend test -Dskip.lint -Dskip.UTs
-
+  # This job uploads also the Jest coverage report which is a summary of UTs and ITs, surely useful when developing a feature branch but it could be uploaded to GitLab Pages as a statement of quality, and it's our case.
+  artifacts:
+    paths:
+      - frontend/reports/lcov-report
 
 # PACKAGE
 # the objective is to create the .jar in the artifacts of this stage and pass it to the realese
@@ -320,7 +323,9 @@ pages:
     # integrate Javadoc
     - mv backend/target/site/apidocs public/javadoc
     # integrate JaCoCo
-    - mv backend/target/site/coverage public/coverage
+    - mv backend/target/site/coverage public/be-coverage
+    # integrate Jest
+    - mv frontend/reports/lcov-report public/fe-coverage
     # integrate PMD
     - mkdir -p public/pmd
     - mv backend/target/site/css public/pmd/css
@@ -337,4 +342,6 @@ pages:
     - job: backend-javadoc
       artifacts: true
     - job: backend-integration-test
+      artifacts: true
+    - job: frontend-integration-test
       artifacts: true
