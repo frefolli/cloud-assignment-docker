@@ -31,12 +31,6 @@ import SettingsManager from '../utils/SettingsManager';
  */
 
 export default class ThemeManager extends React.Component {
-  static propTypes = {
-    testThemeCookie: PropType.object,
-    trigger: PropType.object,
-    escape: PropType.object,
-    children: PropType.object,
-  };
   constructor(props) {
     super(props);
     this.state = {currentTheme:

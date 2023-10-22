@@ -21,6 +21,18 @@ function do_backend_its() {
     mvn -pl backend verify -Dskip.lint -Dskip.UTs
 }
 
+function do_frontend_uts() {
+    echo -e "Execute::UT::FE"
+    mvn -pl frontend test -Dskip.lint
+}
+
+function do_frontend_its() {
+    echo -e "Execute::IT::FE"
+    mvn -pl backend spring-boot:run &
+    mvn -pl frontend verify -Dskip.lint -Dskip.UTs
+    kill $(jobs -p)
+}
+
 function do_frontend_jsdoc() {
     echo -e "Execute::Docs::JSDoc"
     mvn -pl frontend site
@@ -43,8 +55,11 @@ function do_pages() {
     echo -e "[LOG] :: Integrating ./public/javadoc"
     mv backend/target/site/apidocs public/javadoc
     
-    echo -e "[LOG] :: Integrating ./public/coverage"
-    mv backend/target/site/coverage public/coverage
+    echo -e "[LOG] :: Integrating ./public/be-coverage"
+    mv backend/target/site/coverage public/be-coverage
+    
+    echo -e "[LOG] :: Integrating ./public/fe-coverage"
+    mv frontend/reports/lcov-report public/fe-coverage
     
     echo -e "[LOG] :: Integrating ./public/pmd"
     mkdir -p public/pmd
@@ -58,6 +73,8 @@ function do_pipeline() {
     do_backend_pmd
     do_backend_uts
     do_backend_its
+    do_frontend_uts
+    do_frontend_its
     do_frontend_jsdoc
     do_backend_javadoc
     do_pages

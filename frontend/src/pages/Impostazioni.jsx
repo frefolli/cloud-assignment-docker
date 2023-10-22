@@ -24,10 +24,6 @@ import twins from '../theme/twins';
 import LoadingScreen from '../components/LoadingScreen';
 
 export default class Impostazioni extends Component {
-  static propTypes = {
-    notifier: PropTypes.object,
-    masterCall: PropTypes.object,
-  };
   constructor(props) {
     super(props);
     this.state = {
