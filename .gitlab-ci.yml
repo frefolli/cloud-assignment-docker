@@ -77,7 +77,7 @@ stages:
 # We added a CLEAN stage to ensure that cache is ready for the workflow.
 # For example, we set up a check in frontend/pom.xml to ensure that `npm run build` is run only once.
 clean-cache:
-  when: manual
+  # when: manual
   stage: clean
   script:
     - mvn $MAVEN_CLI_OPTS clean
@@ -86,16 +86,22 @@ clean-cache:
 # 
 # Frontend and Backend can be built using two concurrent jobs.
 frontend-build:
-  when: manual
+  # when: manual
   stage: build
   script:
     - mvn $MAVEN_CLI_OPTS compile -pl frontend
+  needs:
+    - job: clean-cache
+      artifacts: false
 
 backend-build:
-  when: manual
+  # when: manual
   stage: build
   script:
     - mvn $MAVEN_CLI_OPTS compile -pl backend
+  needs:
+    - job: clean-cache
+      artifacts: false
 
 # VERIFY
 #
@@ -127,7 +133,7 @@ backend-build:
 ## We don't feel the need for a distinct cache space for these jobs, so we kept the main one.
 ## 
 backend-spotbugs:
-  when: manual
+  # when: manual
   stage: verify
   script:
     - ls backend/target/classes/unimib/ingsof
@@ -137,9 +143,12 @@ backend-spotbugs:
     paths:
       - backend/target/spotbugsXml.xml
     when: on_failure
+  needs:
+    - job: backend-build
+      artifacts: false
 ## 
 backend-checkstyle:
-  when: manual
+  # when: manual
   stage: verify
   script:
     - mvn $MAVEN_CLI_OPTS -pl backend checkstyle:check
@@ -148,10 +157,12 @@ backend-checkstyle:
     paths:
       - backend/target/checkstyle-result.xml
     when: on_failure
-  dependencies: []
+  needs:
+    - job: backend-build
+      artifacts: false
 ## 
 backend-pmd:
-  when: manual
+  # when: manual
   stage: verify
   script:
     - mvn $MAVEN_CLI_OPTS -pl backend pmd:check
@@ -163,7 +174,9 @@ backend-pmd:
       - backend/target/site/images
       - backend/target/site/pmd.html
     when: on_failure
-  dependencies: []
+  needs:
+    - job: backend-build
+      artifacts: false
 ## 
 ## FRONTEND
 ## 
@@ -187,7 +200,7 @@ backend-pmd:
 ##   at the start of the Pipeline.
 ## 
 frontend-eslint:
-  when: manual
+  # when: manual
   stage: verify
   script:
     - mvn $MAVEN_CLI_OPTS -pl frontend process-classes -Dskip.flow
@@ -196,42 +209,52 @@ frontend-eslint:
     paths:
       - frontend/reports/eslint.html
     when: on_failure
-  dependencies: []
+  needs:
+    - job: frontend-build
+      artifacts: false
 ## 
 frontend-flow:
-  when: manual
+  # when: manual
   stage: verify
   script:
     - mvn $MAVEN_CLI_OPTS -pl frontend process-classes -Dskip.eslint
   allow_failure: true
   # FlowJS doesn't provide deliverables
   # So no artifact could be uploaded
-  dependencies: []
+  needs:
+    - job: frontend-build
+      artifacts: false
 
 # UNIT-TEST
 # 
 # Run Backend tests with Maven
 backend-unit-test:
-  when: manual
+  # when: manual
   stage: unit-test
   script:
     - mvn $MAVEN_CLI_OPTS -pl backend test -Dskip.ITs
+  needs:
+    - job: backend-build
+      artifacts: false
 # 
 # Run Frontend tests with Maven
 # Because our solution for running lints on Frontend binds the previous stage to "process-classes", which is a "dependency" lifecycle of `test`,
 #   we need to manually disable such lifecycle.
 frontend-unit-test:
-  when: manual
+  # when: manual
   stage: unit-test
   script:
     - mvn $MAVEN_CLI_OPTS -pl frontend test -Dskip.lint -Dskip.ITs
+  needs:
+    - job: frontend-build
+      artifacts: false
 
 # INTEGRATION-TEST
 # 
 # Run Backend tests with Maven
 # These tests run against endpoints in order to test both Spring API interface and Controller Bl. They tests half of the tech stack: Spring REST <-> SQLite DB.
 backend-integration-test:
-  when: manual
+  # when: manual
   stage: integration-test
   script:
     - mvn $MAVEN_CLI_OPTS -pl backend verify -Dskip.UTs -Dskip.lint
@@ -239,6 +262,9 @@ backend-integration-test:
   artifacts:
     paths:
       - backend/target/site/coverage
+  needs:
+    - job: backend-unit-test
+      artifacts: false
 # Run Frontend tests with Maven
 # Our FE ITs require a copy of our to be running in background. They ensure API request and handling is done correctly.
 # These tests are designed to test the src/utils/*Manager.js we created to abstract and centralize the API access.
@@ -247,7 +273,7 @@ backend-integration-test:
 # The instance of BE is started as a normal linux job instead of GitLab CI/CD Action service (because it couldn't expose needed ports), and uses the `spring-boot:run` goal,
 #   thus we don't have to manually package the Spring Boot project, which would break our Pipeline semanthics.
 frontend-integration-test:
-  when: manual
+  # when: manual
   stage: integration-test
   script:
     - mvn $MAVEN_CLI_OPTS -pl backend spring-boot:run &
@@ -257,12 +283,15 @@ frontend-integration-test:
   artifacts:
     paths:
       - frontend/reports/lcov-report
+  needs:
+    - job: frontend-unit-test
+      artifacts: false
 
 # PACKAGE
 # the objective is to create the .jar in the artifacts of this stage and pass it to the realese
 
 package:  
-  when: manual
+  # when: manual
   stage: package
 
   cache:
@@ -271,9 +300,15 @@ package:
       - frontend/node/         # Local NodeJS installation
       - frontend/node_modules/ # Local NPM repository
       - .m2/repository/        # Local Maven repository
+      - backend/target/        # Maven output directory for Backend
+      - frontend/build/        # NPM output directory for Frontend
     policy: pull # this stage shall not write to the cache
 
-  dependencies: []
+  needs:
+    - job: backend-build
+      artifacts: false
+    - job: frontend-build
+      artifacts: false
 
   artifacts:
     paths:
@@ -285,33 +320,54 @@ package:
 
 
 # RELEASE
+# push to the gitlab registry a docker container freshly built (the .jar file it's copied into it)
+release:
+  # when: manual
+  stage: release
+  image: docker:stable 
+  services:
+    - docker:dind
+  cache: {} # Disable cache, explicit declation of job dependencies to download only their artifacts
+  needs:
+    - job: package #the Dockerfile copies the .jar ... so it's needed to create it in the package phase.
+      artifacts: true
+
+  script:
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+    - docker build  -t $CONTAINER_IMAGE . #having -t $CONTAINER_IMAGE:$CI_COMMIT_REF_NAME was a problem for some reason so we took it off.
+    - docker push $CONTAINER_IMAGE #push to the gitlab registry
+
 
 # DOCS
 ## Firstly we build JSDoc and Javadoc documentations
 frontend-jsdoc:
-  when: manual
+  # when: manual
   stage: docs
   script:
     - mvn $MAVEN_CLI_OPTS -pl frontend site
   artifacts:
     paths:
       - frontend/docs
-  dependencies: []
+  needs:
+    - job: frontend-build
+      artifacts: false
 
 backend-javadoc:
-  when: manual
+  # when: manual
   stage: docs
   script:
     - mvn $MAVEN_CLI_OPTS -pl backend javadoc:javadoc
   artifacts:
     paths:
       - backend/target/site/apidocs
-  dependencies: []
+  needs:
+    - job: backend-build
+      artifacts: false
 
 ## Then artifacts of previous documentation jobs are collected to join a copy of docs-site directory.
 ## `docs-site` is our "site base", the "master" GitLab Pages site which contains and addresses "slave" documentation subsites.
 pages:
-  when: manual
+  # when: manual
   stage: docs
   script:
     - cp -r docs-site public
