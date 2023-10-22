@@ -90,12 +90,18 @@ frontend-build:
   stage: build
   script:
     - mvn $MAVEN_CLI_OPTS compile -pl frontend
+  needs:
+    - job: clean-cache
+      artifacts: false
 
 backend-build:
   when: manual
   stage: build
   script:
     - mvn $MAVEN_CLI_OPTS compile -pl backend
+  needs:
+    - job: clean-cache
+      artifacts: false
 
 # VERIFY
 #
@@ -137,6 +143,9 @@ backend-spotbugs:
     paths:
       - backend/target/spotbugsXml.xml
     when: on_failure
+  needs:
+    - job: backend-build
+      artifacts: false
 ## 
 backend-checkstyle:
   when: manual
@@ -148,7 +157,9 @@ backend-checkstyle:
     paths:
       - backend/target/checkstyle-result.xml
     when: on_failure
-  dependencies: []
+  needs:
+    - job: backend-build
+      artifacts: false
 ## 
 backend-pmd:
   when: manual
@@ -163,7 +174,9 @@ backend-pmd:
       - backend/target/site/images
       - backend/target/site/pmd.html
     when: on_failure
-  dependencies: []
+  needs:
+    - job: backend-build
+      artifacts: false
 ## 
 ## FRONTEND
 ## 
@@ -196,7 +209,9 @@ frontend-eslint:
     paths:
       - frontend/reports/eslint.html
     when: on_failure
-  dependencies: []
+  needs:
+    - job: frontend-build
+      artifacts: false
 ## 
 frontend-flow:
   when: manual
@@ -206,7 +221,9 @@ frontend-flow:
   allow_failure: true
   # FlowJS doesn't provide deliverables
   # So no artifact could be uploaded
-  dependencies: []
+  needs:
+    - job: frontend-build
+      artifacts: false
 
 # UNIT-TEST
 # 
@@ -216,6 +233,9 @@ backend-unit-test:
   stage: unit-test
   script:
     - mvn $MAVEN_CLI_OPTS -pl backend test -Dskip.ITs
+  needs:
+    - job: backend-build
+      artifacts: false
 # 
 # Run Frontend tests with Maven
 # Because our solution for running lints on Frontend binds the previous stage to "process-classes", which is a "dependency" lifecycle of `test`,
@@ -225,6 +245,9 @@ frontend-unit-test:
   stage: unit-test
   script:
     - mvn $MAVEN_CLI_OPTS -pl frontend test -Dskip.lint -Dskip.ITs
+  needs:
+    - job: frontend-build
+      artifacts: false
 
 # INTEGRATION-TEST
 # 
@@ -239,6 +262,9 @@ backend-integration-test:
   artifacts:
     paths:
       - backend/target/site/coverage
+  needs:
+    - job: backend-unit-test
+      artifacts: false
 # Run Frontend tests with Maven
 # Our FE ITs require a copy of our to be running in background. They ensure API request and handling is done correctly.
 # These tests are designed to test the src/utils/*Manager.js we created to abstract and centralize the API access.
@@ -257,6 +283,9 @@ frontend-integration-test:
   artifacts:
     paths:
       - frontend/reports/lcov-report
+  needs:
+    - job: frontend-unit-test
+      artifacts: false
 
 # PACKAGE
 # the objective is to create the .jar in the artifacts of this stage and pass it to the realese
@@ -273,7 +302,11 @@ package:
       - .m2/repository/        # Local Maven repository
     policy: pull # this stage shall not write to the cache
 
-  dependencies: []
+  needs:
+    - job: backend-build
+      artifacts: false
+    - job: frontend-build
+      artifacts: false
 
   artifacts:
     paths:
@@ -293,8 +326,9 @@ release:
   services:
     - docker:dind
   cache: {} # Disable cache, explicit declation of job dependencies to download only their artifacts
-  dependencies:
-    - package #the Dockerfile copies the .jar ... so it's needed to create it in the package phase.
+  needs:
+    - job: package #the Dockerfile copies the .jar ... so it's needed to create it in the package phase.
+      artifacts: true
 
   script:
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
@@ -312,7 +346,9 @@ frontend-jsdoc:
   artifacts:
     paths:
       - frontend/docs
-  dependencies: []
+  needs:
+    - job: frontend-build
+      artifacts: false
 
 backend-javadoc:
   when: manual
@@ -322,7 +358,9 @@ backend-javadoc:
   artifacts:
     paths:
       - backend/target/site/apidocs
-  dependencies: []
+  needs:
+    - job: backend-build
+      artifacts: false
 
 ## Then artifacts of previous documentation jobs are collected to join a copy of docs-site directory.
 ## `docs-site` is our "site base", the "master" GitLab Pages site which contains and addresses "slave" documentation subsites.
