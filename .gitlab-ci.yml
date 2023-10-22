@@ -252,7 +252,7 @@ frontend-integration-test:
   services:
     - name: maven:3.9.4-amazoncorretto-17-debian-bookworm
       alias: backend-instance
-      entrypoint: ["/bin/bash"]
+      entrypoint: ["/usr/local/bin/mvn-entrypoint.sh"]
       command: ["mvn", "-C", "--threads", "1C", "--batch-mode", "-Dmaven.repo.local=.m2/repository", "-pl", "backend", "spring-boot:run"]
   script:
     - mvn $MAVEN_CLI_OPTS -pl frontend verify -Dskip.lint -Dskip.UTs
