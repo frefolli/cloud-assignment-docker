@@ -315,9 +315,6 @@ pages:
   stage: docs
   script:
     - cp -r docs-site public
-    - ls
-    - ls frontend
-    - ls backend
     # integrate JSDoc
     - mv frontend/docs public/jsdoc
     # integrate Javadoc
