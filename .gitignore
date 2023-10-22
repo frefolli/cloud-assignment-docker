@@ -5,3 +5,4 @@ database.db
 frontend/lib
 frontend/reports
 __pycache__
+./public

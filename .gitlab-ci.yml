@@ -159,6 +159,9 @@ backend-pmd:
   artifacts:
     paths:
       - backend/target/pmd.xml
+      - backend/target/site/css
+      - backend/target/site/images
+      - backend/target/site/pmd.html
     when: on_failure
   dependencies: []
 ## 
@@ -232,6 +235,10 @@ backend-integration-test:
   stage: integration-test
   script:
     - mvn $MAVEN_CLI_OPTS -pl backend verify -Dskip.UTs -Dskip.lint
+  # This job uploads also the JaCoCo coverage report which is a summary of UTs and ITs, surely useful when developing a feature branch but it could be uploaded to GitLab Pages as a statement of quality, and it's our case.
+  artifacts:
+    paths:
+      - backend/target/site/coverage
 # Run Frontend tests with Maven
 # Our FE ITs require a copy of our to be running in background. They ensure API request and handling is done correctly.
 # These tests are designed to test the src/utils/*Manager.js we created to abstract and centralize the API access.
@@ -280,26 +287,54 @@ package:
 # RELEASE
 
 # DOCS
-frontend-docs:
+## Firstly we build JSDoc and Javadoc documentations
+frontend-jsdoc:
   when: manual
   stage: docs
   script:
-    - mvn $MAVEN_CLI_OPTS site -pl frontend
+    - mvn $MAVEN_CLI_OPTS -pl frontend site
   artifacts:
     paths:
       - frontend/docs
   dependencies: []
 
+backend-javadoc:
+  when: manual
+  stage: docs
+  script:
+    - mvn $MAVEN_CLI_OPTS -pl backend javadoc:javadoc
+  artifacts:
+    paths:
+      - backend/target/site/apidocs
+  dependencies: []
+
+## Then artifacts of previous documentation jobs are collected to join a copy of docs-site directory.
+## `docs-site` is our "site base", the "master" GitLab Pages site which contains and addresses "slave" documentation subsites.
 pages:
   when: manual
   stage: docs
   script:
-    - mkdir public
-    - mv ./frontend/docs/ public/
+    - cp -r docs-site public
+    # integrate JSDoc
+    - mv frontend/docs public/jsdoc
+    # integrate Javadoc
+    - mv backend/target/site/apidocs public/javadoc
+    # integrate JaCoCo
+    - mv backend/target/site/coverage public/coverage
+    # integrate PMD
+    - mkdir -p public/pmd
+    - mv backend/target/site/css public/pmd/css
+    - mv backend/target/site/images public/pmd/images
+    - mv backend/target/site/pmd.html public/pmd/index.html
   artifacts:
     paths:
       - public
-  only:
-    - master
-  dependencies:
-    - frontend-docs
+  needs:
+    - job: frontend-jsdoc
+      artifacts: true
+    - job: backend-pmd
+      artifacts: true
+    - job: backend-javadoc
+      artifacts: true
+    - job: backend-integration-test
+      artifacts: true
