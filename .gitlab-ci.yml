@@ -292,9 +292,8 @@ frontend-docs:
 pages:
   stage: docs
   script:
-    - pwd
     - mkdir .public
-    - mv /frontend/docs/index.html .public/
+    - mv /builds/frefolli/2023_assignment1_brew_day/frontend/docs/index.html .public/
   artifacts:
     paths:
       - .public
