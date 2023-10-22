@@ -332,8 +332,12 @@ pages:
   artifacts:
     paths:
       - public
-  dependencies:
-    - frontend-jsdoc
-    - backend-pmd
-    - backend-javadoc
-    - backend-integration-test
+  needs:
+    - job: frontend-jsdoc
+      artifacts: true
+    - job: backend-pmd
+      artifacts: true
+    - job: backend-javadoc
+      artifacts: true
+    - job: backend-integration-test
+      artifacts: true
