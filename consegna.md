@@ -22,11 +22,19 @@ The Backend side comprises an API Server written in Java using Spring Boot, and 
 
 Our application consists basically in a Layered System. The business logic is restricted to `Controllers` layer, which communicates with the `DB` to provide and maintain the state of service, and the `API` Interface, which exposes those services. On the other side, the React `Presentation` layer ensure the user is able to achieve his goals, and a layer of `Managers` provides access to the API of Backend Server.
 
-[ARCH.png]
+![Software Architecture](Arch.png)
 
 The pipeline should embrace this architecture and allow for the two major sides of the structure to be tested separately, increasing both atomicity and speed of the pipeline.
 
-[PIPELINE.png]
+![Pipeline Structure](Pipeline.png)
+### Terminology
+
+||||
+| ---- | ---- | ---- |
+| FE | Frontend |
+| BE | Backend |
+| UTs | Unit Tests |
+| ITs | Integration Tests |
 
 ### The Base System
 
@@ -100,14 +108,16 @@ Finally instead of running Valgrind, which could be useful if running native app
 #### Frontend
 
 As frontend linters we run:
-- 1) ESLint
-- 2) Flow
+- 1) ESLint https://eslint.org/
+- 2) Flow   https://flow.org/
 
 In this part we call the `process-classes` lifecycle of Maven because is after compilation and before actual tests. This way we can have Maven to install needed dependencies and let it run after that phase the linter configured. Talking about linters, we configured ESLint and Flow as suggested by the Assignment 1 paper.
 
 We set up a weird trigger for these two frameworks: instead of enabling them with a flag, the Maven plugin we use to interact with NPM allow us only to disable some executions. So we established a flag semathics where `-Dskip.{goal}` skips the goal `goal`. For consistency, the rule enforced by Maven profiles that caches the previous NPM build during the stages is called `-Dskip.build`, but it's activation trigger is the presence of the `frontend/build` directory in the master cache. That's why we set up a clean job at the start of the Pipeline.
 
 ### Unit Test
+
+If these jobs succeed, a coverage report is produced as summary of both UTs and ITs, and it's uploaded as artifact in order to be used within `docs` stage.
 
 #### Frontend
 
@@ -118,8 +128,6 @@ The main concern of Frontend UTs is providing a good quality UI experience, and 
 #### Backend
 
 These tests run against endpoints in order to test both Spring API interface and Controller Bl. They tests half of the tech stack: Spring REST $\Leftrightarrow$ SQLite DB.
-
-If this job succeeds a coverage report is produced as summary of both UTs and ITs, and it's uploaded as artifact in order to be used within `docs` stage.
 
 #### Frontend
 
