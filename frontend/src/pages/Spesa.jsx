@@ -8,9 +8,6 @@ import RemoveShoppingCartIcon from '@mui/icons-material/RemoveShoppingCart';
 import ShoppingManager from '../utils/ShoppingManager';
 
 class Spesa extends Component {
-  static propTypes = {
-    notifier: PropTypes.object,
-  };
   constructor(props) {
     super(props);
     this.state = {

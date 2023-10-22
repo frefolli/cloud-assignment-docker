@@ -8,9 +8,6 @@ import JimFlex from '../components/JimFlex';
 import {FAKE_NOTIFIER} from '../utils/Protocol';
 
 class Home extends Component {
-  static propTypes = {
-    notifier: PropTypes.object,
-  };
   constructor(props) {
     super(props);
     this.notifier = this.props.notifier || FAKE_NOTIFIER;

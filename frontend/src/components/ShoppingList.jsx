@@ -22,10 +22,6 @@ import RecipeIngredientTableReadOnly from './RecipeIngredientTableReadOnly';
  */
 
 class ShoppingList extends Component {
-  static propTypes = {
-    quantity: PropType.number,
-    recipeID: PropType.string,
-  };
   constructor(props) {
     super(props);
     this.state = {
