@@ -18,9 +18,6 @@ import BeersManager from '../utils/BeersManager';
 
 
 class Birre extends Component {
-  static propTypes = {
-    notifier: PropTypes.object,
-  };
   constructor(props) {
     super(props);
     this.state = {

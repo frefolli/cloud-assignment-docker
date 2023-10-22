@@ -8,9 +8,6 @@ import LoadingScreen from '../components/LoadingScreen';
 import InventoryManager from '../utils/InventoryManager';
 
 class Inventario extends Component {
-  static propTypes = {
-    notifier: PropTypes.object,
-  };
   constructor(props) {
     super(props);
     this.state = {

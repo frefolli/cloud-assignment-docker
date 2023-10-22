@@ -23,9 +23,6 @@ import CardContent from '@mui/material/CardContent';
  */
 
 export default class TitleCard extends React.Component {
-  static propTypes = {
-    children: PropType.object,
-  };
   render() {
     return (
       <Box style={{margin: '1.5%', padding: '1%'}}>
