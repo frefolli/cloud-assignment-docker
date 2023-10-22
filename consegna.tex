@@ -224,8 +224,7 @@ To do this `mvn package` command is used. The command takes adventage of the alr
 
 \subsection{Release}
 
-We're still working on it.
-The idea is to use the Dockerfile to build a container which has javajdk and sqlite on it, alongside the .jar file itself, then push the container to the gitlab registry. The .jar file is the artifact produced by the previous stage.
+The idea is to use the Dockerfile to build a container which has javajdk and sqlite on it, alongside the .jar file itself, then push the container to the gitlab registry. The .jar file is the artifact produced by the previous stage, so it's required to run this stage in advance.
 
 \subsection{Docs}
 
@@ -240,6 +239,6 @@ The $public$ directory of the GitLab Pages is templated by our skel $docs-site$,
 
 \section{Advancement}
 
-The pipeline is almost complete, all stages are performed correctly but `release` which is a WIP.
+The pipeline is almost complete, all stages are performed correctly but a full complete execution on master as example is missing.
 
 \end{document}

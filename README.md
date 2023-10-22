@@ -155,4 +155,4 @@ The `public` directory of the GitLab Pages is templated by our skel `docs-site`,
 
 # Pipeline Advancement
 
-The pipeline is almost complete, all stages are performed correctly but `release` which is a WIP.
+The pipeline is almost complete, all stages are performed correctly but a full complete execution on master as example is missing.
