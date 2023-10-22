@@ -28,7 +28,9 @@ function do_frontend_uts() {
 
 function do_frontend_its() {
     echo -e "Execute::IT::FE"
+    mvn -pl backend spring-boot:run &
     mvn -pl frontend verify -Dskip.lint -Dskip.UTs
+    kill $(jobs -p)
 }
 
 function do_frontend_jsdoc() {

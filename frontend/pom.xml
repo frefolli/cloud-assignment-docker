@@ -178,7 +178,7 @@
               <goal>npm</goal>
             </goals>
             <configuration>
-              <arguments>run integration-tests</arguments>
+              <arguments>run integration-tests-for-ci</arguments>
               <skip>${skip.ITs}</skip>
             </configuration>
           </execution>

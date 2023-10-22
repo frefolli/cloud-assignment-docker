@@ -244,18 +244,15 @@ backend-integration-test:
 # These tests are designed to test the src/utils/*Manager.js we created to abstract and centralize the API access.
 # As such, they actually end up testing quasi the whole tech stack: JS Managers <-> Spring REST <-> SQLite DB.
 #
-# The instance of BE is started as a GitLab CI/CD Action service, and uses the `spring-boot:run` goal,
+# The instance of BE is started as a normal linux job instead of GitLab CI/CD Action service (because it couldn't expose needed ports), and uses the `spring-boot:run` goal,
 #   thus we don't have to manually package the Spring Boot project, which would break our Pipeline semanthics.
 frontend-integration-test:
   when: manual
   stage: integration-test
-  services:
-    - name: maven:3.9.4-amazoncorretto-17-debian-bookworm
-      alias: backend-instance
-      entrypoint: ["/usr/local/bin/mvn-entrypoint.sh"]
-      command: ["mvn", "-C", "--threads", "1C", "--batch-mode", "-Dmaven.repo.local=.m2/repository", "-pl", "backend", "spring-boot:run"]
   script:
+    - mvn $MAVEN_CLI_OPTS -pl backend spring-boot:run &
     - mvn $MAVEN_CLI_OPTS -pl frontend verify -Dskip.lint -Dskip.UTs
+    - kill $(jobs -p)
   # This job uploads also the Jest coverage report which is a summary of UTs and ITs, surely useful when developing a feature branch but it could be uploaded to GitLab Pages as a statement of quality, and it's our case.
   artifacts:
     paths:

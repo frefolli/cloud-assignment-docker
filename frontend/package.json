@@ -31,6 +31,7 @@
     "sonarqube": "sonar-scanner -Dsonar.login=squ_f91b9a7394d69d0f9ac15370ad6d8fffa9001a62 -Dsonar.host.url=http://localhost:9000",
     "unit-tests": "jest --coverage -u --verbose --maxWorkers=50% UTs --coverageDirectory reports/UT",
     "integration-tests": "jest --coverage -u --verbose --maxWorkers=1 ITs --setupFilesAfterEnv \"<rootDir>/ITs/setup.js\" --coverageDirectory reports/IT",
+    "integration-tests-for-ci": "npx wait-on http://localhost:8080/api/settings && npm run integration-tests",
     "merge-coverage": "istanbul-merge --out ./reports/coverage-final.json ./reports/IT/coverage-final.json ./reports/UT/coverage-final.json",
     "generate-coverage": "istanbul report --include ./reports/coverage-final.json --dir ./reports/lcov-report html",
     "prepare-coverage": "npm run merge-coverage && npm run generate-coverage",
@@ -85,7 +86,8 @@
     "flow-bin": "^0.218.1",
     "isomorphic-fetch": "^3.0.0",
     "istanbul": "^0.4.5",
-    "istanbul-merge": "^2.0.0"
+    "istanbul-merge": "^2.0.0",
+    "wait-on": "^7.0.1"
   },
   "proxy": "http://localhost:8080"
 }
