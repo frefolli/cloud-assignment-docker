@@ -278,6 +278,26 @@ package:
 
 
 # RELEASE
+release:
+ stage: release
+  # Redefine the job container image
+  image: docker:stable #Docker-in-Docker
+  services:
+    - docker:dind
+  cache: {} # Disable cache
+  # Explicit declation of job dependencies to download only their artifacts
+  dependencies:
+    - package
+  script:
+    # Login into GitLab Container Registry
+    # See https://docs.gitlab.com/ee/ci/docker/using_docker_build.html#authenticating-to-the-container-registry
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+    # Optimizing Docker caching
+    # See https://docs.gitlab.com/ee/ci/docker/using_docker_build.html#using-docker-caching
+    - docker pull $CONTAINER_IMAGE:$CI_COMMIT_REF_NAME || true
+    - docker build --cache-from $CONTAINER_IMAGE:$CI_COMMIT_REF_NAME -t $CONTAINER_IMAGE:$CI_COMMIT_REF_NAME .
+    - docker push $CONTAINER_IMAGE:$CI_COMMIT_REF_NAME
+
 
 # DOCS
 frontend-docs:
