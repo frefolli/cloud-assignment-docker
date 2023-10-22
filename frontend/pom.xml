@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>unimib.ingsof</groupId>
+    <artifactId>brewday</artifactId>
+    <version>1.0.0</version>
+    <relativePath>../pom.xml</relativePath>
+  </parent>
+
+  <artifactId>frontend</artifactId>
+
+  <properties>
+    <!-- bind this java project to sonarqube (/ sonarcloud) project -->
+    <sonar.projectKey>brew.day.frontend</sonar.projectKey>
+    <sonar.organization>se-unimib</sonar.organization>
+    <sonar.sources>./src</sonar.sources>
+    <sonar.coverage.exclusions>./src/index.js</sonar.coverage.exclusions>
+    <sonar.javascript.lcov.reportPaths>./coverage/lcov.info</sonar.javascript.lcov.reportPaths>
+
+    <!-- Lints -->
+    <skip.lint>false</skip.lint>
+    <skip.eslint>${skip.lint}</skip.eslint>
+    <skip.flow>${skip.lint}</skip.flow>
+
+    <!-- Tests -->
+    <skip.test>false</skip.test>
+    <skip.ITs>${skip.test}</skip.ITs>
+    <skip.UTs>${skip.test}</skip.UTs>
+  </properties>
+
+  <profiles>
+    <profile>
+      <id>builder</id>
+      <activation>
+        <file>
+          <missing>build</missing>
+        </file>
+      </activation>
+      <properties>
+        <skip.build>false</skip.build>
+      </properties>
+    </profile>
+    <profile>
+      <id>observer</id>
+      <activation>
+        <file>
+          <exists>build</exists>
+        </file>
+      </activation>
+      <properties>
+        <skip.build>true</skip.build>
+      </properties>
+    </profile>
+  </profiles>
+  
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-site-plugin</artifactId>
+        <version>3.7</version>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-project-info-reports-plugin</artifactId>
+        <version>2.9</version>
+      </plugin>
+      <!-- clean the dist directory used by NPM Build -->
+      <plugin>
+        <artifactId>maven-clean-plugin</artifactId>
+        <version>3.1.0</version>
+        <configuration>
+          <filesets>
+            <fileset>
+              <directory>build</directory>
+            </fileset>
+          </filesets>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>com.github.eirslett</groupId>
+        <artifactId>frontend-maven-plugin</artifactId>
+        <version>1.11.2</version>
+
+        <executions>
+          <!-- Install node and npm -->
+          <execution>
+            <phase>validate</phase>
+            <id>Install Node and NPM</id>
+            <goals>
+              <goal>install-node-and-npm</goal>
+            </goals>
+            <configuration>
+              <nodeVersion>v19.6.0</nodeVersion>
+            </configuration>
+          </execution>
+
+          <!-- clean install -->
+          <execution>
+            <phase>validate</phase>
+            <id>npm install</id>
+            <goals>
+              <goal>npm</goal>
+            </goals>
+          </execution>
+
+          <!-- build app -->
+          <execution>
+            <phase>compile</phase>
+            <id>npm run build</id>
+            <goals>
+              <goal>npm</goal>
+            </goals>
+            <configuration>
+              <arguments>run build</arguments>
+              <skip>${skip.build}</skip>
+            </configuration>
+          </execution>
+
+          <!-- code validation with ESLint -->
+          <execution>
+            <phase>process-classes</phase>
+            <id>eslint</id>
+            <goals>
+              <goal>npm</goal>
+            </goals>
+            <configuration>
+              <arguments>run eslint</arguments>
+              <skip>${skip.eslint}</skip>
+            </configuration>
+          </execution>
+
+          <!-- code validation with FlowJS -->
+          <execution>
+            <phase>process-classes</phase>
+            <id>babel</id>
+            <goals>
+              <goal>npm</goal>
+            </goals>
+            <configuration>
+              <arguments>run babel</arguments>
+              <skip>${skip.flow}</skip>
+            </configuration>
+          </execution>
+
+          <execution>
+            <phase>process-classes</phase>
+            <id>flow</id>
+            <goals>
+              <goal>npm</goal>
+            </goals>
+            <configuration>
+              <arguments>run flow</arguments>
+              <skip>${skip.flow}</skip>
+            </configuration>
+          </execution>
+
+          <execution>
+            <phase>test</phase>
+            <id>unit-tests</id>
+            <goals>
+              <goal>npm</goal>
+            </goals>
+            <configuration>
+              <arguments>run unit-tests</arguments>
+              <skip>${skip.UTs}</skip>
+            </configuration>
+          </execution>
+
+          <execution>
+            <phase>integration-test</phase>
+            <id>integration-tests</id>
+            <goals>
+              <goal>npm</goal>
+            </goals>
+            <configuration>
+              <arguments>run integration-tests-for-ci</arguments>
+              <skip>${skip.ITs}</skip>
+            </configuration>
+          </execution>
+
+          <execution>
+            <phase>post-integration-test</phase>
+            <id>coverage-report</id>
+            <goals>
+              <goal>npm</goal>
+            </goals>
+            <configuration>
+              <arguments>run prepare-coverage</arguments>
+              <skip>${skip.ITs}</skip>
+            </configuration>
+          </execution>
+
+          <execution>
+            <phase>site</phase>
+            <id>documentation</id>
+            <goals>
+              <goal>npm</goal>
+            </goals>
+            <configuration>
+              <arguments>run generate-docs</arguments>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>

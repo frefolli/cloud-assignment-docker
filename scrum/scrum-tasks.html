@@ -1,0 +1,2685 @@
+<html xmlns:ganttproject="http://ganttproject.sf.net/">
+    <head>
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>GanttProject - scrum</title>
+        <style>
+	    A:link {
+		FONT-WEIGHT: bold;  TEXT-DECORATION: none;
+		FONT-SIZE: 14px ; COLOR: black;
+	    }
+	    A:visited {
+		FONT-WEIGHT: bold;  TEXT-DECORATION: none;
+		FONT-SIZE: 14px ; COLOR: black; BACKGROUND: none
+	    }
+	    A:hover {
+		FONT-WEIGHT: bold;  TEXT-DECORATION: none;
+		FONT-SIZE: 14px ; COLOR: white ; BACKGROUND: #6d9ec6;
+	    }
+	    .notes {
+	      padding-left: 10px;
+	    }
+	    .notes pre {
+	      font-family: Arial, Helvetica;
+	      font-size: 10px;
+	      margin-top: 0px;
+	      padding-top: 0px;
+	      margin-bottom: 5px;
+	    }
+	    .attachment {
+	      padding-left: 10px;
+	    }
+	    .attachment a:link {
+	      font-weight: normal;
+	      font-size: 12px;
+	      color: #6d9ec6;
+	      background: white;
+	    }
+	    .attachment a:hover {
+	      font-weight: normal;
+	      text-decoration: underline;
+	      font-size: 12px;
+	      color: #6d9ec6;
+	      background: white;
+	    }
+	    .attachment a:visited {
+	      font-weight: normal;
+	      font-size: 12px;
+	      background: white;
+	      color: gray;
+	    }
+	    TD {
+		FONT-SIZE: 12px; COLOR: black; FONT-STYLE: normal; FONT-FAMILY: Arial, Helvetica, Geneva, sans-serif
+	    }
+	    UL {
+		FONT-SIZE: 12px; FONT-FAMILY: Arial, Helvetica, Geneva, sans-serif
+	    }
+	    LI {
+		FONT-SIZE: 12px; FONT-FAMILY: Arial, Helvetica, Geneva, sans-serif
+	    }
+	    H1 {
+		FONT-WEIGHT: bold; FONT-SIZE: 16pt; COLOR: #6d9ec6;
+	    }
+	    H2 {
+		FONT-WEIGHT: bold; FONT-SIZE: 16pt; COLOR: #000000;
+	    }
+	    H3 {
+		FONT-WEIGHT: bold; FONT-SIZE: 13pt; COLOR: #6d9ec6;
+	    }
+	    H4 {
+		FONT-WEIGHT: bold; FONT-SIZE: 13px; COLOR: #000000;
+	    }
+	    H5 {
+		FONT-WEIGHT: bold; FONT-SIZE: 10pt; COLOR: #6d9ec6;
+	    }
+	    H6 {
+		FONT-WEIGHT: bold; FONT-SIZE: 10pt; COLOR: #000000
+	    }
+
+	    </style>
+    </head>
+    <body bgcolor="white">
+        <center>
+            <style>
+div.project_name {
+  font-size: 150%;
+  color: black;
+  font-weight: bold;
+  border-top: solid #6d9ec6 5px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-left: 5px;
+}
+div.page_links {
+  background: #6d9ec6;
+  text-align: center;
+}
+</style>
+            <center>
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td bgcolor="#dddddd">
+                            <div class="project_name">Untitled Gantt Project</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="page_links">
+                                <a href="scrum.html"></a>  |
+          <a href="scrum-chart.html">Gantt</a> |
+          <a href="scrum-tasks.html">Attivit&agrave;</a> |
+          <a href="scrum-resources.html">Risorse</a>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </center>
+            <br>
+            <style>
+td.header {
+  background: #dddddd;
+  margin: 0;
+  padding-left: 3px;
+  padding-right: 3px;
+  padding-top: 2px;
+  padding-bottom:1px;
+  border-bottom: solid black 2px;
+}
+td.cell {
+  margin: 0;
+  margin-top: 2px;
+  padding-left: 3px;
+  padding-right: 3px;
+  padding-top: 2px;
+  padding-bottom:1px;
+}
+div.cell {
+}
+h5.header {
+  margin-left: 2px;
+  margin-top: 2px;
+}
+</style>
+            <table border="0" cellpadding="0" cellspacing="0">
+                <tr>
+                    <td valign="top" class="header">
+                        <h5 class="header">Nome</h5>
+                    </td><td valign="top" class="header">
+                        <h5 class="header">Data d'inizio</h5>
+                    </td><td valign="top" class="header">
+                        <h5 class="header">Data di fine</h5>
+                    </td><td valign="top" class="header">
+                        <h5 class="header">Risorse</h5>
+                    </td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0em">
+                            <div style="margin: 0; padding: 0; text-align: ;">sprint 1</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">20/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">26/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">analisi</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">20/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">20/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1em">
+                            <div style="margin: 0; padding: 0; text-align: ;">definizione del tech stack</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">20/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">20/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1em">
+                            <div style="margin: 0; padding: 0; text-align: ;">definizione dei casi d'uso</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">20/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">20/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1em">
+                            <div style="margin: 0; padding: 0; text-align: ;">modello di dominio</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">20/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">20/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1em">
+                            <div style="margin: 0; padding: 0; text-align: ;">ssd</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">20/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">20/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1em">
+                            <div style="margin: 0; padding: 0; text-align: ;">contratti</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">20/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">20/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1em">
+                            <div style="margin: 0; padding: 0; text-align: ;">definire le fasi di deploy</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">20/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">20/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">progettazione</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">23/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">23/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1em">
+                            <div style="margin: 0; padding: 0; text-align: ;">sd</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">23/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">23/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">sviluppo</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">23/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">23/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1em">
+                            <div style="margin: 0; padding: 0; text-align: ;">setup ambiente react per frontend</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">23/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">23/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1em">
+                            <div style="margin: 0; padding: 0; text-align: ;">creazione prima dashboard UI</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">23/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">23/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1em">
+                            <div style="margin: 0; padding: 0; text-align: ;">setup ambiente java per backend</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">23/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">23/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1em">
+                            <div style="margin: 0; padding: 0; text-align: ;">creazione prima backbone api</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">23/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">23/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">primer controller rest recipe list</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">23/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">23/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">primer controller rest recipe</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">23/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">23/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">primer controller rest recipe ingredient</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">23/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">23/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">primer controller rest inventory</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">23/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">23/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">primer controller rest inventory ingredient</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">23/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">23/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">testing</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">24/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">25/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1em">
+                            <div style="margin: 0; padding: 0; text-align: ;">coverage</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">24/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">24/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1em">
+                            <div style="margin: 0; padding: 0; text-align: ;">refactoring</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">25/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">25/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">revisione design API</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">25/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">25/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">tentativo di unificazione dell'Ingredient</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">25/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">25/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">implementazione della tabella dell'Ingredient</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">25/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">25/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">integrazione</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">26/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">26/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1em">
+                            <div style="margin: 0; padding: 0; text-align: ;">sonarqube</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">26/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">26/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1em">
+                            <div style="margin: 0; padding: 0; text-align: ;">deploy su github</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">26/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">26/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1em">
+                            <div style="margin: 0; padding: 0; text-align: ;">merge delle due branch backend in una sola</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">26/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">26/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1em">
+                            <div style="margin: 0; padding: 0; text-align: ;">merge del frontend nel master</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">26/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">26/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1em">
+                            <div style="margin: 0; padding: 0; text-align: ;">scrittura della github action per frontend</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">26/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">26/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1em">
+                            <div style="margin: 0; padding: 0; text-align: ;">merge del backend intero nel master</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">26/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">26/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0em">
+                            <div style="margin: 0; padding: 0; text-align: ;">Bare Bone</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">27/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">27/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0em">
+                            <div style="margin: 0; padding: 0; text-align: ;">sprint 2</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">27/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">06/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">backlog</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">27/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">27/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1em">
+                            <div style="margin: 0; padding: 0; text-align: ;">scrum review</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">27/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">27/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1em">
+                            <div style="margin: 0; padding: 0; text-align: ;">creazione branch sprint 2</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">27/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">27/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1em">
+                            <div style="margin: 0; padding: 0; text-align: ;">creazione branch backend</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">27/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">27/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1em">
+                            <div style="margin: 0; padding: 0; text-align: ;">creazione branch frontend</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">27/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">27/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">analisi</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">30/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">30/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1em">
+                            <div style="margin: 0; padding: 0; text-align: ;">identificazione design pattern usati</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">30/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">30/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1em">
+                            <div style="margin: 0; padding: 0; text-align: ;">identificazione architectural pattern usati</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">30/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">30/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1em">
+                            <div style="margin: 0; padding: 0; text-align: ;">identificazione pattern usabili</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">30/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">30/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1em">
+                            <div style="margin: 0; padding: 0; text-align: ;">analisi dei requisiti tecnici</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">30/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">30/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">progettazione</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">31/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">31/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1em">
+                            <div style="margin: 0; padding: 0; text-align: ;">backend</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">31/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">31/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">progettazione api per eseguire le ricette</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">31/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">31/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">progettazione api per ottenere le informazioni su una istanza di birra</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">31/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">31/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">progettazione api per cercare una istanza di birra</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">31/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">31/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">progettazione api per eliminare un istanza di birra</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">31/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">31/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">progettazione api per aggiungere una nota ad una istanza di birra</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">31/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">31/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">progettazione api per eliminare una nota da una istanza di birra</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">31/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">31/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">progettazione api per modificare una nota di una istanza di birra</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">31/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">31/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">progettazione api per ottenere le note di una istanza di birra</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">31/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">31/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">progettazione della generazione degli ID</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">31/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">31/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">progettazione delle settings</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">31/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">31/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">progettazione api per settings</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">31/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">31/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1em">
+                            <div style="margin: 0; padding: 0; text-align: ;">frontend</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">31/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">31/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">progettazione vista delle istanze di birra</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">31/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">31/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">progettazione azione esecuzione ricetta</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">31/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">31/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">progettazione azione ricerca istanza di birra</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">31/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">31/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">progettazione azione eliminazione istanza di birra</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">31/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">31/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">progettazione azione aggiunta nota istanza di birra</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">31/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">31/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">progettazione azione eliminazione nota istanza di birra</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">31/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">31/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">progettazione azione modifica nota istanza di birra</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">31/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">31/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">progettazione azione ricerca nota istanza di birra</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">31/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">31/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">progettazione vista delle settings</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">31/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">31/01/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">sviluppo</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">01/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">01/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1em">
+                            <div style="margin: 0; padding: 0; text-align: ;">backend</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">01/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">01/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">implementazione tabella delle istanze di birra</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">01/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">01/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">implementazione tabella delle note</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">01/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">01/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">implementazione api per eseguire le ricette</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">01/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">01/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">implementazione api per ottenere le informazioni sulle istanze di birra</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">01/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">01/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">implementazione api per cercare una istanza di birra</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">01/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">01/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">implementazione api per eliminare un istanza di birra</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">01/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">01/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">implementazione api per aggiungere una nota ad una istanza di birra</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">01/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">01/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">implementazione api per eliminare una nota da una istanza di birra</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">01/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">01/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">implementazione api per modificare una nota di una istanza di birra</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">01/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">01/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">implementazione api per ottenere le note di una istanza di birra</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">01/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">01/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">implementazione della generazione degli ID</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">01/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">01/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1em">
+                            <div style="margin: 0; padding: 0; text-align: ;">frontend</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">01/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">01/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">implementazione vista delle istanze di birra</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">01/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">01/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">implementazione azione esecuzione ricetta</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">01/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">01/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">implementazione azione ricerca istanza di birra</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">01/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">01/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">implementazione azione eliminazione istanza di birra</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">01/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">01/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">implementazione azione aggiunta nota istanza di birra</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">01/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">01/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">implementazione azione eliminazione nota istanza di birra</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">01/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">01/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">implementazione azione modifica nota istanza di birra</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">01/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">01/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">implementazione azione ricerca nota istanza di birra</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">01/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">01/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">testing</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">02/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">02/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1em">
+                            <div style="margin: 0; padding: 0; text-align: ;">backend</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">02/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">02/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">creazione test tabella delle istanze di birra</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">02/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">02/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">creazione test tabella delle note</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">02/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">02/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">creazione test api per eseguire le ricette</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">02/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">02/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">creazione test api per ottenere le informazioni sulle istanze di birra</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">02/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">02/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">creazione test api per cercare una istanza di birra</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">02/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">02/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">creazione test api per eliminare un istanza di birra</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">02/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">02/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">creazione test api per aggiungere una nota ad una istanza di birra</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">02/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">02/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">creazione test api per eliminare una nota da una istanza di birra</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">02/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">02/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">creazione test api per modificare una nota di una istanza di birra</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">02/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">02/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">creazione test api per ottenere le note di una istanza di birra</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">02/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">02/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">creazione test della generazione degli ID</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">02/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">02/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1em">
+                            <div style="margin: 0; padding: 0; text-align: ;">frontend</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">02/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">02/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">creazione test vista delle istanze di birra</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">02/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">02/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">creazione test azione esecuzione ricetta</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">02/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">02/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">creazione test azione ricerca istanza di birra</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">02/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">02/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">creazione test azione eliminazione istanza di birra</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">02/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">02/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">creazione test azione aggiunta nota istanza di birra</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">02/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">02/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">creazione test azione eliminazione nota istanza di birra</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">02/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">02/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">creazione test azione modifica nota istanza di birra</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">02/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">02/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">creazione test azione ricerca nota istanza di birra</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">02/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">02/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">integrazione</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">03/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">06/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1em">
+                            <div style="margin: 0; padding: 0; text-align: ;">merge backend nella branch sprint 2</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">03/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">03/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1em">
+                            <div style="margin: 0; padding: 0; text-align: ;">merge frontend nella branch sprint 2</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">03/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">03/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1em">
+                            <div style="margin: 0; padding: 0; text-align: ;">merge branch sprint 2 nel master</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">06/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">06/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0em">
+                            <div style="margin: 0; padding: 0; text-align: ;">Sprint 2</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">07/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">07/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0em">
+                            <div style="margin: 0; padding: 0; text-align: ;">sprint 3</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">07/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">10/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">sviluppo</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">07/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">10/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1em">
+                            <div style="margin: 0; padding: 0; text-align: ;">creazione endpoint e test annessi per /api/advice</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">07/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">07/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1em">
+                            <div style="margin: 0; padding: 0; text-align: ;">implementazione controller per /api/advice</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">08/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">08/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1em">
+                            <div style="margin: 0; padding: 0; text-align: ;">implementazione dell'equipaggiamento come setting speciale nel backend</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">08/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">08/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1em">
+                            <div style="margin: 0; padding: 0; text-align: ;">realizzazione dei controlli con l'equipaggiamento per esecuzione di ricette e altro</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">09/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">09/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1em">
+                            <div style="margin: 0; padding: 0; text-align: ;">implementazione della vista delle settings nel frontend per equipaggiamento</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">08/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">08/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1em">
+                            <div style="margin: 0; padding: 0; text-align: ;">implementazione della vista delle settings nel frontend per nome utente</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">09/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">09/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1em">
+                            <div style="margin: 0; padding: 0; text-align: ;">implementazione della vista delle settings nel frontend per colore tema</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">09/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">09/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1em">
+                            <div style="margin: 0; padding: 0; text-align: ;">implementazione della vista delle settings nel frontend per sfondo</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">09/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">09/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1em">
+                            <div style="margin: 0; padding: 0; text-align: ;">implementazione della vista delle settings nel frontend per la prossima ricetta</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">10/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">10/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1em">
+                            <div style="margin: 0; padding: 0; text-align: ;">implementazione della vista home</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">07/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">07/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1em">
+                            <div style="margin: 0; padding: 0; text-align: ;">implementazione della visualizzazione dell'advice nella home</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">08/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">08/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1em">
+                            <div style="margin: 0; padding: 0; text-align: ;">astrazione del ThemeProvider di Material per integrare la scelta del tema</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">10/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">10/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1em">
+                            <div style="margin: 0; padding: 0; text-align: ;">creazione del componente di notifica per gli ingredienti mancanti</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">10/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">10/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">testing e refactoring</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">07/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">10/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1em">
+                            <div style="margin: 0; padding: 0; text-align: ;">risoluzione warning sul frontend</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">07/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">07/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1em">
+                            <div style="margin: 0; padding: 0; text-align: ;">refactoring test + creazione test per BeerEdit.jsx</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">07/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">07/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1em">
+                            <div style="margin: 0; padding: 0; text-align: ;">estrazione della POST di ShoppingEndpoint in una nuova classe DoShoppingEndpoint</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">08/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">08/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1em">
+                            <div style="margin: 0; padding: 0; text-align: ;">renaming dell'endpoint /api/beer in /api/beers per consistenza dei plurali</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">10/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">10/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1em">
+                            <div style="margin: 0; padding: 0; text-align: ;">creazione della classe protocol per il frontend con gli endpoint</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">10/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">10/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0em">
+                            <div style="margin: 0; padding: 0; text-align: ;">Sprint 3</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">13/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">13/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0em">
+                            <div style="margin: 0; padding: 0; text-align: ;">sprint 4</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">13/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">20/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">sviluppo</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">13/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">13/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1em">
+                            <div style="margin: 0; padding: 0; text-align: ;">inserimento del campo per prossima ricetta quantita litri</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">13/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">13/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">testing e refactoring</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">13/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">17/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1em">
+                            <div style="margin: 0; padding: 0; text-align: ;">redirezione delle validation exception a Bad Request per gli endpoint che non lo fanno</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">14/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">14/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1em">
+                            <div style="margin: 0; padding: 0; text-align: ;">usare material autocomplete per l'inserimento del nome degli ingredienti</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">13/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">13/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1em">
+                            <div style="margin: 0; padding: 0; text-align: ;">usare material select per i select</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">13/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">13/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1em">
+                            <div style="margin: 0; padding: 0; text-align: ;">usare material per le tabelle</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">14/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">14/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1em">
+                            <div style="margin: 0; padding: 0; text-align: ;">usare material per navbar</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">14/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">14/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1em">
+                            <div style="margin: 0; padding: 0; text-align: ;">usare Material alert per i messaggi di alert</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">15/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">15/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1em">
+                            <div style="margin: 0; padding: 0; text-align: ;">usare Material snackbar per le notifiche</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">15/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">15/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1em">
+                            <div style="margin: 0; padding: 0; text-align: ;">sostituire multiInput con Materia textField</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">15/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">15/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1em">
+                            <div style="margin: 0; padding: 0; text-align: ;">creazione temi personalizzati</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">15/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">15/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1em">
+                            <div style="margin: 0; padding: 0; text-align: ;">usare Material icon per alcuni bottoni</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">16/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">16/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1em">
+                            <div style="margin: 0; padding: 0; text-align: ;">sostituire textArea con Materia textFieldArea</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">16/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">16/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1em">
+                            <div style="margin: 0; padding: 0; text-align: ;">togliere opzione nulla dai Select della pagina impostazioni</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">16/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">16/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1em">
+                            <div style="margin: 0; padding: 0; text-align: ;">aggiornamento automatico dopo esecuzione dell'advice</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">16/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">16/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1em">
+                            <div style="margin: 0; padding: 0; text-align: ;">aggiungere snackbar dopo aver programmato con successo una ricetta</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">16/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">16/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1em">
+                            <div style="margin: 0; padding: 0; text-align: ;">cambio di design della pagina home</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">16/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">16/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1em">
+                            <div style="margin: 0; padding: 0; text-align: ;">aggiunto tipo di nota in modo testuale nei dettagli di una birra</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">16/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">16/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1em">
+                            <div style="margin: 0; padding: 0; text-align: ;">le quantit&agrave; possono richiedere un numero maggiore di 0</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">16/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">16/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1em">
+                            <div style="margin: 0; padding: 0; text-align: ;">aggiunta Tooltip in hovering alle icone</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">17/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">17/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1em">
+                            <div style="margin: 0; padding: 0; text-align: ;">aggiornamento package-lock con nuove versioni pacchetti npm</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">17/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">17/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1em">
+                            <div style="margin: 0; padding: 0; text-align: ;">ottimizzazione dei test front-end</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">17/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">17/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">Documentazione</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">15/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">20/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1em">
+                            <div style="margin: 0; padding: 0; text-align: ;">documentazione per l'installazione dell'applicativo</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">15/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">15/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1em">
+                            <div style="margin: 0; padding: 0; text-align: ;">documentazione per l'uso del backend</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">15/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">15/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:1em">
+                            <div style="margin: 0; padding: 0; text-align: ;">stesura relazione finale</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">17/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">20/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+                <tr>
+                    <td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0em">
+                            <div style="margin: 0; padding: 0; text-align: ;">Sprint 4</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">20/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell">
+                        <div style="margin:0; padding:0; padding-left:0.5em">
+                            <div style="margin: 0; padding: 0; text-align: ;">20/02/23</div>
+                        </div>
+                    </td><td valign="top" class="cell"></td>
+                </tr>
+            </table>
+        </center>
+        <br>
+        <table width="100%" border="0" cellpadding="0" cellspacing="0">
+            <tr>
+                <td bgcolor="#6d9ec6" width="50%"><font color="#FFFFFF"><b>Ganttproject (3.2.3247)</b></font></td><td bgcolor="#6d9ec6" width="50%" align="right"><b><a href="http://ganttproject.biz">ganttproject.biz</a></b>
+                    <br>
+                    <b>17/02/23 - 13:02:23</b></td>
+            </tr>
+        </table>
+    </body>
+</html>

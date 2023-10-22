@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8"?><project name="Untitled Gantt Project" company="" webLink="http://" view-date="2023-01-19" view-index="0" gantt-divider-location="751" resource-divider-location="300" version="3.2.3247" locale="it_IT">
+    <description/>
+    <view zooming-state="default:3" id="gantt-chart">
+        <field id="tpd3" name="Nome" width="446" order="0"/>
+        <field id="tpd4" name="Data d'inizio" width="138" order="1"/>
+        <field id="tpd5" name="Data di fine" width="150" order="2"/>
+        <option id="filter.completedTasks" value="false"/>
+        <option id="color.recent">
+            <![CDATA[#00ff33 #eeeeee #ff0000]]>
+        </option>
+    </view>
+    <view id="resource-table">
+        <field id="0" name="Nome" width="197" order="0"/>
+        <field id="1" name="Ruolo predefinito" width="97" order="1"/>
+    </view>
+    <!-- -->
+    <calendars>
+        <day-types>
+            <day-type id="0"/>
+            <day-type id="1"/>
+            <default-week id="1" name="default" sun="1" mon="0" tue="0" wed="0" thu="0" fri="0" sat="1"/>
+            <only-show-weekends value="false"/>
+            <overriden-day-types/>
+            <days/>
+        </day-types>
+    </calendars>
+    <tasks empty-milestones="true">
+        <taskproperties>
+            <taskproperty id="tpd0" name="type" type="default" valuetype="icon"/>
+            <taskproperty id="tpd1" name="priority" type="default" valuetype="icon"/>
+            <taskproperty id="tpd2" name="info" type="default" valuetype="icon"/>
+            <taskproperty id="tpd3" name="name" type="default" valuetype="text"/>
+            <taskproperty id="tpd4" name="begindate" type="default" valuetype="date"/>
+            <taskproperty id="tpd5" name="enddate" type="default" valuetype="date"/>
+            <taskproperty id="tpd6" name="duration" type="default" valuetype="int"/>
+            <taskproperty id="tpd7" name="completion" type="default" valuetype="int"/>
+            <taskproperty id="tpd8" name="coordinator" type="default" valuetype="text"/>
+            <taskproperty id="tpd9" name="predecessorsr" type="default" valuetype="text"/>
+        </taskproperties>
+        <task id="0" name="sprint 1" color="#8cb6ce" meeting="false" project="true" start="2023-01-20" duration="5" complete="100" thirdDate="2023-01-20" thirdDate-constraint="0" expand="true">
+            <depend id="19" type="2" difference="0" hardness="Strong"/>
+            <depend id="71" type="3" difference="0" hardness="Strong"/>
+            <task id="1" name="analisi" meeting="false" start="2023-01-20" duration="1" complete="100" expand="true">
+                <depend id="2" type="2" difference="0" hardness="Strong"/>
+                <depend id="8" type="2" difference="0" hardness="Strong"/>
+                <task id="6" name="definizione del tech stack" color="#8cb6ce" meeting="false" start="2023-01-20" duration="1" complete="100" thirdDate="2023-01-20" thirdDate-constraint="0" expand="true"/>
+                <task id="5" name="definizione dei casi d'uso" color="#8cb6ce" meeting="false" start="2023-01-20" duration="1" complete="100" thirdDate="2023-01-20" thirdDate-constraint="0" expand="true"/>
+                <task id="9" name="modello di dominio" color="#8cb6ce" meeting="false" start="2023-01-20" duration="1" complete="100" thirdDate="2023-01-20" thirdDate-constraint="0" expand="true"/>
+                <task id="10" name="ssd" color="#8cb6ce" meeting="false" start="2023-01-20" duration="1" complete="100" thirdDate="2023-01-20" thirdDate-constraint="0" expand="true"/>
+                <task id="11" name="contratti" color="#8cb6ce" meeting="false" start="2023-01-20" duration="1" complete="100" thirdDate="2023-01-20" thirdDate-constraint="0" expand="true"/>
+                <task id="17" name="definire le fasi di deploy" color="#8cb6ce" meeting="false" start="2023-01-20" duration="1" complete="100" thirdDate="2023-01-20" thirdDate-constraint="0" expand="true"/>
+            </task>
+            <task id="8" name="progettazione" color="#000000" meeting="false" start="2023-01-23" duration="1" complete="100" thirdDate="2023-01-23" thirdDate-constraint="0" expand="true">
+                <task id="12" name="sd" color="#8cb6ce" meeting="false" start="2023-01-23" duration="1" complete="100" thirdDate="2023-01-20" thirdDate-constraint="0" expand="true"/>
+            </task>
+            <task id="2" name="sviluppo" color="#000000" meeting="false" start="2023-01-23" duration="1" complete="100" thirdDate="2023-01-23" thirdDate-constraint="0" expand="true">
+                <depend id="3" type="2" difference="0" hardness="Strong"/>
+                <task id="7" name="setup ambiente react per frontend" color="#00ff33" meeting="false" start="2023-01-23" duration="1" complete="100" thirdDate="2023-01-20" thirdDate-constraint="0" expand="true"/>
+                <task id="70" name="creazione prima dashboard UI" color="#00ff33" meeting="false" start="2023-01-23" duration="1" complete="100" thirdDate="2023-01-23" thirdDate-constraint="0" expand="true"/>
+                <task id="18" name="setup ambiente java per backend" color="#ff0000" meeting="false" start="2023-01-23" duration="1" complete="100" thirdDate="2023-01-19" thirdDate-constraint="0" expand="true"/>
+                <task id="68" name="creazione prima backbone api" meeting="false" start="2023-01-23" duration="1" complete="100" expand="true">
+                    <task id="74" name="primer controller rest recipe list" color="#ff0000" meeting="false" start="2023-01-23" duration="1" complete="100" thirdDate="2023-01-23" thirdDate-constraint="0" expand="true"/>
+                    <task id="72" name="primer controller rest recipe" color="#ff0000" meeting="false" start="2023-01-23" duration="1" complete="100" thirdDate="2023-01-23" thirdDate-constraint="0" expand="true"/>
+                    <task id="73" name="primer controller rest recipe ingredient" color="#ff0000" meeting="false" start="2023-01-23" duration="1" complete="100" thirdDate="2023-01-23" thirdDate-constraint="0" expand="true"/>
+                    <task id="75" name="primer controller rest inventory" color="#ff0000" meeting="false" start="2023-01-23" duration="1" complete="100" thirdDate="2023-01-23" thirdDate-constraint="0" expand="true"/>
+                    <task id="76" name="primer controller rest inventory ingredient" color="#ff0000" meeting="false" start="2023-01-23" duration="1" complete="100" thirdDate="2023-01-23" thirdDate-constraint="0" expand="true"/>
+                </task>
+            </task>
+            <task id="3" name="testing" color="#000000" meeting="false" start="2023-01-24" duration="2" complete="100" thirdDate="2023-01-24" thirdDate-constraint="0" expand="true">
+                <depend id="4" type="2" difference="0" hardness="Strong"/>
+                <task id="13" name="coverage" color="#8cb6ce" meeting="false" start="2023-01-24" duration="1" complete="100" thirdDate="2023-01-20" thirdDate-constraint="0" expand="true">
+                    <depend id="14" type="2" difference="0" hardness="Strong"/>
+                </task>
+                <task id="14" name="refactoring" color="#8cb6ce" meeting="false" start="2023-01-25" duration="1" complete="100" thirdDate="2023-01-20" thirdDate-constraint="0" expand="true">
+                    <task id="79" name="revisione design API" color="#ff0000" meeting="false" start="2023-01-25" duration="1" complete="100" thirdDate="2023-02-27" thirdDate-constraint="0" expand="true"/>
+                    <task id="80" name="tentativo di unificazione dell'Ingredient" color="#ff0000" meeting="false" start="2023-01-25" duration="1" complete="100" thirdDate="2023-02-06" thirdDate-constraint="0" expand="true"/>
+                    <task id="81" name="implementazione della tabella dell'Ingredient" color="#ff0000" meeting="false" start="2023-01-25" duration="1" complete="100" thirdDate="2023-02-13" thirdDate-constraint="0" expand="true"/>
+                </task>
+            </task>
+            <task id="4" name="integrazione" color="#000000" meeting="false" start="2023-01-26" duration="1" complete="100" thirdDate="2023-01-25" thirdDate-constraint="0" expand="true">
+                <task id="15" name="sonarqube" color="#8cb6ce" meeting="false" start="2023-01-26" duration="1" complete="100" thirdDate="2023-01-20" thirdDate-constraint="0" expand="true"/>
+                <task id="16" name="deploy su github" color="#8cb6ce" meeting="false" start="2023-01-26" duration="1" complete="100" thirdDate="2023-01-20" thirdDate-constraint="0" expand="true"/>
+                <task id="82" name="merge delle due branch backend in una sola" color="#8cb6ce" meeting="false" start="2023-01-26" duration="1" complete="100" thirdDate="2023-01-25" thirdDate-constraint="0" expand="true"/>
+                <task id="84" name="merge del frontend nel master" color="#8cb6ce" meeting="false" start="2023-01-26" duration="1" complete="100" thirdDate="2023-01-25" thirdDate-constraint="0" expand="true"/>
+                <task id="83" name="scrittura della github action per frontend" color="#8cb6ce" meeting="false" start="2023-01-26" duration="1" complete="100" thirdDate="2023-01-25" thirdDate-constraint="0" expand="true"/>
+                <task id="85" name="merge del backend intero nel master" color="#8cb6ce" meeting="false" start="2023-01-26" duration="1" complete="100" thirdDate="2023-01-25" thirdDate-constraint="0" expand="true"/>
+            </task>
+        </task>
+        <task id="71" name="Bare Bone" color="#8cb6ce" meeting="true" start="2023-01-27" duration="0" complete="0" thirdDate="2023-01-26" thirdDate-constraint="0" expand="true"/>
+        <task id="19" name="sprint 2" color="#8cb6ce" meeting="false" project="true" start="2023-01-27" duration="7" complete="100" thirdDate="2023-01-13" thirdDate-constraint="0" expand="true">
+            <task id="23" name="backlog" color="#000000" meeting="false" start="2023-01-27" duration="1" complete="100" thirdDate="2023-01-31" thirdDate-constraint="0" expand="true">
+                <depend id="27" type="2" difference="0" hardness="Strong"/>
+                <task id="104" name="scrum review" color="#8cb6ce" meeting="false" start="2023-01-27" duration="1" complete="100" thirdDate="2023-01-27" thirdDate-constraint="0" expand="true"/>
+                <task id="140" name="creazione branch sprint 2" color="#8cb6ce" meeting="false" start="2023-01-27" duration="1" complete="100" thirdDate="2023-01-27" thirdDate-constraint="0" expand="true"/>
+                <task id="141" name="creazione branch backend" color="#8cb6ce" meeting="false" start="2023-01-27" duration="1" complete="100" thirdDate="2023-01-27" thirdDate-constraint="0" expand="true"/>
+                <task id="142" name="creazione branch frontend" color="#8cb6ce" meeting="false" start="2023-01-27" duration="1" complete="100" thirdDate="2023-01-27" thirdDate-constraint="0" expand="true"/>
+            </task>
+            <task id="27" name="analisi" color="#8cb6ce" meeting="false" start="2023-01-30" duration="1" complete="100" thirdDate="2023-01-16" thirdDate-constraint="0" expand="true">
+                <depend id="28" type="2" difference="0" hardness="Strong"/>
+                <task id="97" name="identificazione design pattern usati" color="#8cb6ce" meeting="false" start="2023-01-30" duration="1" complete="100" thirdDate="2023-01-30" thirdDate-constraint="0" expand="true"/>
+                <task id="98" name="identificazione architectural pattern usati" color="#8cb6ce" meeting="false" start="2023-01-30" duration="1" complete="100" thirdDate="2023-01-30" thirdDate-constraint="0" expand="true"/>
+                <task id="99" name="identificazione pattern usabili" color="#8cb6ce" meeting="false" start="2023-01-30" duration="1" complete="100" thirdDate="2023-01-30" thirdDate-constraint="0" expand="true"/>
+                <task id="103" name="analisi dei requisiti tecnici" color="#8cb6ce" meeting="false" start="2023-01-30" duration="1" complete="100" thirdDate="2023-01-30" thirdDate-constraint="0" expand="true"/>
+            </task>
+            <task id="28" name="progettazione" color="#8cb6ce" meeting="false" start="2023-01-31" duration="1" complete="100" thirdDate="2023-01-31" thirdDate-constraint="0" expand="true">
+                <depend id="29" type="2" difference="0" hardness="Strong"/>
+                <task id="124" name="backend" meeting="false" start="2023-01-31" duration="1" complete="100" expand="true">
+                    <depend id="136" type="2" difference="0" hardness="Strong"/>
+                    <task id="90" name="progettazione api per eseguire le ricette" color="#ff0000" meeting="false" start="2023-01-31" duration="1" complete="100" thirdDate="2023-01-31" thirdDate-constraint="0" expand="true"/>
+                    <task id="96" name="progettazione api per ottenere le informazioni su una istanza di birra" color="#ff0000" meeting="false" start="2023-01-31" duration="1" complete="100" thirdDate="2023-01-31" thirdDate-constraint="0" expand="true"/>
+                    <task id="122" name="progettazione api per cercare una istanza di birra" color="#ff0000" meeting="false" start="2023-01-31" duration="1" complete="100" thirdDate="2023-01-31" thirdDate-constraint="0" expand="true"/>
+                    <task id="91" name="progettazione api per eliminare un istanza di birra" color="#ff0000" meeting="false" start="2023-01-31" duration="1" complete="100" thirdDate="2023-01-31" thirdDate-constraint="0" expand="true"/>
+                    <task id="92" name="progettazione api per aggiungere una nota ad una istanza di birra" color="#ff0000" meeting="false" start="2023-01-31" duration="1" complete="100" thirdDate="2023-01-31" thirdDate-constraint="0" expand="true"/>
+                    <task id="94" name="progettazione api per eliminare una nota da una istanza di birra" color="#ff0000" meeting="false" start="2023-01-31" duration="1" complete="100" thirdDate="2023-01-31" thirdDate-constraint="0" expand="true"/>
+                    <task id="93" name="progettazione api per modificare una nota di una istanza di birra" color="#ff0000" meeting="false" start="2023-01-31" duration="1" complete="100" thirdDate="2023-01-31" thirdDate-constraint="0" expand="true"/>
+                    <task id="95" name="progettazione api per ottenere le note di una istanza di birra" color="#ff0000" meeting="false" start="2023-01-31" duration="1" complete="100" thirdDate="2023-01-31" thirdDate-constraint="0" expand="true"/>
+                    <task id="106" name="progettazione della generazione degli ID" color="#ff0000" meeting="false" start="2023-01-31" duration="1" complete="100" thirdDate="2023-01-31" thirdDate-constraint="0" expand="true"/>
+                    <task id="172" name="progettazione delle settings" color="#ff0000" meeting="false" start="2023-01-31" duration="1" complete="100" thirdDate="2023-01-31" thirdDate-constraint="0" expand="true"/>
+                    <task id="173" name="progettazione api per settings" color="#ff0000" meeting="false" start="2023-01-31" duration="1" complete="100" thirdDate="2023-01-31" thirdDate-constraint="0" expand="true"/>
+                </task>
+                <task id="144" name="frontend" meeting="false" start="2023-01-31" duration="1" complete="100" expand="true">
+                    <depend id="137" type="2" difference="0" hardness="Strong"/>
+                    <task id="145" name="progettazione vista delle istanze di birra" color="#00ff33" meeting="false" start="2023-01-31" duration="1" complete="100" thirdDate="2023-01-31" thirdDate-constraint="0" expand="true"/>
+                    <task id="146" name="progettazione azione esecuzione ricetta" color="#00ff33" meeting="false" start="2023-01-31" duration="1" complete="100" thirdDate="2023-01-31" thirdDate-constraint="0" expand="true"/>
+                    <task id="148" name="progettazione azione ricerca istanza di birra" color="#00ff33" meeting="false" start="2023-01-31" duration="1" complete="100" thirdDate="2023-01-31" thirdDate-constraint="0" expand="true"/>
+                    <task id="149" name="progettazione azione eliminazione istanza di birra" color="#00ff33" meeting="false" start="2023-01-31" duration="1" complete="100" thirdDate="2023-01-31" thirdDate-constraint="0" expand="true"/>
+                    <task id="150" name="progettazione azione aggiunta nota istanza di birra" color="#00ff33" meeting="false" start="2023-01-31" duration="1" complete="100" thirdDate="2023-01-31" thirdDate-constraint="0" expand="true"/>
+                    <task id="151" name="progettazione azione eliminazione nota istanza di birra" color="#00ff33" meeting="false" start="2023-01-31" duration="1" complete="100" thirdDate="2023-01-31" thirdDate-constraint="0" expand="true"/>
+                    <task id="152" name="progettazione azione modifica nota istanza di birra" color="#00ff33" meeting="false" start="2023-01-31" duration="1" complete="100" thirdDate="2023-01-31" thirdDate-constraint="0" expand="true"/>
+                    <task id="153" name="progettazione azione ricerca nota istanza di birra" color="#00ff33" meeting="false" start="2023-01-31" duration="1" complete="100" thirdDate="2023-01-31" thirdDate-constraint="0" expand="true"/>
+                    <task id="174" name="progettazione vista delle settings" color="#00ff33" meeting="false" start="2023-01-31" duration="1" complete="100" thirdDate="2023-01-31" thirdDate-constraint="0" expand="true"/>
+                </task>
+            </task>
+            <task id="29" name="sviluppo" color="#8cb6ce" meeting="false" start="2023-02-01" duration="1" complete="100" thirdDate="2023-01-16" thirdDate-constraint="0" expand="true">
+                <depend id="30" type="2" difference="0" hardness="Strong"/>
+                <task id="100" name="backend" meeting="false" start="2023-02-01" duration="1" complete="100" expand="true">
+                    <depend id="136" type="2" difference="0" hardness="Strong"/>
+                    <task id="101" name="implementazione tabella delle istanze di birra" color="#ff0000" meeting="false" start="2023-02-01" duration="1" complete="100" thirdDate="2023-02-01" thirdDate-constraint="0" expand="true"/>
+                    <task id="102" name="implementazione tabella delle note" color="#ff0000" meeting="false" start="2023-02-01" duration="1" complete="100" thirdDate="2023-02-01" thirdDate-constraint="0" expand="true"/>
+                    <task id="108" name="implementazione api per eseguire le ricette" color="#ff0000" meeting="false" start="2023-02-01" duration="1" complete="100" thirdDate="2023-02-01" thirdDate-constraint="0" expand="true"/>
+                    <task id="115" name="implementazione api per ottenere le informazioni sulle istanze di birra" color="#ff0000" meeting="false" start="2023-02-01" duration="1" complete="100" thirdDate="2023-02-01" thirdDate-constraint="0" expand="true"/>
+                    <task id="123" name="implementazione api per cercare una istanza di birra" color="#ff0000" meeting="false" start="2023-02-01" duration="1" complete="100" thirdDate="2023-02-01" thirdDate-constraint="0" expand="true"/>
+                    <task id="116" name="implementazione api per eliminare un istanza di birra" color="#ff0000" meeting="false" start="2023-02-01" duration="1" complete="100" thirdDate="2023-02-01" thirdDate-constraint="0" expand="true"/>
+                    <task id="117" name="implementazione api per aggiungere una nota ad una istanza di birra" color="#ff0000" meeting="false" start="2023-02-01" duration="1" complete="100" thirdDate="2023-02-01" thirdDate-constraint="0" expand="true"/>
+                    <task id="118" name="implementazione api per eliminare una nota da una istanza di birra" color="#ff0000" meeting="false" start="2023-02-01" duration="1" complete="100" thirdDate="2023-02-01" thirdDate-constraint="0" expand="true"/>
+                    <task id="120" name="implementazione api per modificare una nota di una istanza di birra" color="#ff0000" meeting="false" start="2023-02-01" duration="1" complete="100" thirdDate="2023-02-01" thirdDate-constraint="0" expand="true"/>
+                    <task id="121" name="implementazione api per ottenere le note di una istanza di birra" color="#ff0000" meeting="false" start="2023-02-01" duration="1" complete="100" thirdDate="2023-02-01" thirdDate-constraint="0" expand="true"/>
+                    <task id="107" name="implementazione della generazione degli ID" color="#ff0000" meeting="false" start="2023-02-01" duration="1" complete="100" thirdDate="2023-02-01" thirdDate-constraint="0" expand="true"/>
+                </task>
+                <task id="154" name="frontend" color="#000000" meeting="false" start="2023-02-01" duration="1" complete="100" expand="true">
+                    <depend id="137" type="2" difference="0" hardness="Strong"/>
+                    <task id="155" name="implementazione vista delle istanze di birra" color="#00ff33" meeting="false" start="2023-02-01" duration="1" complete="100" thirdDate="2023-02-01" thirdDate-constraint="0" expand="true"/>
+                    <task id="156" name="implementazione azione esecuzione ricetta" color="#00ff33" meeting="false" start="2023-02-01" duration="1" complete="100" thirdDate="2023-02-01" thirdDate-constraint="0" expand="true"/>
+                    <task id="157" name="implementazione azione ricerca istanza di birra" color="#00ff33" meeting="false" start="2023-02-01" duration="1" complete="100" thirdDate="2023-02-01" thirdDate-constraint="0" expand="true"/>
+                    <task id="158" name="implementazione azione eliminazione istanza di birra" color="#00ff33" meeting="false" start="2023-02-01" duration="1" complete="100" thirdDate="2023-02-01" thirdDate-constraint="0" expand="true"/>
+                    <task id="159" name="implementazione azione aggiunta nota istanza di birra" color="#00ff33" meeting="false" start="2023-02-01" duration="1" complete="100" thirdDate="2023-02-01" thirdDate-constraint="0" expand="true"/>
+                    <task id="160" name="implementazione azione eliminazione nota istanza di birra" color="#00ff33" meeting="false" start="2023-02-01" duration="1" complete="100" thirdDate="2023-02-01" thirdDate-constraint="0" expand="true"/>
+                    <task id="161" name="implementazione azione modifica nota istanza di birra" color="#00ff33" meeting="false" start="2023-02-01" duration="1" complete="100" thirdDate="2023-02-01" thirdDate-constraint="0" expand="true"/>
+                    <task id="162" name="implementazione azione ricerca nota istanza di birra" color="#00ff33" meeting="false" start="2023-02-01" duration="1" complete="100" thirdDate="2023-02-01" thirdDate-constraint="0" expand="true"/>
+                </task>
+            </task>
+            <task id="30" name="testing" color="#8cb6ce" meeting="false" start="2023-02-02" duration="1" complete="100" thirdDate="2023-01-16" thirdDate-constraint="0" expand="true">
+                <depend id="31" type="2" difference="0" hardness="Strong"/>
+                <task id="139" name="backend" meeting="false" start="2023-02-02" duration="1" complete="100" expand="true">
+                    <depend id="136" type="2" difference="0" hardness="Strong"/>
+                    <task id="125" name="creazione test tabella delle istanze di birra" color="#ff0000" meeting="false" start="2023-02-02" duration="1" complete="100" thirdDate="2023-02-02" thirdDate-constraint="0" expand="true"/>
+                    <task id="126" name="creazione test tabella delle note" color="#ff0000" meeting="false" start="2023-02-02" duration="1" complete="100" thirdDate="2023-02-02" thirdDate-constraint="0" expand="true"/>
+                    <task id="127" name="creazione test api per eseguire le ricette" color="#ff0000" meeting="false" start="2023-02-02" duration="1" complete="100" thirdDate="2023-02-02" thirdDate-constraint="0" expand="true"/>
+                    <task id="128" name="creazione test api per ottenere le informazioni sulle istanze di birra" color="#ff0000" meeting="false" start="2023-02-02" duration="1" complete="100" thirdDate="2023-02-02" thirdDate-constraint="0" expand="true"/>
+                    <task id="129" name="creazione test api per cercare una istanza di birra" color="#ff0000" meeting="false" start="2023-02-02" duration="1" complete="100" thirdDate="2023-02-02" thirdDate-constraint="0" expand="true"/>
+                    <task id="130" name="creazione test api per eliminare un istanza di birra" color="#ff0000" meeting="false" start="2023-02-02" duration="1" complete="100" thirdDate="2023-02-02" thirdDate-constraint="0" expand="true"/>
+                    <task id="131" name="creazione test api per aggiungere una nota ad una istanza di birra" color="#ff0000" meeting="false" start="2023-02-02" duration="1" complete="100" thirdDate="2023-02-02" thirdDate-constraint="0" expand="true"/>
+                    <task id="132" name="creazione test api per eliminare una nota da una istanza di birra" color="#ff0000" meeting="false" start="2023-02-02" duration="1" complete="100" thirdDate="2023-02-02" thirdDate-constraint="0" expand="true"/>
+                    <task id="133" name="creazione test api per modificare una nota di una istanza di birra" color="#ff0000" meeting="false" start="2023-02-02" duration="1" complete="100" thirdDate="2023-02-02" thirdDate-constraint="0" expand="true"/>
+                    <task id="134" name="creazione test api per ottenere le note di una istanza di birra" color="#ff0000" meeting="false" start="2023-02-02" duration="1" complete="100" thirdDate="2023-02-02" thirdDate-constraint="0" expand="true"/>
+                    <task id="135" name="creazione test della generazione degli ID" color="#ff0000" meeting="false" start="2023-02-02" duration="1" complete="100" thirdDate="2023-02-02" thirdDate-constraint="0" expand="true"/>
+                </task>
+                <task id="163" name="frontend" color="#000000" meeting="false" start="2023-02-02" duration="1" complete="100" expand="true">
+                    <depend id="137" type="2" difference="0" hardness="Strong"/>
+                    <task id="164" name="creazione test vista delle istanze di birra" color="#00ff33" meeting="false" start="2023-02-02" duration="1" complete="100" thirdDate="2023-02-02" thirdDate-constraint="0" expand="true"/>
+                    <task id="165" name="creazione test azione esecuzione ricetta" color="#00ff33" meeting="false" start="2023-02-02" duration="1" complete="100" thirdDate="2023-02-02" thirdDate-constraint="0" expand="true"/>
+                    <task id="166" name="creazione test azione ricerca istanza di birra" color="#00ff33" meeting="false" start="2023-02-02" duration="1" complete="100" thirdDate="2023-02-02" thirdDate-constraint="0" expand="true"/>
+                    <task id="167" name="creazione test azione eliminazione istanza di birra" color="#00ff33" meeting="false" start="2023-02-02" duration="1" complete="100" thirdDate="2023-02-02" thirdDate-constraint="0" expand="true"/>
+                    <task id="168" name="creazione test azione aggiunta nota istanza di birra" color="#00ff33" meeting="false" start="2023-02-02" duration="1" complete="100" thirdDate="2023-02-02" thirdDate-constraint="0" expand="true"/>
+                    <task id="169" name="creazione test azione eliminazione nota istanza di birra" color="#00ff33" meeting="false" start="2023-02-02" duration="1" complete="100" thirdDate="2023-02-02" thirdDate-constraint="0" expand="true"/>
+                    <task id="170" name="creazione test azione modifica nota istanza di birra" color="#00ff33" meeting="false" start="2023-02-02" duration="1" complete="100" thirdDate="2023-02-02" thirdDate-constraint="0" expand="true"/>
+                    <task id="171" name="creazione test azione ricerca nota istanza di birra" color="#00ff33" meeting="false" start="2023-02-02" duration="1" complete="100" thirdDate="2023-02-02" thirdDate-constraint="0" expand="true"/>
+                </task>
+            </task>
+            <task id="31" name="integrazione" color="#8cb6ce" meeting="false" start="2023-02-03" duration="2" complete="100" thirdDate="2023-01-16" thirdDate-constraint="0" expand="true">
+                <depend id="143" type="2" difference="0" hardness="Strong"/>
+                <task id="136" name="merge backend nella branch sprint 2" color="#8cb6ce" meeting="false" start="2023-02-03" duration="1" complete="100" thirdDate="2023-02-03" thirdDate-constraint="0" expand="true">
+                    <depend id="138" type="2" difference="0" hardness="Strong"/>
+                </task>
+                <task id="137" name="merge frontend nella branch sprint 2" color="#8cb6ce" meeting="false" start="2023-02-03" duration="1" complete="100" thirdDate="2023-02-03" thirdDate-constraint="0" expand="true">
+                    <depend id="138" type="2" difference="0" hardness="Strong"/>
+                </task>
+                <task id="138" name="merge branch sprint 2 nel master" color="#8cb6ce" meeting="false" start="2023-02-06" duration="1" complete="100" thirdDate="2023-02-06" thirdDate-constraint="0" expand="true"/>
+            </task>
+        </task>
+        <task id="143" name="Sprint 2" color="#8cb6ce" meeting="true" start="2023-02-07" duration="0" complete="0" thirdDate="2023-01-27" thirdDate-constraint="0" expand="true">
+            <depend id="197" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="175" name="sprint 3" meeting="false" start="2023-02-07" duration="4" complete="100" expand="true">
+            <task id="179" name="sviluppo" meeting="false" start="2023-02-07" duration="4" complete="100" expand="true">
+                <depend id="197" type="2" difference="0" hardness="Strong"/>
+                <task id="177" name="creazione endpoint e test annessi per /api/advice" color="#ff0000" meeting="false" start="2023-02-07" duration="1" complete="100" thirdDate="2023-02-07" thirdDate-constraint="0" expand="true">
+                    <depend id="178" type="2" difference="0" hardness="Strong"/>
+                </task>
+                <task id="178" name="implementazione controller per /api/advice" color="#ff0000" meeting="false" start="2023-02-08" duration="1" complete="100" thirdDate="2023-01-31" thirdDate-constraint="0" expand="true"/>
+                <task id="183" name="implementazione dell'equipaggiamento come setting speciale nel backend" color="#ff0000" meeting="false" start="2023-02-08" duration="1" complete="100" thirdDate="2023-02-03" thirdDate-constraint="0" expand="true">
+                    <depend id="184" type="2" difference="0" hardness="Strong"/>
+                </task>
+                <task id="184" name="realizzazione dei controlli con l'equipaggiamento per esecuzione di ricette e altro" color="#ff0000" meeting="false" start="2023-02-09" duration="1" complete="100" thirdDate="2023-02-09" thirdDate-constraint="0" expand="true"/>
+                <task id="189" name="implementazione della vista delle settings nel frontend per equipaggiamento" color="#00ff33" meeting="false" start="2023-02-08" duration="1" complete="100" thirdDate="2023-02-09" thirdDate-constraint="0" expand="true"/>
+                <task id="186" name="implementazione della vista delle settings nel frontend per nome utente" color="#00ff33" meeting="false" start="2023-02-09" duration="1" complete="100" thirdDate="2023-02-01" thirdDate-constraint="0" expand="true"/>
+                <task id="188" name="implementazione della vista delle settings nel frontend per colore tema" color="#00ff33" meeting="false" start="2023-02-09" duration="1" complete="100" thirdDate="2023-02-09" thirdDate-constraint="0" expand="true"/>
+                <task id="187" name="implementazione della vista delle settings nel frontend per sfondo" color="#00ff33" meeting="false" start="2023-02-09" duration="1" complete="100" thirdDate="2023-02-09" thirdDate-constraint="0" expand="true"/>
+                <task id="190" name="implementazione della vista delle settings nel frontend per la prossima ricetta" color="#00ff33" meeting="false" start="2023-02-10" duration="1" complete="100" thirdDate="2023-02-10" thirdDate-constraint="0" expand="true"/>
+                <task id="191" name="implementazione della vista home" color="#00ff33" meeting="false" start="2023-02-07" duration="1" complete="100" thirdDate="2023-02-10" thirdDate-constraint="0" expand="true">
+                    <depend id="192" type="2" difference="0" hardness="Strong"/>
+                </task>
+                <task id="192" name="implementazione della visualizzazione dell'advice nella home" color="#00ff33" meeting="false" start="2023-02-08" duration="1" complete="100" thirdDate="2023-02-06" thirdDate-constraint="0" expand="true"/>
+                <task id="193" name="astrazione del ThemeProvider di Material per integrare la scelta del tema" color="#00ff33" meeting="false" start="2023-02-10" duration="1" complete="100" thirdDate="2023-02-06" thirdDate-constraint="0" expand="true"/>
+                <task id="194" name="creazione del componente di notifica per gli ingredienti mancanti" color="#00ff33" meeting="false" start="2023-02-10" duration="1" complete="100" thirdDate="2023-02-06" thirdDate-constraint="0" expand="true"/>
+            </task>
+            <task id="181" name="testing e refactoring" meeting="false" start="2023-02-07" duration="4" complete="100" expand="true">
+                <depend id="197" type="2" difference="0" hardness="Strong"/>
+                <task id="182" name="risoluzione warning sul frontend" color="#00ff33" meeting="false" start="2023-02-07" duration="1" complete="100" thirdDate="2023-01-30" thirdDate-constraint="0" expand="true"/>
+                <task id="180" name="refactoring test + creazione test per BeerEdit.jsx" color="#00ff33" meeting="false" start="2023-02-07" duration="1" complete="100" thirdDate="2023-01-30" thirdDate-constraint="0" expand="true"/>
+                <task id="185" name="estrazione della POST di ShoppingEndpoint in una nuova classe DoShoppingEndpoint" color="#ff0000" meeting="false" start="2023-02-08" duration="1" complete="100" thirdDate="2023-02-01" thirdDate-constraint="0" expand="true"/>
+                <task id="195" name="renaming dell'endpoint /api/beer in /api/beers per consistenza dei plurali" color="#ff0000" meeting="false" start="2023-02-10" duration="1" complete="100" thirdDate="2023-02-10" thirdDate-constraint="0" expand="true"/>
+                <task id="196" name="creazione della classe protocol per il frontend con gli endpoint" color="#00ff33" meeting="false" start="2023-02-10" duration="1" complete="100" thirdDate="2023-02-03" thirdDate-constraint="0" expand="true"/>
+            </task>
+        </task>
+        <task id="197" name="Sprint 3" color="#8cb6ce" meeting="true" start="2023-02-13" duration="0" complete="0" thirdDate="2023-02-13" thirdDate-constraint="0" expand="true">
+            <depend id="199" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="198" name="sprint 4" meeting="false" start="2023-02-13" duration="6" complete="100" expand="true">
+            <task id="200" name="sviluppo" meeting="false" start="2023-02-13" duration="1" complete="100" expand="true">
+                <depend id="199" type="2" difference="0" hardness="Strong"/>
+                <task id="202" name="inserimento del campo per prossima ricetta quantita litri" color="#00ff33" meeting="false" start="2023-02-13" duration="1" complete="100" thirdDate="2023-02-13" thirdDate-constraint="0" expand="true"/>
+            </task>
+            <task id="201" name="testing e refactoring" color="#000000" meeting="false" start="2023-02-13" duration="5" complete="100" thirdDate="2023-02-13" thirdDate-constraint="0" expand="true">
+                <depend id="199" type="2" difference="0" hardness="Strong"/>
+                <task id="207" name="redirezione delle validation exception a Bad Request per gli endpoint che non lo fanno" color="#ff0000" meeting="false" start="2023-02-14" duration="1" complete="100" expand="true"/>
+                <task id="203" name="usare material autocomplete per l'inserimento del nome degli ingredienti" color="#00ff33" meeting="false" start="2023-02-13" duration="1" complete="100" expand="true"/>
+                <task id="204" name="usare material select per i select" color="#00ff33" meeting="false" start="2023-02-13" duration="1" complete="100" expand="true"/>
+                <task id="205" name="usare material per le tabelle" color="#00ff33" meeting="false" start="2023-02-14" duration="1" complete="100" thirdDate="2023-02-14" thirdDate-constraint="0" expand="true"/>
+                <task id="208" name="usare material per navbar" color="#00ff33" meeting="false" start="2023-02-14" duration="1" complete="100" expand="true"/>
+                <task id="209" name="usare Material alert per i messaggi di alert" color="#00ff33" meeting="false" start="2023-02-15" duration="1" complete="100" expand="true"/>
+                <task id="211" name="usare Material snackbar per le notifiche" color="#00ff33" meeting="false" start="2023-02-15" duration="1" complete="100" expand="true"/>
+                <task id="217" name="sostituire multiInput con Materia textField" color="#00ff33" meeting="false" start="2023-02-15" duration="1" complete="100" thirdDate="2023-02-10" thirdDate-constraint="0" expand="true"/>
+                <task id="224" name="creazione temi personalizzati" color="#00ff33" meeting="false" start="2023-02-15" duration="1" complete="100" thirdDate="2023-02-02" thirdDate-constraint="0" expand="true"/>
+                <task id="210" name="usare Material icon per alcuni bottoni" color="#00ff33" meeting="false" start="2023-02-16" duration="1" complete="100" thirdDate="2023-02-15" thirdDate-constraint="0" expand="true"/>
+                <task id="218" name="sostituire textArea con Materia textFieldArea" color="#00ff33" meeting="false" start="2023-02-16" duration="1" complete="100" thirdDate="2023-02-10" thirdDate-constraint="0" expand="true"/>
+                <task id="212" name="togliere opzione nulla dai Select della pagina impostazioni" color="#00ff33" meeting="false" start="2023-02-16" duration="1" complete="100" thirdDate="2023-01-25" thirdDate-constraint="0" expand="true"/>
+                <task id="213" name="aggiornamento automatico dopo esecuzione dell'advice" color="#00ff33" meeting="false" start="2023-02-16" duration="1" complete="100" thirdDate="2023-02-10" thirdDate-constraint="0" expand="false"/>
+                <task id="214" name="aggiungere snackbar dopo aver programmato con successo una ricetta" color="#00ff33" meeting="false" start="2023-02-16" duration="1" complete="100" thirdDate="2023-02-10" thirdDate-constraint="0" expand="true"/>
+                <task id="215" name="cambio di design della pagina home" color="#00ff33" meeting="false" start="2023-02-16" duration="1" complete="100" thirdDate="2023-02-10" thirdDate-constraint="0" expand="true"/>
+                <task id="219" name="aggiunto tipo di nota in modo testuale nei dettagli di una birra" color="#00ff33" meeting="false" start="2023-02-16" duration="1" complete="100" thirdDate="2023-02-10" thirdDate-constraint="0" expand="true"/>
+                <task id="216" name="le quantità possono richiedere un numero maggiore di 0" color="#00ff33" meeting="false" start="2023-02-16" duration="1" complete="100" thirdDate="2023-02-10" thirdDate-constraint="0" expand="true"/>
+                <task id="225" name="aggiunta Tooltip in hovering alle icone" color="#00ff33" meeting="false" start="2023-02-17" duration="1" complete="100" thirdDate="2023-02-02" thirdDate-constraint="0" expand="true"/>
+                <task id="226" name="aggiornamento package-lock con nuove versioni pacchetti npm" color="#00ff33" meeting="false" start="2023-02-17" duration="1" complete="100" thirdDate="2023-02-02" thirdDate-constraint="0" expand="true"/>
+                <task id="227" name="ottimizzazione dei test front-end" color="#00ff33" meeting="false" start="2023-02-17" duration="1" complete="100" thirdDate="2023-02-02" thirdDate-constraint="0" expand="true"/>
+            </task>
+            <task id="220" name="Documentazione" color="#000000" meeting="false" start="2023-02-15" duration="4" complete="100" thirdDate="2023-02-15" thirdDate-constraint="0" expand="true">
+                <task id="222" name="documentazione per l'installazione dell'applicativo" color="#8cb6ce" meeting="false" start="2023-02-15" duration="1" complete="100" thirdDate="2023-02-02" thirdDate-constraint="0" expand="true"/>
+                <task id="223" name="documentazione per l'uso del backend" color="#8cb6ce" meeting="false" start="2023-02-15" duration="1" complete="100" thirdDate="2023-02-02" thirdDate-constraint="0" expand="true"/>
+                <task id="221" name="stesura relazione finale" color="#8cb6ce" meeting="false" start="2023-02-17" duration="2" complete="100" thirdDate="2023-02-02" thirdDate-constraint="0" expand="true"/>
+            </task>
+        </task>
+        <task id="199" name="Sprint 4" color="#8cb6ce" meeting="true" start="2023-02-20" duration="0" complete="0" thirdDate="2023-02-08" thirdDate-constraint="0" expand="true"/>
+    </tasks>
+    <resources>
+        <resource id="0" name="Francesco" function="Default:0" contacts="" phone=""/>
+        <resource id="1" name="Qazim" function="Default:0" contacts="" phone=""/>
+        <resource id="2" name="Alessandro" function="Default:0" contacts="" phone=""/>
+    </resources>
+    <allocations/>
+    <vacations/>
+    <previous/>
+    <roles roleset-name="Default"/>
+    <roles roleset-name="SoftwareDevelopment"/>
+</project>

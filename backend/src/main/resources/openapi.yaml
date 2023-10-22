@@ -1,0 +1,819 @@
+openapi: 3.0.3
+info:
+  title: Swagger BrewDay - OpenAPI 3.0
+  description: API of BrewDay Backend
+  version: 1.0.0
+servers:
+  - url: https://localhost:8080/api
+paths:
+  /recipes:
+    get:
+      tags:
+        - recipes
+      summary: Get all recipe IDs
+      parameters:
+        - name: name
+          in: query
+          description: filter by name
+          schema:
+            type: string
+        - name: description
+          in: query
+          description: filter by description
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecipeIDList'
+    post:
+      tags:
+        - recipes
+      summary: Add a new recipe to the collection
+      requestBody:
+        $ref: '#/components/requestBodies/Recipe'
+      responses:
+        '200':
+          description: Successful operation
+          headers:
+            recipeID:
+              schema:
+                type: string
+                example: recipeID
+        '400':
+          description: Bad Request
+  /recipes/{recipeID}:
+    get:
+      tags:
+        - recipes
+      summary: Find recipe by ID
+      parameters:
+        - name: recipeID
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Recipe'
+        '404':
+          description: Not found
+    post:
+      tags:
+        - recipe_ingredients
+      summary: Add a new ingredient to the recipe
+      parameters:
+        - name: recipeID
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        $ref: '#/components/requestBodies/Ingredient'
+      responses:
+        '200':
+          description: Successful operation
+          headers:
+            ingredientID:
+              schema:
+                type: string
+                example: ingredientID
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+    put:
+      tags:
+        - recipes
+      summary: Update recipe by ID
+      parameters:
+        - name: recipeID
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        $ref: '#/components/requestBodies/Recipe'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Recipe'
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+    delete:
+      tags:
+        - recipes
+      summary: Delete recipe by ID
+      parameters:
+        - name: recipeID
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+  /recipes/{recipeID}/{ingredientID}:
+    get:
+      tags:
+        - recipe_ingredients
+      summary: Find recipe ingredient by ID
+      parameters:
+        - name: recipeID
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: ingredientID
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecipeIngredient'
+        '404':
+          description: Not Found
+    put:
+      tags:
+        - recipe_ingredients
+      summary: Update recipe ingredient by ID
+      parameters:
+        - name: recipeID
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: ingredientID
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        $ref: '#/components/requestBodies/IngredientUpdate'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecipeIngredient'
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+    delete:
+      tags:
+        - recipe_ingredients
+      summary: Delete recipe ingredient by ID
+      parameters:
+        - name: recipeID
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: ingredientID
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+  /inventory:
+    get:
+      tags:
+        - inventory
+      summary: Get all inventory ingredients
+      parameters:
+        - name: name
+          in: query
+          description: filter by name
+          schema:
+            type: string
+        - name: description
+          in: query
+          description: filter by name
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InventoryIngredientList'
+    post:
+      tags:
+        - inventory_ingredient
+      summary: Add a new inventory ingredient
+      requestBody:
+        $ref: '#/components/requestBodies/Ingredient'
+      responses:
+        '200':
+          description: Successful operation
+          headers:
+            ingredientID:
+              schema:
+                type: string
+                example: ingredientID
+        '400':
+          description: Bad Request
+  /inventory/{ingredientID}:
+    get:
+      tags:
+        - inventory_ingredient
+      summary: Find inventory ingredient by ID
+      parameters:
+        - name: ingredientID
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InventoryIngredient'
+        '404':
+          description: Not found
+    put:
+      tags:
+        - inventory_ingredient
+      summary: Update inventory ingredient by ID
+      parameters:
+        - name: ingredientID
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        $ref: '#/components/requestBodies/IngredientUpdate'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InventoryIngredient'
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+    delete:
+      tags:
+        - inventory_ingredient
+      summary: Delete inventory ingredient by ID
+      parameters:
+        - name: ingredientID
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+  /beers:
+    get:
+      tags:
+        - beers
+      summary: Get all beer IDs
+      parameters:
+        - name: name
+          in: query
+          description: filter by name
+          schema:
+            type: string
+        - name: recipeID
+          in: query
+          description: filter by recipeID
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BeerIDList'
+    post:
+      tags:
+        - beers
+      summary: Add a new beer to the collection
+      requestBody:
+        $ref: '#/components/requestBodies/Beer'
+      responses:
+        '200':
+          description: Successful operation
+          headers:
+            beerID:
+              schema:
+                type: string
+                example: beerID
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+  /beers/{beerID}:
+    get:
+      tags:
+        - beers
+      summary: Find beer by ID
+      parameters:
+        - name: beerID
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Beer'
+        '404':
+          description: Not found
+    post:
+      tags:
+        - beer_notes
+      summary: Add a new note to the beer
+      parameters:
+        - name: beerID
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        $ref: '#/components/requestBodies/BeerNote'
+      responses:
+        '200':
+          description: Successful operation
+          headers:
+            noteID:
+              schema:
+                type: string
+                example: noteID
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+    put:
+      tags:
+        - beers
+      summary: Update beer by ID
+      parameters:
+        - name: beerID
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        $ref: '#/components/requestBodies/BeerUpdate'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Beer'
+        '400':
+          description: Bad Request
+        '404':
+          description: Not found
+    delete:
+      tags:
+        - beers
+      summary: Delete beer by ID
+      parameters:
+        - name: beerID
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+  /beers/{beerID}/{noteID}:
+    get:
+      tags:
+        - beer_notes
+      summary: Find beer note by ID
+      parameters:
+        - name: beerID
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: noteID
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BeerNote'
+        '404':
+          description: Not Found
+    put:
+      tags:
+        - beer_notes
+      summary: Update beer note by ID
+      parameters:
+        - name: beerID
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: noteID
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        $ref: '#/components/requestBodies/BeerNote'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BeerNote'
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+    delete:
+      tags:
+        - beer_notes
+      summary: Delete beer note by ID
+      parameters:
+        - name: beerID
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: noteID
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+  /shopping:
+    post:
+      tags:
+        - shopping
+      summary: Post shopping list
+      requestBody:
+        $ref: '#/components/requestBodies/ShoppingList'
+      responses:
+        '200':
+          description: Successful operation
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+  /shopping/{recipeID}:
+    get:
+      tags:
+        - shopping
+      summary: Get shopping list for recipe
+      parameters:
+        - name: recipeID
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShoppingList'
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+  /settings:
+    get:
+      tags:
+        - settings
+      summary: Get all settings
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SettingList'
+    post:
+      tags:
+        - settings
+      summary: Add a new setting
+      requestBody:
+        $ref: '#/components/requestBodies/Setting'
+      responses:
+        '200':
+          description: Successful operation
+          headers:
+            settingID:
+              schema:
+                type: string
+                example: settingID
+        '400':
+          description: Bad Request
+  /settings/{settingID}:
+    get:
+      tags:
+        - settings
+      summary: Find setting by ID
+      parameters:
+        - name: settingID
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Setting'
+        '404':
+          description: Not found
+    put:
+      tags:
+        - settings
+      summary: Update setting by ID
+      parameters:
+        - name: settingID
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        $ref: '#/components/requestBodies/SettingUpdate'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Setting'
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+    delete:
+      tags:
+        - settings
+      summary: Delete setting by ID
+      parameters:
+        - name: settingID
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+components:
+  schemas:
+    RecipeIDList:
+      type: array
+      items:
+        type: string
+        example: recipeID
+    BeerIDList:
+      type: array
+      items:
+        type: string
+        example: beerID
+    Recipe:
+      type: object
+      properties:
+        recipeID:
+          type: string
+          example: recipeID
+        name:
+          type: string
+          example: recipeName
+        description:
+          type: string
+          example: recipeDescription
+        ingredients:
+          type: array
+          items:
+            $ref: '#/components/schemas/RecipeIngredient'
+    InventoryIngredientList:
+      type: array
+      items:
+        $ref: '#/components/schemas/InventoryIngredient'
+    InventoryIngredient:
+      type: object
+      properties:
+        ingredientID:
+          type: integer
+          example: ingredientID
+        name:
+          type: integer
+          example: ingredientName
+        quantity:
+          type: integer
+          format: int64
+          example: 2
+    RecipeIngredient:
+      type: object
+      properties:
+        recipeID:
+          type: integer
+          example: recipeID
+        ingredientID:
+          type: integer
+          example: ingredientID
+        name:
+          type: integer
+          example: ingredientName
+        quantity:
+          type: integer
+          format: int64
+          example: 2
+    Beer:
+      type: object
+      properties:
+        beerID:
+          type: string
+          example: beerID
+        name:
+          type: string
+          example: beerName
+        recipeID:
+          type: string
+          example: recipeID
+        notes:
+          type: array
+          items:
+            $ref: '#/components/schemas/BeerNote'
+    BeerNote:
+      type: object
+      properties:
+        beerID:
+          type: string
+          example: beerID
+        noteID:
+          type: string
+          example: noteID
+        noteType:
+          type: string
+          example: generic
+        description:
+          type: string
+          example: description
+    ShoppingList:
+      type: array
+      items:
+        $ref: '#/components/schemas/InventoryIngredient'
+    Setting:
+      type: object
+      properties:
+        settingID:
+          type: string
+          example: settingID
+        value:
+          type: string
+          example: value
+    SettingList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Setting'
+  requestBodies:
+    Recipe:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+                example: recipeName
+              description:
+                type: string
+                example: recipeDescription
+    Ingredient:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              name:
+                type: integer
+                example: ingredientName
+              quantity:
+                type: integer
+                format: int64
+                example: 2
+    IngredientUpdate:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              quantity:
+                type: integer
+                format: int64
+                example: 2
+    Beer:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+                example: beerName
+              recipeID:
+                type: string
+                example: recipeID
+    BeerUpdate:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+                example: beerName
+    BeerNote:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              noteType:
+                type: string
+                example: generic
+              description:
+                type: string
+                example: description
+    ShoppingList:
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                name:
+                  type: integer
+                  example: ingredientName
+                quantity:
+                  type: integer
+                  format: int64
+                  example: 2
+    Setting:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              settingID:
+                type: string
+                example: settingID
+              value:
+                type: string
+                example: value
+    SettingUpdate:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              value:
+                type: string
+                example: value

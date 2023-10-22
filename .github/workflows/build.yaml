@@ -1,0 +1,96 @@
+name: CD/CI
+run-name: Build Job ${{ github.event.head_commit.message }} by @${{ github.actor }}
+env:
+ BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    types: [opened, synchronize, reopened]
+jobs:
+  frontend:
+    name: Build and analyze frontend
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./frontend/
+    steps:
+      - uses: actions/setup-node@v3
+      - name: Cache SonarCloud packages
+        uses: actions/cache@v1
+        with:
+          path: ~/.sonar/cache
+          key: ${{ runner.os }}-sonar-frontend
+          restore-keys: ${{ runner.os }}-sonar-frontend
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Install dependencies
+        run: npm install
+      - name: Run tests and coverage
+        run: npm run coverage
+      - name: Build and analyze
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: CI= mvn clean sonar:sonar -Dsonar.host.url=https://sonarcloud.io
+  backend:
+    name: Build and analyze backend
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Set up JDK 17
+        uses: actions/setup-java@v1
+        with:
+          java-version: 17
+      - name: Cache SonarCloud packages
+        uses: actions/cache@v1
+        with:
+          path: ~/.sonar/cache
+          key: ${{ runner.os }}-sonar-backend
+          restore-keys: ${{ runner.os }}-sonar-backend
+      - name: Cache Maven packages
+        uses: actions/cache@v1
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+      - name: Build and analyze
+        working-directory: ./backend
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: mvn clean verify test sonar:sonar -Dsonar.host.url=https://sonarcloud.io
+  deploy:
+    needs: [frontend, backend]
+    name: Deploy phase
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Set up JDK 17
+        uses: actions/setup-java@v1
+        with:
+          java-version: 17
+      - name: Cache Maven packages
+        uses: actions/cache@v1
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+      - name: Build all
+        run: CI= mvn clean package
+      - name:
+        run: mv ./backend/target/backend-1.0.0.jar ./brewday.jar
+      - uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: "latest-${{ env.BRANCH_NAME }}"
+          prerelease: true
+          title: "Latest ${{ env.BRANCH_NAME }} Build"
+          files: |
+            ./brewday.jar

@@ -1,0 +1,344 @@
+# The image used for this CI/CD Action should contain a JDK 17 (used by brew-day) and maven as well
+# We chose a Debian Bookwork containing the AmazonCorretto redistribution of JDK 17
+# Having to rely on Debian instead of Ubuntu enable us to have update yet stable toolkits.
+#
+# It's really important to notice how we don't need to impose dependency on NodeJS but only against Maven.
+# This because our setup allow the `frontend/pom.xml` to download a distribution of node by it self.
+image: maven:3.9.4-amazoncorretto-17-debian-bookworm
+
+# Configure CI/CD to run on master Branch updates, but only when a PR is not acting on it, and for PR in general.
+workflow:
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH && $CI_OPEN_MERGE_REQUESTS
+      when: never
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+
+# Global environment variables that are available within each job container environment
+variables:
+  # Probably used during dockerization
+  DOCKER_HOST: tcp://docker:2375
+  DOCKER_DRIVER: overlay2
+  #
+  # Used in release phase
+  CONTAINER_IMAGE: $CI_REGISTRY_IMAGE
+  #
+  # Since this Action is run inside a cloud Gitlab instance, we need to set constaints on resources and stategies of Maven.
+  # We also set a customized location for Maven repository in order to be able to cache it.
+  MAVEN_CLI_OPTS: "-C --threads 1C --batch-mode -Dmaven.repo.local=.m2/repository"
+
+# We define one cache that is used by all jobs
+# We are allowed to define root-relative paths for targets and so on,
+# because `mvn` cli accepts a parameter `-pl` which takes as input the project name.
+#
+# As you can notice, in the root pom.xml two subprojects are defined
+# - 1) frontend
+# - 2) backend
+#
+# Running `mvn compile -pl backend` will trigger the compilation of only backend, which is great
+# as it applies to the specified lifecycle (es: test, verify, package ...).
+#
+# We also enact a quality policy which allows job failures if-and-only-if such job is a verify job.
+# Verify is allowed to fail for two reasons:
+# - it's not really a critical phase for our pipeline, because most of it it's just verifing style and/or common pitfalls.
+#   - in the original project we already addressed that specific requirement by using SonarQube, but in this project it won't be used (more on that later)
+# - using GitLab CI/CD semanthics we can let individual jobs upload some deliverables with artifacts mechanics
+#   - if a job in this phase fails, it uploads the failure report
+#   - we aspire also to cache some reports to deliver them in the base site (more on that later)
+# Clean, Build, UTs, ITs, Package, Release and Docs MUSTN'T FAIL
+cache:
+  - key: "$CI_COMMIT_REF_SLUG"
+    paths:
+      - frontend/node/         # Local NodeJS installation
+      - frontend/node_modules/ # Local NPM repository
+      - .m2/repository/        # Local Maven repository
+      - backend/target/        # Maven output directory for Backend
+      - frontend/build/        # NPM output directory for Frontend
+      - frontend/reports/      # ESLint and Flow output directory
+
+# Stages definition:
+#
+# Every job FOR NOW has a `when: manual` trigger, this because there's no real need of executing
+#   the whole pipeline when testing a single aspect of the pipeline. Only the few jobs that matter
+#   get executed by manually running them.
+#
+stages:
+  - clean
+  - build
+  - verify
+  - unit-test
+  - integration-test
+  - package
+  - release
+  - docs
+
+# CLEAN
+# 
+# We added a CLEAN stage to ensure that cache is ready for the workflow.
+# For example, we set up a check in frontend/pom.xml to ensure that `npm run build` is run only once.
+clean-cache:
+  when: manual
+  stage: clean
+  script:
+    - mvn $MAVEN_CLI_OPTS clean
+
+# BUILD
+# 
+# Frontend and Backend can be built using two concurrent jobs.
+frontend-build:
+  when: manual
+  stage: build
+  script:
+    - mvn $MAVEN_CLI_OPTS compile -pl frontend
+
+backend-build:
+  when: manual
+  stage: build
+  script:
+    - mvn $MAVEN_CLI_OPTS compile -pl backend
+
+# VERIFY
+#
+## BACKEND
+## 
+## As backend linters we run
+## 
+## - 1) SpotBugs     https://spotbugs.github.io/
+## - 2) CheckStyle   https://checkstyle.sourceforge.io/
+## - 3) PMD          https://pmd.github.io/
+##
+## Since JDK 17 is only officially supported starting with FindSec-Plugin 1.12.0,
+##   and that this specific version lacks of fixes to generic type parsing introduced
+##   with issue #680, we decided to run SpotBugs without it.
+## 
+## We also decided to run CheckStyle on the backend part using the default Sun stylechecks
+##   provided by the framework for simplicity.
+## 
+## Finally instead of running Valgrind, which could be useful if running native application,
+##   although it was suggested in the Assignment 1 paper, we run additional checks with PMD,
+##   another source code analyzer, which "finds common programming flaws like unused variables,
+##   empty catch blocks, unnecessary object creation, and so forth".
+## 
+## The original project ran SonarQube against both Frontend and Backend thanks to the SonarCloud
+##   account provided by Ingegneria del Software course. In order to avoid abouse of this priviledge
+##   and useless bloats on that account, we decided to skip the usage of this tool.
+## 
+## Every verification job allows mvn to fail as a trigger for upload of checking frameworks reports.
+## We don't feel the need for a distinct cache space for these jobs, so we kept the main one.
+## 
+backend-spotbugs:
+  when: manual
+  stage: verify
+  script:
+    - ls backend/target/classes/unimib/ingsof
+    - mvn $MAVEN_CLI_OPTS -pl backend spotbugs:check
+  allow_failure: true
+  artifacts:
+    paths:
+      - backend/target/spotbugsXml.xml
+    when: on_failure
+## 
+backend-checkstyle:
+  when: manual
+  stage: verify
+  script:
+    - mvn $MAVEN_CLI_OPTS -pl backend checkstyle:check
+  allow_failure: true
+  artifacts:
+    paths:
+      - backend/target/checkstyle-result.xml
+    when: on_failure
+  dependencies: []
+## 
+backend-pmd:
+  when: manual
+  stage: verify
+  script:
+    - mvn $MAVEN_CLI_OPTS -pl backend pmd:check
+  allow_failure: true
+  artifacts:
+    paths:
+      - backend/target/pmd.xml
+      - backend/target/site/css
+      - backend/target/site/images
+      - backend/target/site/pmd.html
+    when: on_failure
+  dependencies: []
+## 
+## FRONTEND
+## 
+## As frontend linters we run
+## 
+## - 1) ESLint
+## - 2) Flow
+##
+## As previous said, we skip the SonarQube analysis that was configured by us in the original trunk.
+## Every verification job allows mvn to fail as a trigger for upload of checking frameworks reports.
+## We don't feel the need for a distinct cache space for these jobs, so we kept the main one.
+##
+## In this part we call the `process-classes` lifecycle of Maven because is after compilation and before actual tests.
+## This way we can have Maven to install needed dependencies and let it run after that phase the linter configured.
+##
+## Talking about linters, we configured ESLint and Flow as suggested by the Assignment 1 paper. We set up what i'll call
+##   a weird trigger for these two frameworks: instead of enabling them with a flag, the Maven plugin we use to interact with
+##   NPM allow us only to disable some executions. So we established a flag semathics where `-Dskip.{goal}` skips the goal `goal`.
+##   For consistency, the rule enforced by Maven profiles that caches the previous NPM build during the stages is called `-Dskip.build`,
+##   but it's activation trigger is the presence of the `frontend/build` directory in the master cache. That's why we set up a clean job
+##   at the start of the Pipeline.
+## 
+frontend-eslint:
+  when: manual
+  stage: verify
+  script:
+    - mvn $MAVEN_CLI_OPTS -pl frontend process-classes -Dskip.flow
+  allow_failure: true
+  artifacts:
+    paths:
+      - frontend/reports/eslint.html
+    when: on_failure
+  dependencies: []
+## 
+frontend-flow:
+  when: manual
+  stage: verify
+  script:
+    - mvn $MAVEN_CLI_OPTS -pl frontend process-classes -Dskip.eslint
+  allow_failure: true
+  # FlowJS doesn't provide deliverables
+  # So no artifact could be uploaded
+  dependencies: []
+
+# UNIT-TEST
+# 
+# Run Backend tests with Maven
+backend-unit-test:
+  when: manual
+  stage: unit-test
+  script:
+    - mvn $MAVEN_CLI_OPTS -pl backend test -Dskip.ITs
+# 
+# Run Frontend tests with Maven
+# Because our solution for running lints on Frontend binds the previous stage to "process-classes", which is a "dependency" lifecycle of `test`,
+#   we need to manually disable such lifecycle.
+frontend-unit-test:
+  when: manual
+  stage: unit-test
+  script:
+    - mvn $MAVEN_CLI_OPTS -pl frontend test -Dskip.lint -Dskip.ITs
+
+# INTEGRATION-TEST
+# 
+# Run Backend tests with Maven
+# These tests run against endpoints in order to test both Spring API interface and Controller Bl. They tests half of the tech stack: Spring REST <-> SQLite DB.
+backend-integration-test:
+  when: manual
+  stage: integration-test
+  script:
+    - mvn $MAVEN_CLI_OPTS -pl backend verify -Dskip.UTs -Dskip.lint
+  # This job uploads also the JaCoCo coverage report which is a summary of UTs and ITs, surely useful when developing a feature branch but it could be uploaded to GitLab Pages as a statement of quality, and it's our case.
+  artifacts:
+    paths:
+      - backend/target/site/coverage
+# Run Frontend tests with Maven
+# Our FE ITs require a copy of our to be running in background. They ensure API request and handling is done correctly.
+# These tests are designed to test the src/utils/*Manager.js we created to abstract and centralize the API access.
+# As such, they actually end up testing quasi the whole tech stack: JS Managers <-> Spring REST <-> SQLite DB.
+#
+# The instance of BE is started as a normal linux job instead of GitLab CI/CD Action service (because it couldn't expose needed ports), and uses the `spring-boot:run` goal,
+#   thus we don't have to manually package the Spring Boot project, which would break our Pipeline semanthics.
+frontend-integration-test:
+  when: manual
+  stage: integration-test
+  script:
+    - mvn $MAVEN_CLI_OPTS -pl backend spring-boot:run &
+    - mvn $MAVEN_CLI_OPTS -pl frontend verify -Dskip.lint -Dskip.UTs
+    - kill $(jobs -p)
+  # This job uploads also the Jest coverage report which is a summary of UTs and ITs, surely useful when developing a feature branch but it could be uploaded to GitLab Pages as a statement of quality, and it's our case.
+  artifacts:
+    paths:
+      - frontend/reports/lcov-report
+
+# PACKAGE
+# the objective is to create the .jar in the artifacts of this stage and pass it to the realese
+
+package:  
+  when: manual
+  stage: package
+
+  cache:
+    key: "$CI_COMMIT_REF_SLUG"
+    paths: #riusa la cach quanto puoi
+      - frontend/node/         # Local NodeJS installation
+      - frontend/node_modules/ # Local NPM repository
+      - .m2/repository/        # Local Maven repository
+    policy: pull # this stage shall not write to the cache
+
+  dependencies: []
+
+  artifacts:
+    paths:
+      - backend/target/backend-1.0.0.jar
+    when: on_success #when packaging fails... we don't have any jar. It's default not to produce artificts on fail but it's better to write it down to make ic clear :)
+
+  script:
+    - mvn $MAVEN_CLI_OPTS package -Dskip.lint -Dskip.test  #tests where already done, so let's not repeat them.
+
+
+# RELEASE
+
+# DOCS
+## Firstly we build JSDoc and Javadoc documentations
+frontend-jsdoc:
+  when: manual
+  stage: docs
+  script:
+    - mvn $MAVEN_CLI_OPTS -pl frontend site
+  artifacts:
+    paths:
+      - frontend/docs
+  dependencies: []
+
+backend-javadoc:
+  when: manual
+  stage: docs
+  script:
+    - mvn $MAVEN_CLI_OPTS -pl backend javadoc:javadoc
+  artifacts:
+    paths:
+      - backend/target/site/apidocs
+  dependencies: []
+
+## Then artifacts of previous documentation jobs are collected to join a copy of docs-site directory.
+## `docs-site` is our "site base", the "master" GitLab Pages site which contains and addresses "slave" documentation subsites.
+pages:
+  when: manual
+  stage: docs
+  script:
+    - cp -r docs-site public
+    # integrate JSDoc
+    - mv frontend/docs public/jsdoc
+    # integrate Javadoc
+    - mv backend/target/site/apidocs public/javadoc
+    # integrate JaCoCo
+    - mv backend/target/site/coverage public/be-coverage
+    # integrate Jest
+    - mv frontend/reports/lcov-report public/fe-coverage
+    # integrate PMD
+    - mkdir -p public/pmd
+    - mv backend/target/site/css public/pmd/css
+    - mv backend/target/site/images public/pmd/images
+    - mv backend/target/site/pmd.html public/pmd/index.html
+  artifacts:
+    paths:
+      - public
+  needs:
+    - job: frontend-jsdoc
+      artifacts: true
+    - job: backend-pmd
+      artifacts: true
+    - job: backend-javadoc
+      artifacts: true
+    - job: backend-integration-test
+      artifacts: true
+    - job: frontend-integration-test
+      artifacts: true
