@@ -288,3 +288,18 @@ frontend-docs:
   artifacts:
     paths:
       - frontend/docs
+  dependencies: []
+
+pages:
+  when: manual
+  stage: docs
+  script:
+    - mkdir public
+    - mv ./frontend/docs/ public/
+  artifacts:
+    paths:
+      - public
+  only:
+    - master
+  dependencies:
+    - frontend-docs
