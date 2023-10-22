@@ -19,9 +19,6 @@ import LoadingScreen from '../components/LoadingScreen';
 import {TextField} from '@mui/material';
 
 export default class Ricette extends Component {
-  static propTypes = {
-    notifier: PropTypes.object,
-  };
   constructor(props) {
     super(props);
     this.state = {
