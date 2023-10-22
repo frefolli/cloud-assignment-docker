@@ -296,8 +296,8 @@ release:
     # Optimizing Docker caching
     # See https://docs.gitlab.com/ee/ci/docker/using_docker_build.html#using-docker-caching
     - docker pull $CONTAINER_IMAGE:$CI_COMMIT_REF_NAME || true
-    - docker build --cache-from $CONTAINER_IMAGE:$CI_COMMIT_REF_NAME -t $CONTAINER_IMAGE:$CI_COMMIT_REF_NAME .
-    - docker push $CONTAINER_IMAGE:$CI_COMMIT_REF_NAME
+    - docker build --cache-from $CONTAINER_IMAGE:$CI_COMMIT_REF_NAME -t '$CONTAINER_IMAGE:$CI_COMMIT_REF_NAME' .
+    - docker push '$CONTAINER_IMAGE:$CI_COMMIT_REF_NAME'
 
 
 # DOCS
