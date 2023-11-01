@@ -16,7 +16,7 @@ workflow:
 
 # Global environment variables that are available within each job container environment
 variables:
-  # Probably used during dockerization
+  # Used during dockerization
   DOCKER_HOST: tcp://docker:2375
   DOCKER_DRIVER: overlay2
   #
@@ -58,9 +58,10 @@ cache:
 
 # Stages definition:
 #
-# Every job FOR NOW has a `when: manual` trigger, this because there's no real need of executing
-#   the whole pipeline when testing a single aspect of the pipeline. Only the few jobs that matter
-#   get executed by manually running them.
+# During the development phase, every job ran with a `when: manual` trigger,
+# because there was no real need of executing the whole pipeline when testing a single aspect of it.
+# Only the few jobs that matter got executed by manually running them.
+# This is better enforced with dependencies between jobs.
 #
 stages:
   - clean
@@ -288,7 +289,7 @@ frontend-integration-test:
       artifacts: false
 
 # PACKAGE
-# the objective is to create the .jar in the artifacts of this stage and pass it to the realese
+# the objective is to create the .jar in the artifacts of this stage and pass it to the release
 
 package:  
   # when: manual

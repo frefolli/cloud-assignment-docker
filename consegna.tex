@@ -20,7 +20,7 @@
 }
 
 \title{Assignment 1}
-\subtitle{Progettazione e Sviluppo Software}
+\subtitle{Processo e Sviluppo Software}
 \author{Preziosa; Refolli; Toska}
 \date{Academic Year 2023/2024}
 
@@ -56,7 +56,7 @@ The Backend side comprises an API Server written in Java using Spring Boot, and 
 
 \subsection{The Pipeline}
 
-Our application consists basically in a Layered System. The business logic is restricted to `Controllers` layer, which communicates with the DB (`SQLite`) to provide and maintain the state of service, and the API Interface (`Endpoints`), which exposes those services. On the other side, the React Presentation layer (`React UI`) ensure the user is able to achieve his goals, and a layer of `Managers` provides access to the API of Backend Server.
+Our application consists basically in a Layered System. The business logic is restricted to `Controllers` layer, which interacts with the DB (`SQLite`) to provide and maintain the state of service, and the API Interface (`Endpoints`), which exposes those services. On the other side, the React Presentation layer (`React UI`) ensure the user is able to achieve his goals, and a layer of `Managers` provides access to the API of Backend Server.
 
 \putimage{Arch.png}{Software Architecture}{fig:arch}
 
@@ -64,7 +64,7 @@ The pipeline should embrace this architecture and allow for the two major sides 
 
 \subsection{The Structure}
 
-\putimage{Pipeline.png}{Pipeline Structure}{fig:arch}
+\putimage{Pipeline.png}{Pipeline Structure}{fig:pipeline}
 
 \subsection{The Base System}
 
@@ -120,7 +120,7 @@ Finally, `Clean`, `Build`, `UTs`, `ITs`, `Package`, `Release` and `Docs` stages 
 
 \section{The Stages}
 
-The main structure pipeline follows the stages described in the example `my-dummy-pipeline` project, just with a few changes. Every stage is explained in detail in further sections.
+The main structure of the pipeline follows the stages described in the example `my-dummy-pipeline` project, just with a few changes. Every stage is explained in detail in further sections.
 
 \begin{center}
     \begin{tabular}{|c|c|}
@@ -147,7 +147,7 @@ The main structure pipeline follows the stages described in the example `my-dumm
     \end{tabular}
 \end{center}
 
-During the development phase, every job ran with a `when: manual` trigger, because there was no real need of executing the whole pipeline when testing a single aspect of the pipeline. Only the few jobs that matter got executed by manually running them. This is better enforced with dependencies between jobs.
+During the development phase, every job ran with a `when: manual` trigger, because there was no real need of executing the whole pipeline when testing a single aspect of it. Only the few jobs that matter got executed by manually running them. This is better enforced with dependencies between jobs.
 
 \subsection{Clean}
 
@@ -160,7 +160,7 @@ Frontend and Backend can be built using two concurrent jobs, since they are in f
 \subsection{Verify}
 
 The original project ran SonarQube against both Frontend and Backend thanks to the SonarCloud account provided by Ingegneria del Software course. In order to avoid abuse of this privilege and useless bloats on that account, we decided to skip the usage of this tool.
-Every verification job allows mvn to fail as a trigger for upload of checking frameworks reports. We don't feel the need for a distinct cache space for these jobs, so we kept the main one.
+Every verification job allows mvn to fail as a trigger to upload of checking frameworks reports. We don't feel the need for a distinct cache space for these jobs, so we kept the main one.
 
 \subsubsection{Backend}
  
@@ -205,7 +205,7 @@ We set up a weird trigger for these two frameworks: instead of enabling them wit
 
 \subsubsection{Frontend}
 
-The main concern of Frontend UTs is providing a good quality UI experience, and proving that the pages and components works provided that API interaction works; in other words we that the relationship React UI $\Leftrightarrow$ Managers. Thus inductively, after having proven that Managers work correctly, when can state a general statement of correctness of the macro system with more accuracy.
+The main concern of Frontend UTs is providing a good quality UI experience, and proving that the pages and components works provided that API interaction works; in other words we test the relationship React UI $\Leftrightarrow$ Managers. Thus inductively, after having proven that Managers work correctly, when can state a general statement of correctness of the macro system with more accuracy.
 
 \subsection{Integration Test}
 
@@ -213,7 +213,7 @@ If these jobs succeed, a coverage report is produced as summary of both UTs and 
 
 \subsubsection{Backend}
 
-These tests run against endpoints in order to test both Spring API interface and Controller Bl. They tests half of the tech stack: Spring REST $\Leftrightarrow$ SQLite DB.
+These tests run against endpoints in order to test both Spring API interface and Controller Bl. They tests half of the tech stack: Spring REST $\Leftrightarrow$ Controllers $\Leftrightarrow$ SQLite DB.
 
 \subsubsection{Frontend}
 
@@ -243,7 +243,7 @@ The $public$ directory of the GitLab Pages is templated by our skel $docs-site$,
 
 \section{Advancement}
 
-The pipeline is almost complete, all stages are performed correctly but a full complete execution on master as example is missing.
+The pipeline is complete, all stages are performed correctly and a full execution on master as example is provided.
 
 \subsection{Major Issues}
 
@@ -253,6 +253,6 @@ Since there isn't a community docker image with both Maven and NPM (especially w
 
 \paragraph{Gitlab-Runner}
 
-As said previously, developing the pipeline we set up some triggers to ensure that only the precise jobs where executed (typically in a PR). This wasn't enough, though. In order to have a better usage of our limited cloud computing time we installed on our machines $gitlab-runner$, which is the same piece of software used by GitLab to execute a pipeline, then both "hosting" an executor and temporally excluding Cloud runners from execution. This allowed us to fear-less make changes and experiments about the pipeline.
+As said previously, developing the pipeline we set up some triggers to ensure that only the precise jobs where executed (typically in a PR). This wasn't enough, though. In order to have a better usage of our limited cloud computing time we installed on our machines $gitlab-runner$, which is the same piece of software used by GitLab to execute a pipeline, then both "hosting" an executor and temporally excluding Cloud runners from execution. This allowed us to fear-less make changes and experiments about the pipeline. Once in a while we enabled back the cloud runners to ensure that GitLab's runners was able to execute the pipeline without problems. All the pipeline executions were made on GitLab platform, and they're visible under "Pipelines" section. Finally, the example pipeline run on Master branch was ran with Cloud runners as requested by paper.
 
 \end{document}
