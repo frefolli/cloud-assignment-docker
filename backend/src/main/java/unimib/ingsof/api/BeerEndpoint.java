@@ -19,6 +19,8 @@ import unimib.ingsof.logic.BeerController;
 import unimib.ingsof.persistence.service.Protocol;
 import unimib.ingsof.persistence.view.BeerView;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
+@CrossOrigin(origins = "http://localhost:8080")
 @RestController
 @RequestMapping("/api/beers/{beerID}")
 public class BeerEndpoint {

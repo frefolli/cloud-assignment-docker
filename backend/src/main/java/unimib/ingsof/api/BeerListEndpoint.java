@@ -23,6 +23,9 @@ import unimib.ingsof.exceptions.WrongIDGenerationInitialization;
 import unimib.ingsof.logic.BeerListController;
 import unimib.ingsof.persistence.service.Protocol;
 
+
+import org.springframework.web.bind.annotation.CrossOrigin;
+@CrossOrigin(origins = "http://localhost:8080")
 @RestController
 @RequestMapping("/api/beers")
 public class BeerListEndpoint {

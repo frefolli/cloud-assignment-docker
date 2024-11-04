@@ -2,7 +2,7 @@ import React from 'react';
 import {Cookie, Feedback, Warning} from '@mui/icons-material';
 import Notifier from './Notifier';
 
-export const BACKEND_SERVER = 'http://brewday-backend';
+export const BACKEND_SERVER = 'http://localhost:3000';
 export const ADVICE_ENDPOINT = BACKEND_SERVER + '/api/advice';
 export const BEERS_ENDPOINT = BACKEND_SERVER + '/api/beers';
 export const SHOPPING_ENDPOINT = BACKEND_SERVER + '/api/shopping';

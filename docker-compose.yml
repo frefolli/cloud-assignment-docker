@@ -10,5 +10,8 @@ services:
     image: brewday-backend:latest
     networks:
       - api_bridge
+    ports:
+      - 3000:8080
 networks:
-  - api_bridge
+  api_bridge:
+    driver: bridge

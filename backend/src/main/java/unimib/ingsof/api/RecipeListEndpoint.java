@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 import unimib.ingsof.logic.RecipeListController;
 import unimib.ingsof.persistence.service.Protocol;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
+@CrossOrigin(origins = "http://localhost:8080")
 @RestController
 @RequestMapping("/api/recipes")
 public class RecipeListEndpoint {

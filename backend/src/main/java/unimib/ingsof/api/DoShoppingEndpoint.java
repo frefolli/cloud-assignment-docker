@@ -15,6 +15,8 @@ import unimib.ingsof.exceptions.ValidationException;
 import unimib.ingsof.exceptions.WrongIDGenerationInitialization;
 import unimib.ingsof.logic.ShoppingController;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
+@CrossOrigin(origins = "http://localhost:8080")
 @RestController
 @RequestMapping("/api/shopping")
 public class DoShoppingEndpoint {
