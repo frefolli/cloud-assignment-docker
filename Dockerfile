@@ -1,11 +1,29 @@
-
-#nota: amazoncorretto ha già dentro di sé sqlite.
-# amazoncorretto implementa openjdk
-FROM amazoncorretto:17
-#copio il jar dentro l'immagine'
-COPY backend/target/backend-1.0.0.jar app.jar
-#imposto l'entrypoint del container
-ENTRYPOINT ["java","-jar","/app.jar"]
-#il server gira sulla 8080, nota che serve fare il bind della porta 8080 del container con la macchina host per accedere ai servizi del server, non basta l'expose di qui sotto.
-EXPOSE 8080
-
+########################################################################
+FROM debian:bookworm as builder_base
+# Install builder generic dependencies
+RUN sudo apt install -y wget tar gzip
+# Download sources
+RUN wget https://github.com/frefolli/cloud-assignment-docker/archive/refs/heads/master.tar.gz
+RUN tar xvf master.tar.gz
+RUN mv cloud-assignment-docker-master /sources
+RUN rm master.tar.gz
+########################################################################
+FROM builder_base as backend_builder
+# Install builder specific dependencies
+RUN sudo apt install -y maven openjdk-17-jdk
+WORKDIR /sources/backend
+# Build backend jar
+ENV MAVEN_CLI_OPTS="-C --threads 1C --batch-mode -Dmaven.repo.local=.m2/repository"
+RUN mvn $MAVEN_CLI_OPTS -pl backend
+########################################################################
+FROM builder_base as frontend_builder
+# Install builder specific dependencies
+RUN sudo apt install -y yarnpkg
+WORKDIR /sources/frontend
+# Build frontend dist
+RUN npm run build
+########################################################################
+FROM <IMAGE> as backend_image
+########################################################################
+FROM <IMAGE> as frontend_image
+########################################################################
