@@ -2,13 +2,14 @@ import React from 'react';
 import {Cookie, Feedback, Warning} from '@mui/icons-material';
 import Notifier from './Notifier';
 
-export const ADVICE_ENDPOINT = '/api/advice';
-export const BEERS_ENDPOINT = '/api/beers';
-export const SHOPPING_ENDPOINT = '/api/shopping';
-export const INVENTORY_ENDPOINT = '/api/inventory';
-export const RECIPES_ENDPOINT = '/api/recipes';
-export const RESET_ENDPOINT = '/api/reset';
-export const SETTINGS_ENDPOINT = '/api/settings';
+export const BACKEND_SERVER = 'http://brewday-backend';
+export const ADVICE_ENDPOINT = BACKEND_SERVER + '/api/advice';
+export const BEERS_ENDPOINT = BACKEND_SERVER + '/api/beers';
+export const SHOPPING_ENDPOINT = BACKEND_SERVER + '/api/shopping';
+export const INVENTORY_ENDPOINT = BACKEND_SERVER + '/api/inventory';
+export const RECIPES_ENDPOINT = BACKEND_SERVER + '/api/recipes';
+export const RESET_ENDPOINT = BACKEND_SERVER + '/api/reset';
+export const SETTINGS_ENDPOINT = BACKEND_SERVER + '/api/settings';
 
 export const ADVICE_VIEW_TRIGGER = 'adviceReload=true';
 export const ADVICE_VIEW_ESCAPE = 'adviceReload=false';

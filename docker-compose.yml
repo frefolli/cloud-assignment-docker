@@ -1,0 +1,14 @@
+version: '3.42'
+services:
+  brewday-frontend:
+    image: brewday-frontend:latest
+    ports:
+      - 8080:80
+    networks:
+      - api_bridge
+  brewday-backend:
+    image: brewday-backend:latest
+    networks:
+      - api_bridge
+networks:
+  - api_bridge
