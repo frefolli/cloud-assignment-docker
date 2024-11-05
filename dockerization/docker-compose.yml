@@ -2,16 +2,11 @@ version: '3.42'
 services:
   brewday-frontend:
     image: brewday-frontend:latest
+    build: ./frontend
     ports:
       - 8080:80
-    networks:
-      - api_bridge
   brewday-backend:
     image: brewday-backend:latest
-    networks:
-      - api_bridge
+    build: ./backend
     ports:
       - 3000:8080
-networks:
-  api_bridge:
-    driver: bridge
