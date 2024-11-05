@@ -5,7 +5,7 @@ services:
     build: ./brewday-web
     environment:
       - BACKEND_PORT=${BACKEND_PORT}
-      - POSTGRES_DB_URL=jdbc:postgresql://db:5432/brewdaydb
+      - POSTGRES_DB_URL=jdbc:postgresql://brewday-database:5432/brewdaydb
       - POSTGRES_DB_USERNAME=${POSTGRES_DB_USERNAME}
       - POSTGRES_DB_PASSWORD=${POSTGRES_DB_PASSWORD}
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
