@@ -1,4 +1,6 @@
 @all:
-	docker build . --target backend_image -t brewday-backend
-	docker build . --target frontend_image -t brewday-frontend
-	docker-compose build
+	mvn clean
+	mvn compile -pl frontend -Dskip.lint -Dskip.test
+	mvn compile -pl backend -Dskip.lint -Dskip.test
+	mvn package -Dskip.lint -Dskip.test
+	java -jar backend/target/backend-*.jar

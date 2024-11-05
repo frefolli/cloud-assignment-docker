@@ -46,9 +46,9 @@ export default class NextRecipeView extends Component {
     return new Promise((acc, rej) => {
       this.settingsManager.getSetting('nextRecipeID')
           .then((data) => {
-            if (data.value !== '') {
+            if (data.value) {
               this.setState({nextRecipeID: data.value}, acc);
-            } else rej(new Error('DB is broken'));
+            } else rej(false);
           })
           .catch((err) => {
             this.settingsManager.putSetting('nextRecipeID', '')
@@ -63,7 +63,7 @@ export default class NextRecipeView extends Component {
           .then((data) => {
             if (Number(data.value) > 0) {
               this.setState({nextRecipeQuantity: data.value}, acc);
-            } else rej(new Error('DB is broken'));
+            } else rej(new Error('Il Database e\' rotto, perfavore resetta l\'impostazione della prossima ricetta con il pannello di controllo'));
           })
           .catch((err) => {
             this.settingsManager.putSetting('nextRecipeQuantity', '0')
@@ -115,7 +115,11 @@ export default class NextRecipeView extends Component {
           .then(this.getNextRecipeQuantity)
           .then(this.getShoppingList)
           .then(this.getEquipment)
-          .catch((err) => !err || this.notifier.connectionError());
+          .catch((err) => {
+            if (err) {
+              this.notifier.error(err + '');
+            }
+          });
     });
   };
 
