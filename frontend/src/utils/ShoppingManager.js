@@ -12,10 +12,11 @@ export default class ShoppingManager {
         body: JSON.stringify({
           quantity: nextRecipe.quantity,
         }),
+        mode: 'cors'
       })
-          .then((response) => response.json())
-          .then((data) => acc(data))
-          .catch((err) => rej(err));
+        .then((response) => response.json())
+        .then((data) => acc(data))
+        .catch((err) => rej(err));
     });
   }
 
@@ -25,9 +26,10 @@ export default class ShoppingManager {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(ingredients),
+        mode: 'cors'
       })
-          .then((data) => acc(data))
-          .catch((err) => rej(err));
+        .then((data) => acc(data))
+        .catch((err) => rej(err));
     });
   }
 }

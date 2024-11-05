@@ -19,8 +19,6 @@ import unimib.ingsof.exceptions.WrongIDGenerationInitialization;
 import unimib.ingsof.logic.ShoppingController;
 import unimib.ingsof.persistence.view.IngredientView;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
-@CrossOrigin(origins = "http://localhost:8080")
 @RestController
 @RequestMapping("/api/shopping/{recipeID}")
 public class ShoppingEndpoint {

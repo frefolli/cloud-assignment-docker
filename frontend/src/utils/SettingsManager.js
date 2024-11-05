@@ -3,19 +3,19 @@ import {SETTINGS_ENDPOINT} from './Protocol';
 export default class SettingsManager {
   getSettings() {
     return new Promise((acc, rej) => {
-      fetch(SETTINGS_ENDPOINT)
-          .then((response) => response.json())
-          .then((data) => acc(data))
-          .catch(rej);
+      fetch(SETTINGS_ENDPOINT, {mode: 'cors'})
+        .then((response) => response.json())
+        .then((data) => acc(data))
+        .catch(rej);
     });
   }
 
   getSetting(settingID) {
     return new Promise((acc, rej) => {
-      fetch(SETTINGS_ENDPOINT+`/${settingID}`)
-          .then((response) => response.json())
-          .then((data) => acc(data))
-          .catch(rej);
+      fetch(SETTINGS_ENDPOINT+`/${settingID}`, {mode: 'cors'})
+        .then((response) => response.json())
+        .then((data) => acc(data))
+        .catch(rej);
     });
   }
 
@@ -28,17 +28,18 @@ export default class SettingsManager {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({value: newValue}),
+        mode: 'cors'
       })
-          .then((response) => {
-            if (response.status >= 400) {
-              throw new Error();
-            }
-          })
-          .then(acc)
-          .catch(() => {
-            this.postSetting(settingID, newValue)
-                .then(acc).catch(rej);
-          });
+        .then((response) => {
+          if (response.status >= 400) {
+            throw new Error();
+          }
+        })
+        .then(acc)
+        .catch(() => {
+          this.postSetting(settingID, newValue)
+            .then(acc).catch(rej);
+        });
     });
   }
 
@@ -51,13 +52,14 @@ export default class SettingsManager {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({settingID: settingID, value: newValue}),
+        mode: 'cors'
       })
-          .then((response) => {
-            if (response.status >= 400) {
-              throw new Error();
-            }
-          })
-          .then(acc).catch(rej);
+        .then((response) => {
+          if (response.status >= 400) {
+            throw new Error();
+          }
+        })
+        .then(acc).catch(rej);
     });
   }
 }

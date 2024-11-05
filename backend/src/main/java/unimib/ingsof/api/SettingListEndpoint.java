@@ -18,8 +18,6 @@ import unimib.ingsof.logic.SettingListController;
 import unimib.ingsof.persistence.model.Setting;
 import unimib.ingsof.persistence.service.Protocol;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
-@CrossOrigin(origins = "http://localhost:8080")
 @RestController
 @RequestMapping("/api/settings")
 public class SettingListEndpoint {

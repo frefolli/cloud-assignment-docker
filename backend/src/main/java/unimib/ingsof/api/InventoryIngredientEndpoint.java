@@ -16,8 +16,6 @@ import unimib.ingsof.exceptions.DoesntExistsException;
 import unimib.ingsof.logic.InventoryIngredientController;
 import unimib.ingsof.persistence.view.IngredientView;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
-@CrossOrigin(origins = "http://localhost:8080")
 @RestController
 @RequestMapping("/api/inventory/{ingredientID}")
 public class InventoryIngredientEndpoint {

@@ -11,8 +11,6 @@ import unimib.ingsof.exceptions.InternalServerException;
 import unimib.ingsof.logic.AdviceController;
 import unimib.ingsof.persistence.view.AdviceView;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
-@CrossOrigin(origins = "http://localhost:8080")
 @RestController
 @RequestMapping("/api/advice")
 public class AdviceEndpoint {

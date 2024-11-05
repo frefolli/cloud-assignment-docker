@@ -16,8 +16,6 @@ import unimib.ingsof.exceptions.DoesntExistsException;
 import unimib.ingsof.logic.BeerNoteController;
 import unimib.ingsof.persistence.model.BeerNote;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
-@CrossOrigin(origins = "http://localhost:8080")
 @RestController
 @RequestMapping("/api/beers/{beerID}/{noteID}")
 public class BeerNoteEndpoint {

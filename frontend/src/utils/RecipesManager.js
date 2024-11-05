@@ -7,17 +7,17 @@ export default class RecipesManager {
       if (search !== undefined && search.name !== undefined) {
         url += `?name=${search.name}`;
       }
-      fetch(url)
-          .then((response) => response.json())
-          .then(acc).catch(rej);
+      fetch(url, {mode: 'cors'})
+        .then((response) => response.json())
+        .then(acc).catch(rej);
     });
   }
 
   getRecipe(recipeID) {
     return new Promise((acc, rej) => {
-      fetch(RECIPES_ENDPOINT + `/${recipeID}`)
-          .then((response) => response.json())
-          .then(acc).catch(rej);
+      fetch(RECIPES_ENDPOINT + `/${recipeID}`, {mode: 'cors'})
+        .then((response) => response.json())
+        .then(acc).catch(rej);
     });
   }
 
@@ -30,8 +30,9 @@ export default class RecipesManager {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(recipe),
+        mode: 'cors'
       }).
-          then(acc).catch(rej);
+        then(acc).catch(rej);
     });
   }
 
@@ -44,8 +45,9 @@ export default class RecipesManager {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(recipe),
+        mode: 'cors'
       }).
-          then(acc).catch(rej);
+        then(acc).catch(rej);
     });
   }
 
@@ -57,9 +59,10 @@ export default class RecipesManager {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
         },
+        mode: 'cors'
       })
-          .then(acc)
-          .catch(rej);
+        .then(acc)
+        .catch(rej);
     });
   }
 
@@ -72,8 +75,9 @@ export default class RecipesManager {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(ingredient),
+        mode: 'cors'
       }).
-          then(acc).catch(rej);
+        then(acc).catch(rej);
     });
   }
 
@@ -86,8 +90,9 @@ export default class RecipesManager {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(ingredient),
+        mode: 'cors'
       }).
-          then(acc).catch(rej);
+        then(acc).catch(rej);
     });
   }
 
@@ -99,9 +104,10 @@ export default class RecipesManager {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
         },
+        mode: 'cors'
       })
-          .then(acc)
-          .catch(rej);
+        .then(acc)
+        .catch(rej);
     });
   }
 }

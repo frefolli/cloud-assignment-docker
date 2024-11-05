@@ -13,17 +13,17 @@ export default class BeersManager {
           url += `&&recipeID=${search.recipe}`;
         }
       }
-      fetch(url)
-          .then((response) => response.json())
-          .then((data) => acc(data)).catch(rej);
+      fetch(url, {mode: 'cors'})
+        .then((response) => response.json())
+        .then((data) => acc(data)).catch(rej);
     });
   }
 
   getBeer(beerID) {
     return new Promise((acc, rej) => {
-      fetch(BEERS_ENDPOINT + `/${beerID}`)
-          .then((response) => response.json())
-          .then((data) => acc(data)).catch(rej);
+      fetch(BEERS_ENDPOINT + `/${beerID}`, {mode: 'cors'})
+        .then((response) => response.json())
+        .then((data) => acc(data)).catch(rej);
     });
   }
 
@@ -36,8 +36,9 @@ export default class BeersManager {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(beer),
+        mode: 'cors'
       }).
-          then((data) => acc(data)).catch(rej);
+        then((data) => acc(data)).catch(rej);
     });
   }
 
@@ -50,8 +51,9 @@ export default class BeersManager {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(beer),
+        mode: 'cors'
       }).
-          then((data) => acc(data)).catch(rej);
+        then((data) => acc(data)).catch(rej);
     });
   }
 
@@ -63,9 +65,10 @@ export default class BeersManager {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
         },
+        mode: 'cors'
       })
-          .then((data) => acc(data))
-          .catch(rej);
+        .then((data) => acc(data))
+        .catch(rej);
     });
   }
 
@@ -78,8 +81,9 @@ export default class BeersManager {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(note),
+        mode: 'cors'
       }).
-          then((data) => acc(data)).catch(rej);
+        then((data) => acc(data)).catch(rej);
     });
   }
 
@@ -92,8 +96,9 @@ export default class BeersManager {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(note),
+        mode: 'cors'
       }).
-          then((data) => acc(data)).catch(rej);
+        then((data) => acc(data)).catch(rej);
     });
   }
 
@@ -105,9 +110,10 @@ export default class BeersManager {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
         },
+        mode: 'cors'
       })
-          .then((data) => acc(data))
-          .catch(rej);
+        .then((data) => acc(data))
+        .catch(rej);
     });
   }
 }

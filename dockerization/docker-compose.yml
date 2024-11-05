@@ -1,12 +1,25 @@
 version: '3.42'
 services:
-  brewday-frontend:
-    image: brewday-frontend:latest
-    build: ./frontend
-    ports:
-      - 8080:80
-  brewday-backend:
-    image: brewday-backend:latest
+  brewday-web:
+    image: brewday-web:latest
     build: ./backend
+    environment:
+      - BACKEND_PORT=${BACKEND_PORT}
+      - POSTGRES_DB_URL=jdbc:postgresql://db:5432/brewdaydb
+      - POSTGRES_DB_USERNAME=${POSTGRES_DB_USERNAME}
+      - POSTGRES_DB_PASSWORD=${POSTGRES_DB_PASSWORD}
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
     ports:
-      - 3000:8080
+      - 8080:${BACKEND_PORT}
+    depends_on:
+      - brewday-database
+  brewday-database:
+    image: 'postgres:13.1-alpine'
+    environment:
+      - POSTGRES_USER=${POSTGRES_DB_USERNAME}
+      - POSTGRES_PASSWORD=${POSTGRES_DB_PASSWORD}
+      - POSTGRES_DB=brewdaydb
+    volumes:
+      - brewday_psql:/restoring
+  volumes:
+    - brewday_psql

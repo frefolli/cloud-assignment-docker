@@ -16,8 +16,6 @@ import unimib.ingsof.exceptions.DoesntExistsException;
 import unimib.ingsof.logic.SettingController;
 import unimib.ingsof.persistence.model.Setting;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
-@CrossOrigin(origins = "http://localhost:8080")
 @RestController
 @RequestMapping("/api/settings/{settingID}")
 public class SettingEndpoint {
