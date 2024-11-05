@@ -10,6 +10,8 @@ RUN rm master.tar.gz
 # Build backend jar
 WORKDIR /sources
 ENV MAVEN_CLI_OPTS="-C --threads 1C --batch-mode -Dmaven.repo.local=.m2/repository"
+RUN mvn $MAVEN_CLI_OPTS compile -pl frontend
+RUN mvn $MAVEN_CLI_OPTS compile -pl backend
 RUN mvn $MAVEN_CLI_OPTS package -Dskip.lint -Dskip.test
 ########################################################################
 FROM debian:bookworm as web_image
