@@ -1,10 +1,9 @@
 # Assignment on Containerization with Docker (sucks!!! w chroot anyway)
 
-The `frontend` subdirectory contains a Dockerfile for building the frontend.
-The `backend` subdirectory contains a Dockerfile for building the backend.
-Anyway these can be built using `docker-compose build` since it specifies those subdirectories as target for building their image.
-The `frontend` nginx server listens to port 8080 (internally exposed as 80), while the `backend` Spring api server listens to port 3000 (internally exposed as 8080).
-Visiting the `frontend` at `http://localhost:8080` should be sufficient to test connections in all the App since the homepage uses some APIs to retrieve trivial information (user preferences ... and the advice availability I think).
+The `brewday-web` subdirectory contains a Dockerfile for building the brewday-web service.
+Anyway this can be built using `docker-compose build` since it specifies this subdirectory as target for building its image.
+The `brewday-web` Spring api server listens to port 8080.
+Visiting `http://localhost:8080` should be sufficient to test connections in all the App since the homepage uses some APIs to retrieve trivial information (user preferences ... and the advice availability I think).
 
 ## Utils
 
