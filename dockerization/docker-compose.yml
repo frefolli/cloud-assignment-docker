@@ -2,7 +2,7 @@ version: '3.42'
 services:
   brewday-web:
     image: brewday-web:latest
-    build: ./backend
+    build: ./brewday-web
     environment:
       - BACKEND_PORT=${BACKEND_PORT}
       - POSTGRES_DB_URL=jdbc:postgresql://db:5432/brewdaydb
@@ -10,7 +10,7 @@ services:
       - POSTGRES_DB_PASSWORD=${POSTGRES_DB_PASSWORD}
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
     ports:
-      - 8080:${BACKEND_PORT}
+      - "8080:${BACKEND_PORT}"
     depends_on:
       - brewday-database
   brewday-database:
@@ -21,5 +21,6 @@ services:
       - POSTGRES_DB=brewdaydb
     volumes:
       - brewday_psql:/restoring
-  volumes:
-    - brewday_psql
+volumes:
+  brewday_psql:
+    driver: local
