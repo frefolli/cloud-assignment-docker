@@ -13,8 +13,8 @@ FROM builder_base as frontend_builder
 RUN apt-get install -y yarnpkg
 WORKDIR /sources/frontend
 # Build frontend dist
-RUN --mount=type=bind,source=node_modules,target=/sources/frontend/node_modules yarnpkg
-RUN --mount=type=bind,source=node_modules,target=/sources/frontend/node_modules yarnpkg run build
+RUN yarnpkg
+RUN yarnpkg run build
 ########################################################################
 FROM nginx as frontend_image
 # Install image specific dependencies

@@ -14,7 +14,7 @@ RUN apt-get install -y maven openjdk-17-jdk sqlite3
 WORKDIR /sources/backend
 # Build backend jar
 ENV MAVEN_CLI_OPTS="-C --threads 1C --batch-mode -Dmaven.repo.local=.m2/repository"
-RUN --mount=type=bind,source=maven_cache,target=/sources/backend/.m2 mvn $MAVEN_CLI_OPTS package
+RUN mvn $MAVEN_CLI_OPTS package
 ########################################################################
 FROM debian:bookworm as backend_image
 # Install image specific dependencies
