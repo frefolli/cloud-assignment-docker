@@ -15,6 +15,11 @@ services:
       - brewday-database
     networks:
       - brewday_net
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 400M
   brewday-database:
     image: 'postgres:13.1-alpine'
     environment:
@@ -25,6 +30,11 @@ services:
       - brewday_psql:/restoring
     networks:
       - brewday_net
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 100M
 volumes:
   brewday_psql:
     driver: local

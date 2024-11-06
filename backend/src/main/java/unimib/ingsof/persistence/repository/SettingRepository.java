@@ -49,4 +49,10 @@ public interface SettingRepository extends CrudRepository<Setting, String> {
     @Transactional
     @Query(value = "drop table if exists setting", nativeQuery = true)
     void drop();
+    
+    // DELETE
+    @Modifying
+    @Transactional
+    @Query(value = "DELETE FROM setting WHERE settingID = 'nextRecipeID' AND value = :recipeID", nativeQuery = true)
+    void removeRecipe(@Param("recipeID") String recipeID);
 }

@@ -12,6 +12,8 @@ import unimib.ingsof.persistence.model.Recipe;
 import unimib.ingsof.persistence.model.RecipeIngredient;
 import unimib.ingsof.persistence.repository.RecipeIngredientRepositoryGateway;
 import unimib.ingsof.persistence.repository.RecipeRepositoryGateway;
+import unimib.ingsof.persistence.repository.BeerRepositoryGateway;
+import unimib.ingsof.persistence.repository.SettingRepositoryGateway;
 import unimib.ingsof.persistence.service.Protocol;
 import unimib.ingsof.persistence.view.RecipeIngredientView;
 import unimib.ingsof.persistence.view.RecipeView;
@@ -63,6 +65,8 @@ public class RecipeController {
 	}
 	
 	public void deleteRecipe(String recipeID) {
+    BeerRepositoryGateway.getInstance().removeRecipe(recipeID);
+    SettingRepositoryGateway.getInstance().removeRecipe(recipeID);
 		RecipeRepositoryGateway.getInstance().deleteRecipe(recipeID);
 	}
 	

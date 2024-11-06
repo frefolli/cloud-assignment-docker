@@ -50,4 +50,10 @@ public interface BeerRepository extends CrudRepository<Beer, String> {
     @Query(value = "drop table if exists beer", nativeQuery = true)
     @Transactional
 	void drop();
+
+    // PUT
+    @Modifying
+    @Query(value = "UPDATE beer SET recipeID = NULL WHERE recipeID = :recipeID RETURNING *", nativeQuery = true)
+    @Transactional
+	ArrayList<Beer> removeRecipe(@Param("recipeID") String recipeID);
 }
