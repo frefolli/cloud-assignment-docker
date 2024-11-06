@@ -13,6 +13,8 @@ services:
       - "8080:${BACKEND_PORT}"
     depends_on:
       - brewday-database
+    networks:
+      - brewday_net
   brewday-database:
     image: 'postgres:13.1-alpine'
     environment:
@@ -21,6 +23,11 @@ services:
       - POSTGRES_DB=brewdaydb
     volumes:
       - brewday_psql:/restoring
+    networks:
+      - brewday_net
 volumes:
   brewday_psql:
     driver: local
+networks:
+  brewday_net:
+    driver: bridge
