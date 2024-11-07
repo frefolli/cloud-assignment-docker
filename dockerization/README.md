@@ -1,5 +1,7 @@
 # Assignment on Containerization with Docker
 
+Assignment of Refolli Francesco. 865955.
+
 The `brewday-web` subdirectory contains a Dockerfile for building the brewday-web service.
 Anyway this can be built using `docker-compose build` since it specifies this subdirectory as target for building its image.
 The `brewday-web` Spring api server listens to port 8080.
